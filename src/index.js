@@ -5,13 +5,12 @@ import TestClass from './js/TestClass';
 
 function App() {
   let element = document.createElement('div');
-
+  console.log('hello');
   // Lodash, currently included via a script, is required for this line to work
   element.innerHTML = _.join(['Hello', 'webpack'], ' ');
   element.classList.add('hello');
 
-  const testClass = new TestClass(element);
-
+  // const testClass = new TestClass(element);
   return element;
 }
 
