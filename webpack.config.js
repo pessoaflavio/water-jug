@@ -1,4 +1,6 @@
 const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -6,6 +8,19 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist')
   },
+  devServer: {
+    contentBase: path.resolve(__dirname, 'dist'),
+    hot: true,
+		port: 3000
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html'
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     rules: [
       {
@@ -36,18 +51,3 @@ module.exports = {
     ]
   }
 };
-
-// {
-//   test: /\.scss$/,
-//   use: [
-//     {
-//       loader: "style-loader" // creates style nodes from JS strings
-//     },
-//     {
-//       loader: "css-loader" // translates CSS into CommonJS
-//     },
-//     {
-//       loader: "sass-loader" // compiles Sass to CSS
-//     }
-//   ]
-// }
