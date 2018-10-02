@@ -15,11 +15,13 @@ export default class GiftPanel {
     // Registering HTML elements as class variables,
     // so we don't need to query the DOM again
     self.headerFrames = parentNode.querySelectorAll('.js-header-frame');
-    self.giftValue = parentNode.querySelector('js-gift-value');
-    self.giftItem = parentNode.querySelector('');
-    self.giftValueTotal = parentNode.querySelector('');
-    self.giftNumberTotal = parentNode.querySelector('');
-    self.giftItemPlural = parentNode.querySelector('');
+    self.giftValue = parentNode.querySelector('.js-gift-value');
+    self.giftItem = parentNode.querySelector('.js-gift-item');
+    self.giftValueTotal = parentNode.querySelector('.js-gift-value-total');
+    self.giftNumberTotal = parentNode.querySelector('.js-gift-number-total');
+    self.giftItemPlural = parentNode.querySelector('.js-gift-item-plural');
+
+    console.log(self);
   }
 
   toggleFrame(frameNumber: 0 | 1) {
@@ -36,17 +38,25 @@ export default class GiftPanel {
   }
 
   update(
-    city: string,
-    donations: number,
-    bucket: [number, number]) {
+    value: number,
+    item: string,
+    valueTotal: number,
+    numberTotal: number,
+    itemPlural: string) {
 
     const self = this;
-    const { citySpans, donationsTotal, donationsBucket } = self;
-    console.log(donationsTotal, donationsBucket);
+    const {
+      giftValue,
+      giftItem,
+      giftValueTotal,
+      giftNumberTotal,
+      giftItemPlural } = self;
 
-    Array.prototype.forEach.call(citySpans, el => el.innerHTML = city);
-    donationsTotal.innerHTML = `${donations} donations`;
-    donationsBucket.innerHTML = `between $${bucket[0]} and $${bucket[1]}`;
+    giftValue.innerHTML = `$${value}`;
+    giftItem.innerHTML = item;
+    giftValueTotal.innerHTML = `$${valueTotal}`;
+    giftNumberTotal.innerHTML = numberTotal.toString();
+    giftItemPlural.innerHTML = itemPlural;
 
     self.toggleFrame(0);
   }
