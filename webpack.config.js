@@ -1,20 +1,37 @@
 const path = require('path');
+const webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
   output: {
-    filename: 'main.js',
+    filename: '[name].[hash].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
+  devServer: {
+    contentBase: path.resolve(__dirname, 'dist'),
+    hot: true,
+		port: 3000
+  },
+  devtool: 'eval-source-map',
+  plugins: [
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html'
+    }),
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
   module: {
     rules: [
       {
         test: /\.js?$/,
+        exclude: /node_modules/,
         use: [{
           loader: 'babel-loader',
           options: { presets: ['es2015', 'flow'] }
         }]
-      },      
+      },
       {
         test: /\.(scss|css)$/,
         use: [

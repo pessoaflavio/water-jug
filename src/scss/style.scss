@@ -1,6 +1,22 @@
-@import "_fonts.scss";
+@font-face {
+  font-family: 'Roboto';
+  src:  url('../fonts/Roboto-Regular.ttf');
+  font-weight: 400;
+  font-style: normal;
+}
+
+// Fonts
+$font-sans: 'Roboto', Arial, Helvetica, sans-serif;
+
+// Colors
+
+
+// Responsive
+
+
 @import "_test-partial.scss";
 
 body {
   background-color: #facada;
+  color: blue;
 }
