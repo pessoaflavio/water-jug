@@ -1,14 +1,8 @@
-// @flow weak
-
 import _ from 'lodash';
 import './scss/style.scss'
 import cat from './images/cat.jpg';
 import TestClass from './js/TestClass';
-
-function square(n) {
-  return n * n;
-}
-square("2");
+import CityPanel from './js/CityPanel';
 
 function App() {
   let element = document.createElement('div');
@@ -18,6 +12,11 @@ function App() {
   element.classList.add('hello');
 
   const testClass = new TestClass(element);
+
+  const cityPanelEl = document.querySelector('.panel--city');
+  if (cityPanelEl) {
+    const cityPanel = new CityPanel(cityPanelEl);
+  }
 
   return element;
 }

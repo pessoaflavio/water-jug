@@ -6,24 +6,32 @@
   <body>
     <!-- Panel #1 -->
     <div class="panel--city">
+
       <div class="kicker">
         <p class="kicker__hed">Donations</p>
         <p class="kicker__subhed">by average amount per gift</p>
       </div>
 
       <div class="header">
-        <p>
-          <!-- On frame #1 -->
-          <span class="number--big">Washington DC</span>
+        <!-- On frame #1 -->
+        <div class="js-header-frame">
+          <p>
+            <span class="js-city number--big">Washington DC</span>
+          </p>
+        </div>
 
-          <!-- On frame #2 -->
-          Last year <span class="highlight">Washington DC</span> made
-          <span class="number--big">184 donations</span>
-          <span class="number--medium">between $1000 and $9999</span>
-        </p>
+        <!-- On frame #2 -->
+        <div class="js-header-frame">
+          <p>
+            Last year <span class="js-city highlight">Washington DC</span> made
+            <span class="js-donations-total number--big">184 donations</span>
+            <span class="js-donations-bucket number--medium">between $1000 and $9999</span>
+          </p>
+        </div>
       </div>
 
       <div class="donations-chart"></div>
+
     </div> <!-- End panel #1 -->
 
     <script src="main.js"></script>
