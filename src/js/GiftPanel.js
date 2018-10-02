@@ -1,11 +1,13 @@
 // @flow weak
 
-export default class CityPanel {
+export default class GiftPanel {
 
   headerFrames: Array<HTMLElement>;
-  citySpans: Array<HTMLElement>;
-  donationsTotal: HTMLElement;
-  donationsBucket: HTMLElement;
+  giftValue: HTMLElement;
+  giftItem: HTMLElement;
+  giftValueTotal: HTMLElement;
+  giftNumberTotal: HTMLElement;
+  giftItemPlural: HTMLElement;
 
   constructor(parentNode) {
     const self = this;
@@ -13,9 +15,11 @@ export default class CityPanel {
     // Registering HTML elements as class variables,
     // so we don't need to query the DOM again
     self.headerFrames = parentNode.querySelectorAll('.js-header-frame');
-    self.citySpans = parentNode.querySelectorAll('.js-city');
-    self.donationsTotal = parentNode.querySelector('.js-donations-total');
-    self.donationsBucket = parentNode.querySelector('.js-donations-bucket');
+    self.giftValue = parentNode.querySelector('js-gift-value');
+    self.giftItem = parentNode.querySelector('');
+    self.giftValueTotal = parentNode.querySelector('');
+    self.giftNumberTotal = parentNode.querySelector('');
+    self.giftItemPlural = parentNode.querySelector('');
   }
 
   toggleFrame(frameNumber: 0 | 1) {
