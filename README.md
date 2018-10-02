@@ -1,3 +1,5 @@
 # Water Jug
-Node version: 8.12.0
- test npm rebuild node-sass
+
+To start: `npm install`
+To develop: `npm run serve`
+To build: `npm run build`

@@ -5,20 +5,33 @@ import TestClass from './js/TestClass';
 import CityPanel from './js/CityPanel';
 
 function App() {
-  let element = document.createElement('div');
-  console.log('hello');
-  // Lodash, currently included via a script, is required for this line to work
-  element.innerHTML = _.join(['Hello', 'webpack'], ' ');
-  element.classList.add('hello');
-
-  const testClass = new TestClass(element);
-
   const cityPanelEl = document.querySelector('.panel--city');
-  if (cityPanelEl) {
-    const cityPanel = new CityPanel(cityPanelEl);
-  }
+  const giftPanelEl = document.querySelector('.panel--gift');
 
-  return element;
+  if (cityPanelEl && giftPanelEl) {
+    const cityPanel = new CityPanel(cityPanelEl);
+
+    // Example update for panel #1:
+    function sampleUpdatePanel1() {
+      const city = 'Chicago';
+      const donations = 8500;
+      const bucket = [1000, 9999];
+
+      cityPanel.update(city, donations, bucket);
+
+      setTimeout(() => {
+        console.log('hello');
+        cityPanel.toggleFrame(1);
+      }, 2000);
+    }
+
+    document.addEventListener('keypress', (event) => {
+      const keyName = event.key;
+      if (keyName === '1') {
+        sampleUpdatePanel1();
+      }
+    });
+  }
 }
 
-document.body.appendChild(App());
+window.addEventListener('DOMContentLoaded', App());

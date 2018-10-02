@@ -14,8 +14,8 @@ export default class TestClass {
     // so we don't need to query the DOM again
     self.headerFrames = parentNode.querySelectorAll('.js-header-frame');
     self.citySpans = parentNode.querySelectorAll('.js-city');
-    self.donationsTotal = parentNode.querySelectorAll('.js-donations-total');
-    self.donationsBucket = parentNode.querySelectorAll('.js-donations-bucket');
+    self.donationsTotal = parentNode.querySelector('.js-donations-total');
+    self.donationsBucket = parentNode.querySelector('.js-donations-bucket');
   }
 
   toggleFrame(frameNumber: 0 | 1) {
@@ -32,18 +32,18 @@ export default class TestClass {
   }
 
   update(
-    frameNumber: 0 | 1,
     city: string,
     donations: number,
     bucket: [number, number]) {
 
     const self = this;
     const { citySpans, donationsTotal, donationsBucket } = self;
+    console.log(donationsTotal, donationsBucket);
 
     Array.prototype.forEach.call(citySpans, el => el.innerHTML = city);
     donationsTotal.innerHTML = `${donations} donations`;
     donationsBucket.innerHTML = `between $${bucket[0]} and $${bucket[1]}`;
 
-    self.toggleFrame(frameNumber);
+    self.toggleFrame(0);
   }
 }
