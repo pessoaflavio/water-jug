@@ -1,39 +1,68 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Water Jug</title>
-  </head>
-  <body>
-    Hello
-    <!-- Panel #1 -->
-    <div class="panel--city">
 
-      <div class="kicker">
-        <p class="kicker__hed">Donations</p>
-        <p class="kicker__subhed">by average amount per gift</p>
+<head>
+  <title>Water Jug</title>
+</head>
+
+<body>
+  <!-- Panel #1 -->
+  <div class="panel--city">
+
+    <div class="kicker">
+      <p class="kicker__hed">Donations</p>
+      <p class="kicker__subhed">by average amount per gift</p>
+    </div>
+
+    <div class="header">
+      <!-- On frame #1 -->
+      <div class="js-header-frame header__frame">
+        <p>
+          <span class="js-city number--big"></span>
+        </p>
       </div>
 
-      <div class="header">
-        <!-- On frame #1 -->
-        <div class="js-header-frame">
-          <p>
-            <span class="js-city number--big">Washington DC</span>
-          </p>
-        </div>
+      <!-- On frame #2 -->
+      <div class="js-header-frame header__frame">
+        <p>
+          Last year <span class="js-city highlight"></span> made
+          <span class="js-donations-total number--big"></span>
+          <span class="js-donations-bucket number--medium"></span>
+        </p>
+      </div>
+    </div>
 
-        <!-- On frame #2 -->
-        <div class="js-header-frame">
-          <p>
-            Last year <span class="js-city highlight">Washington DC</span> made
-            <span class="js-donations-total number--big">184 donations</span>
-            <span class="js-donations-bucket number--medium">between $1000 and $9999</span>
-          </p>
-        </div>
+    <div class="donations-chart">
+
+    </div>
+
+  </div>
+  <!-- End panel #1 -->
+
+  <!-- Panel #2 -->
+  <div class="panel--gift">
+
+    <div class="header">
+      <!-- On frame #1 -->
+      <div class="js-header-frame header__frame">
+        <p>
+          Just <span class="js-gift-value number--big"></span> is enough to pay for
+          <span class="number--small">1 <span class="js-gift-item"></span></span>
+        </p>
       </div>
 
-      <div class="donations-chart"></div>
+      <!-- On frame #2 -->
+      <div class="js-header-frame header__frame">
+        <p>
+          This adds to <span class="js-gift-value-total number--big"></span> enough to pay for
+          <span class="number--small">
+              <span class="js-gift-number-total"></span> <span class="js-gift-item-plural"></span>
+          </span>
+        </p>
+      </div>
+    </div>
 
-    </div> <!-- End panel #1 -->
-  <script type="text/javascript" src="main.542d1037a056e31f62cb.bundle.js"></script>
-</body>
+  </div>
+<script type="text/javascript" src="main.64aa68533f45a40a21b0.bundle.js"></script></body>
+
 </html>

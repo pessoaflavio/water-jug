@@ -3,10 +3,19 @@ import './scss/style.scss'
 // import cat from './images/cat.jpg';
 import CityPanel from './js/CityPanel';
 import GiftPanel from './js/GiftPanel';
+import BarChart from './js/BarChart';
+
+import contribution from './data/contribution.json';
 
 function App() {
   const cityPanelEl = document.querySelector('.panel--city');
   const giftPanelEl = document.querySelector('.panel--gift');
+
+  const barChart = new BarChart({
+    el: document.querySelector('.donations-chart'),
+    data: contribution,
+    city: "New York"
+  })
 
   if (cityPanelEl && giftPanelEl) {
     const cityPanel = new CityPanel(cityPanelEl);
