@@ -1,5 +1,6 @@
 var OBJLoader = require('../../libs/OBJLoader.js');
 var MTLLoader = require('../../libs/MTLLoader.js');
+// var FBXLoader = require('../../libs/FBXLoader.js');
 
 export default class RenderGift {
   constructor(opts) {
@@ -16,14 +17,28 @@ export default class RenderGift {
 
     self.loadModel(self.modelName)
       .then(object => {
-        console.log(object);
         self.model = object;
+        self.model.scale.set(self.scale, self.scale, self.scale);
+        self.model.position.set(0, 0, 0);
+        self.model.rotation.set(Math.PI / 8, Math.PI / 4, 0);
         const scene = self.getScene();
         self.scene = scene;
         self.update(scene);
       })
 
 
+  }
+  getBox(w, h, d, color) {
+    const geometry = new THREE.BoxGeometry(w, h, d);
+    const material = new THREE.MeshBasicMaterial({
+      color
+    });
+    var mesh = new THREE.Mesh(
+      geometry,
+      material
+    );
+
+    return mesh;
   }
   getParentSize(parentElement) {
     const self = this;
@@ -42,8 +57,8 @@ export default class RenderGift {
       new THREE.MTLLoader().load(`models/${name}.mtl`, function(materials) {
         materials.baseUrl = `models/`;
         materials.preload();
-        console.log('materials', materials)
         new THREE.OBJLoader().setMaterials(materials).load(`models/${name}.obj`,
+          // new THREE.FBXLoader().load(`models/${name}.FBX`,
           function(object) {
             resolve(object)
           },
@@ -98,8 +113,9 @@ export default class RenderGift {
     const fov = 45;
     const aspect = renderer.domElement.width / renderer.domElement.height;
     const near = 0.01;
-    const far = 5000;
+    const far = 1000;
     const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
+    camera.position.set(0, 0, 30);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
     return camera;
   }
@@ -127,12 +143,27 @@ export default class RenderGift {
     const hemiLight = self.getHemiLight();
     hemiLight.name = "hemiLight";
     scene.add(hemiLight);
+
+    const spotLight = self.getSpotLight(0xffffff, 1, scale, Math.PI / 8);
+    spotLight.name = "spotLight";
+    scene.add(spotLight);
+
+    console.log(self.model)
     scene.add(self.model);
     return scene;
   }
   getHemiLight() {
-    const light = new THREE.HemisphereLight(0xffffff, 0x444444);
-    light.position.set(0, 200, 0);
+    const light = new THREE.HemisphereLight(0xADD8E6, 0xFF69B4);
+    light.position.set(0, 20, 0);
+    return light;
+  }
+  getSpotLight(color, intensity, distance, angle) {
+    // SpotLight( color : Integer, intensity : Float, distance : Float, angle : Radians, penumbra : Float, decay : Float )
+    const light = new THREE.SpotLight(color, intensity, distance, angle);
+    light.castShadow = true;
+    light.shadow.bias = 0.001;
+    light.shadow.mapSize.width = 2048;
+    light.shadow.mapSize.height = 2048;
     return light;
   }
   update(scene) {

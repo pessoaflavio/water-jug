@@ -10,8 +10,8 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Bump -bm 0.350042 /Users/jieqianzhang/PROJECTS/water-jug/dist/sceneassets/images/normal_jerrycan.png
-map_Kd  /Users/jieqianzhang/PROJECTS/water-jug/dist/sceneassets/images/flat_jerrycan.png
+map_Bump -bm 0.350042 texture-1.jpg
+map_Kd  texture-1.jpg
 
 newmtl cap
 Ns 139.215686
@@ -22,5 +22,5 @@ Ke 0.000000 0.000000 0.000000
 Ni 1.000000
 d 1.000000
 illum 2
-map_Bump -bm 0.350042 /Users/jieqianzhang/PROJECTS/water-jug/dist/sceneassets/images/normal_jerrycan.png
-map_Kd  /Users/jieqianzhang/PROJECTS/water-jug/dist/sceneassets/images/flat_jerrycan.png
+map_Bump -bm 0.350042 texture-1.jpg
+map_Kd  texture-1.jpg
