@@ -4,6 +4,7 @@ To start: `npm install`
 To develop: `npm run serve`
 To build: `npm run build`
 
+Once on the page, press '1' to simulate a data call to a city.
 
 ## Naming Conventions
 
