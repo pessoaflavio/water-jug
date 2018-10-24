@@ -4,6 +4,7 @@ import './scss/style.scss'
 import CityPanel from './js/CityPanel';
 import GiftPanel from './js/GiftPanel';
 import BarChart from './js/BarChart';
+import RenderGift from './js/RenderGift';
 
 import contribution from './data/contribution.json';
 
@@ -15,7 +16,12 @@ function App() {
     el: document.querySelector('.donations-chart'),
     data: contribution,
     city: "New York"
-  })
+  });
+
+  const model = new RenderGift({
+    el: giftPanelEl,
+    model: "jerrycan"
+  });
 
   if (cityPanelEl && giftPanelEl) {
     const cityPanel = new CityPanel(cityPanelEl);

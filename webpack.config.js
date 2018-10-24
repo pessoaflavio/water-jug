@@ -11,7 +11,7 @@ module.exports = {
   devServer: {
     contentBase: path.resolve(__dirname, 'dist'),
     hot: true,
-		port: 3000
+    port: 3000
   },
   devtool: 'eval-source-map',
   plugins: [
@@ -23,13 +23,14 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin()
   ],
   module: {
-    rules: [
-      {
+    rules: [{
         test: /\.js?$/,
         exclude: /node_modules/,
         use: [{
           loader: 'babel-loader',
-          options: { presets: ['es2015', 'flow'] }
+          options: {
+            presets: ['es2015', 'flow']
+          }
         }]
       },
       {
@@ -50,6 +51,12 @@ module.exports = {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [
           'file-loader?name=fonts/[name].[ext]'
+        ]
+      },
+      {
+        test: /\.(FBX)$/,
+        use: [
+          'file-loader?name=models/[name].[ext]'
         ]
       }
     ]
