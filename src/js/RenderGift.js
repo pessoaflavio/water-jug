@@ -1,7 +1,3 @@
-var OBJLoader = require('../../libs/OBJLoader.js');
-var MTLLoader = require('../../libs/MTLLoader.js');
-// var FBXLoader = require('../../libs/FBXLoader.js');
-
 export default class RenderGift {
   constructor(opts) {
     const self = this;
@@ -14,31 +10,22 @@ export default class RenderGift {
     const size = self.getParentSize(self.el);
     self.renderer = self.getRenderer(self.canvas, size);
     self.camera = self.getCamera();
+    self.gui = new dat.GUI();
 
     self.loadModel(self.modelName)
+      .then(object => self.setupObject(object))
       .then(object => {
         self.model = object;
         self.model.scale.set(self.scale, self.scale, self.scale);
         self.model.position.set(0, 0, 0);
         self.model.rotation.set(Math.PI / 8, Math.PI / 4, 0);
+        self.model.castShadow = true;
         const scene = self.getScene();
         self.scene = scene;
         self.update(scene);
       })
 
 
-  }
-  getBox(w, h, d, color) {
-    const geometry = new THREE.BoxGeometry(w, h, d);
-    const material = new THREE.MeshBasicMaterial({
-      color
-    });
-    var mesh = new THREE.Mesh(
-      geometry,
-      material
-    );
-
-    return mesh;
   }
   getParentSize(parentElement) {
     const self = this;
@@ -76,6 +63,13 @@ export default class RenderGift {
         );
       })
     })
+  }
+  setupObject(object) {
+    object.traverse(function(child) {
+      child.receiveShadow = true;
+
+    })
+    return object;
   }
   getRenderer(canvas, size) {
     const self = this;
@@ -140,31 +134,76 @@ export default class RenderGift {
     camera.updateProjectionMatrix();
 
     // Lights
+
     const hemiLight = self.getHemiLight();
     hemiLight.name = "hemiLight";
     scene.add(hemiLight);
 
-    const spotLight = self.getSpotLight(0xffffff, 1, scale, Math.PI / 8);
+    const ambientLight = self.getAmbientLight(0xffffff, 1);
+    ambientLight.name = "ambientLight";
+    scene.add(ambientLight);
+
+    const spotLight = self.getSpotLight(0xffffff, 1, 100, Math.PI / 8);
     spotLight.name = "spotLight";
     scene.add(spotLight);
 
-    console.log(self.model)
+    // const thisSpotlight = self.gui.addFolder('spotlight');
+    // // lights.add(ambientLight, 'intensity', 0, 1);
+    // thisSpotlight.add(spotLight.rotation, 'x', -Math.PI, Math.PI);
+    // thisSpotlight.add(spotLight.rotation, 'y', -Math.PI, Math.PI);
+    // thisSpotlight.add(spotLight.rotation, 'z', -Math.PI, Math.PI);
+    // thisSpotlight.add(spotLight.position, 'x', -100, 100);
+    // thisSpotlight.add(spotLight.position, 'y', -100, 100);
+    // thisSpotlight.add(spotLight.position, 'z', -100, 100);
+
+
+    const plane = self.getPlane(1000, 1000, 0xADD8E6);
+    plane.name = "plane";
+    plane.receiveShadow = true;
+
+    const thisPlane = self.gui.addFolder('plane');
+    thisPlane.add(plane.rotation, 'x', -Math.PI, Math.PI);
+    thisPlane.add(plane.rotation, 'y', -Math.PI, Math.PI);
+    thisPlane.add(plane.rotation, 'z', -Math.PI, Math.PI);
+
+    scene.add(plane);
+
     scene.add(self.model);
+    console.log(self.model)
     return scene;
   }
   getHemiLight() {
-    const light = new THREE.HemisphereLight(0xADD8E6, 0xFF69B4);
-    light.position.set(0, 20, 0);
+    const light = new THREE.HemisphereLight(0xFFFFFF, 0xFF69B4);
+    light.position.set(0, 50, 0);
+    return light;
+  }
+  getAmbientLight(color, intensity) {
+    const light = new THREE.AmbientLight(color, intensity);
     return light;
   }
   getSpotLight(color, intensity, distance, angle) {
     // SpotLight( color : Integer, intensity : Float, distance : Float, angle : Radians, penumbra : Float, decay : Float )
     const light = new THREE.SpotLight(color, intensity, distance, angle);
+    light.position.set(0, 46, 44);
     light.castShadow = true;
     light.shadow.bias = 0.001;
     light.shadow.mapSize.width = 2048;
     light.shadow.mapSize.height = 2048;
     return light;
+  }
+  getPlane(w, h, color) {
+    var geometry = new THREE.PlaneGeometry(w, h);
+    var material = new THREE.MeshBasicMaterial({
+      color
+    });
+    var mesh = new THREE.Mesh(
+      geometry,
+      material
+    );
+
+    mesh.rotation.x = -Math.PI / 4;
+
+    return mesh;
   }
   update(scene) {
     const self = this;
