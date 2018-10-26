@@ -13,7 +13,7 @@ export default class RenderGift {
     self.gui = new dat.GUI();
 
     self.loadModel(self.modelName)
-      // .then(object => self.setupObject(object))
+      .then(object => self.setupObject(object))
       .then(object => {
         self.model = object;
         self.model.scale.set(self.scale, self.scale, self.scale);
@@ -43,7 +43,7 @@ export default class RenderGift {
     return new Promise((resolve, reject) => {
       new THREE.GLTFLoader().load(`models/${name}_baked.gltf`,
         function(object) {
-          resolve(object.scene)
+          resolve(object.scene);
         },
         // on progress
         function(xhr) {
@@ -62,6 +62,7 @@ export default class RenderGift {
   setupObject(object) {
     object.traverse(function(child) {
       child.receiveShadow = true;
+      child.castShadow = true;
 
     })
     return object;
@@ -83,6 +84,7 @@ export default class RenderGift {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setClearColor(0xffffff);
     renderer.shadowMap.enabled = true;
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
     return renderer;
   }
@@ -138,21 +140,25 @@ export default class RenderGift {
     ambientLight.name = "ambientLight";
     scene.add(ambientLight);
 
-    const spotLight = self.getSpotLight(0xffffff, 0.8, 100, Math.PI / 8);
+    const spotLight = self.getSpotLight(0xffffff, 0.2, 100, Math.PI / 3);
     spotLight.name = "spotLight";
     scene.add(spotLight);
+    //
+    // const directionalLight = self.getDirectionalLight(0xffffff, 1);
+    // directionalLight.name = "directionalLight";
+    // scene.add(directionalLight);
 
-    // const thisSpotlight = self.gui.addFolder('spotlight');
-    // // lights.add(ambientLight, 'intensity', 0, 1);
-    // thisSpotlight.add(spotLight.rotation, 'x', -Math.PI, Math.PI);
-    // thisSpotlight.add(spotLight.rotation, 'y', -Math.PI, Math.PI);
-    // thisSpotlight.add(spotLight.rotation, 'z', -Math.PI, Math.PI);
-    // thisSpotlight.add(spotLight.position, 'x', -100, 100);
-    // thisSpotlight.add(spotLight.position, 'y', -100, 100);
-    // thisSpotlight.add(spotLight.position, 'z', -100, 100);
+    const thisSpotlight = self.gui.addFolder('spotlight');
+    // lights.add(ambientLight, 'intensity', 0, 1);
+    thisSpotlight.add(spotLight.rotation, 'x', -Math.PI, Math.PI);
+    thisSpotlight.add(spotLight.rotation, 'y', -Math.PI, Math.PI);
+    thisSpotlight.add(spotLight.rotation, 'z', -Math.PI, Math.PI);
+    thisSpotlight.add(spotLight.position, 'x', -100, 100);
+    thisSpotlight.add(spotLight.position, 'y', -100, 100);
+    thisSpotlight.add(spotLight.position, 'z', -100, 100);
 
 
-    const plane = self.getPlane(1000, 1000, 0xADD8E6);
+    const plane = self.getPlane(1000, 1000, 0xFFB6C1);
     plane.name = "plane";
     plane.receiveShadow = true;
 
@@ -176,10 +182,19 @@ export default class RenderGift {
     light.position.set(0, 0, 50);
     return light;
   }
+  getDirectionalLight(color, intensity) {
+    const light = new THREE.DirectionalLight(color, intensity);
+    light.position.set(-4, 11, 22);
+    light.castShadow = true;
+    light.shadow.bias = 0.001;
+    light.shadow.mapSize.width = 2048;
+    light.shadow.mapSize.height = 2048;
+    return light;
+  }
   getSpotLight(color, intensity, distance, angle) {
     // SpotLight( color : Integer, intensity : Float, distance : Float, angle : Radians, penumbra : Float, decay : Float )
     const light = new THREE.SpotLight(color, intensity, distance, angle);
-    light.position.set(0, 46, 44);
+    light.position.set(-8.7, 17.8, 27);
     light.castShadow = true;
     light.shadow.bias = 0.001;
     light.shadow.mapSize.width = 2048;
@@ -187,16 +202,18 @@ export default class RenderGift {
     return light;
   }
   getPlane(w, h, color) {
-    var geometry = new THREE.PlaneGeometry(w, h);
-    var material = new THREE.MeshBasicMaterial({
-      color
-    });
+    var geometry = new THREE.PlaneBufferGeometry(w, w, h, h);
+    var material = new THREE.MeshStandardMaterial({
+      color: color
+    })
     var mesh = new THREE.Mesh(
       geometry,
       material
     );
 
-    mesh.rotation.x = -Math.PI / 4;
+    mesh.receiveShadow = true;
+
+    mesh.rotation.x = -1.17;
 
     return mesh;
   }
