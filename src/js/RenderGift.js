@@ -13,7 +13,7 @@ export default class RenderGift {
     self.gui = new dat.GUI();
 
     self.loadModel(self.modelName)
-      .then(object => self.setupObject(object))
+      // .then(object => self.setupObject(object))
       .then(object => {
         self.model = object;
         self.model.scale.set(self.scale, self.scale, self.scale);
@@ -41,27 +41,22 @@ export default class RenderGift {
   loadModel(name) {
     const self = this;
     return new Promise((resolve, reject) => {
-      new THREE.MTLLoader().load(`models/${name}.mtl`, function(materials) {
-        materials.baseUrl = `models/`;
-        materials.preload();
-        new THREE.OBJLoader().setMaterials(materials).load(`models/${name}.obj`,
-          // new THREE.FBXLoader().load(`models/${name}.FBX`,
-          function(object) {
-            resolve(object)
-          },
-          // on progress
-          function(xhr) {
-            if (xhr.lengthComputable) {
-              var percentComplete = xhr.loaded / xhr.total * 100;
-            }
-          },
-          // on error
-          function(xhr) {
-            // console.log(xhr);
-            reject;
+      new THREE.GLTFLoader().load(`models/${name}_baked.gltf`,
+        function(object) {
+          resolve(object.scene)
+        },
+        // on progress
+        function(xhr) {
+          if (xhr.lengthComputable) {
+            var percentComplete = xhr.loaded / xhr.total * 100;
           }
-        );
-      })
+        },
+        // on error
+        function(xhr) {
+          // console.log(xhr);
+          reject;
+        }
+      );
     })
   }
   setupObject(object) {
@@ -143,7 +138,7 @@ export default class RenderGift {
     ambientLight.name = "ambientLight";
     scene.add(ambientLight);
 
-    const spotLight = self.getSpotLight(0xffffff, 1, 100, Math.PI / 8);
+    const spotLight = self.getSpotLight(0xffffff, 0.8, 100, Math.PI / 8);
     spotLight.name = "spotLight";
     scene.add(spotLight);
 
@@ -169,16 +164,16 @@ export default class RenderGift {
     scene.add(plane);
 
     scene.add(self.model);
-    console.log(self.model)
     return scene;
   }
   getHemiLight() {
-    const light = new THREE.HemisphereLight(0xFFFFFF, 0xFF69B4);
+    const light = new THREE.HemisphereLight(0xFFFFFF, 0xFFFFFF);
     light.position.set(0, 50, 0);
     return light;
   }
   getAmbientLight(color, intensity) {
     const light = new THREE.AmbientLight(color, intensity);
+    light.position.set(0, 0, 50);
     return light;
   }
   getSpotLight(color, intensity, distance, angle) {
