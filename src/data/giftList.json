@@ -1,0 +1,258 @@
+[
+  {
+    "name": "pair of warm gloves",
+    "name_plural": "pairs of warm gloves",
+    "price": 5,
+    "bucket": "less than 10",
+    "OriginalItem": "Warm Gloves",
+    "comment": "-"
+  },
+  {
+    "name": "glasses",
+    "name_plural": "glasses",
+    "price": 10,
+    "bucket": "less than 10",
+    "OriginalItem": "Glasses %u2013 The Gift of Sight",
+    "comment": "-"
+  },
+  {
+    "name": "sleeping bag",
+    "name_plural": "sleeping bags",
+    "price": 10,
+    "bucket": "less than 10",
+    "OriginalItem": "Sleeping Bag",
+    "comment": "-"
+  },
+  {
+    "name": "jerry can",
+    "name_plural": "jerry cans",
+    "price": 2,
+    "bucket": "less than 10",
+    "OriginalItem": "Jerry Cans",
+    "comment": "Actual Price is 10 dollars for 5 jerry cans"
+  },
+  {
+    "name": "mosquito net",
+    "name_plural": "mosquito nets",
+    "price": 8,
+    "bucket": "less than 10",
+    "OriginalItem": "Mosquito Nets",
+    "comment": "Actual Price is 40 dollars for 5 nets"
+  },
+  {
+    "name": "birth certificate",
+    "name_plural": "birth certificates",
+    "price": 4,
+    "bucket": "less than 10",
+    "OriginalItem": "Birth Certificate",
+    "comment": "Actual Price is 20 dollars for 5 certificates"
+  },
+  {
+    "name": "placehold",
+    "name_plural": "placeholds",
+    "price": 13,
+    "bucket": "11-15",
+    "OriginalItem": "placehold",
+    "comment": "-"
+  },
+  {
+    "name": "set of warm blankets and mat",
+    "name_plural": "sets of warm blankets and mat",
+    "price": 15,
+    "bucket": "11-15",
+    "OriginalItem": "Warm Blankets & Mats",
+    "comment": "-"
+  },
+  {
+    "name": "school uniform",
+    "name_plural": "school uniforms",
+    "price": 16,
+    "bucket": "11-15",
+    "OriginalItem": "School Uniform",
+    "comment": "-"
+  },
+  {
+    "name": "set of winter clothes",
+    "name_plural": "sets of winter clothes",
+    "price": 17,
+    "bucket": "11-15",
+    "OriginalItem": "Winter Clothes",
+    "comment": "-"
+  },
+  {
+    "name": "school desk",
+    "name_plural": "school desks",
+    "price": 20,
+    "bucket": "16-20",
+    "OriginalItem": "School Desk",
+    "comment": "-"
+  },
+  {
+    "name": "kitchen set of stoves, pots & cutlery",
+    "name_plural": "kitchen sets of stoves, pots & cutlery",
+    "price": 20,
+    "bucket": "16-20",
+    "OriginalItem": "Stoves, Pots & Cutlery",
+    "comment": "-"
+  },
+  {
+    "name": "placehold",
+    "name_plural": "placeholds",
+    "price": 17,
+    "bucket": "16-20",
+    "OriginalItem": "placehold",
+    "comment": "-"
+  },
+  {
+    "name": "school kit",
+    "name_plural": "school kits",
+    "price": 21,
+    "bucket": "21-30",
+    "OriginalItem": "School Kit %u2013 Educate a Child",
+    "comment": "-"
+  },
+  {
+    "name": "personal hygiene kit",
+    "name_plural": "personal hygiene kits",
+    "price": 25,
+    "bucket": "21-30",
+    "OriginalItem": "Personal Hygiene Kit",
+    "comment": "-"
+  },
+  {
+    "name": "emergency rescue kit",
+    "name_plural": "emergency rescue kits",
+    "price": 30,
+    "bucket": "21-30",
+    "OriginalItem": "Emergency Rescue Kit",
+    "comment": "-"
+  },
+  {
+    "name": "water filter",
+    "name_plural": "water filters",
+    "price": 30,
+    "bucket": "21-30",
+    "OriginalItem": "Water Filter",
+    "comment": "-"
+  },
+  {
+    "name": "solar lantern",
+    "name_plural": "solar lanterns",
+    "price": 45,
+    "bucket": "31-49",
+    "OriginalItem": "Solar Lanterns",
+    "comment": "-"
+  },
+  {
+    "name": "placehold",
+    "name_plural": "placeholds",
+    "price": 43,
+    "bucket": "31-49",
+    "OriginalItem": "placehold",
+    "comment": "-"
+  },
+  {
+    "name": "placehold",
+    "name_plural": "placeholds",
+    "price": 34,
+    "bucket": "31-49",
+    "OriginalItem": "placehold",
+    "comment": "-"
+  },
+  {
+    "name": "batch of vaccines",
+    "name_plural": "batches of vaccines",
+    "price": 50,
+    "bucket": "50-100",
+    "OriginalItem": "Vaccines",
+    "comment": "-"
+  },
+  {
+    "name": "dental care treatment",
+    "name_plural": "dental care treatments",
+    "price": 50,
+    "bucket": "50-100",
+    "OriginalItem": "Dental Care?",
+    "comment": "-"
+  },
+  {
+    "name": "set of fleece blankets",
+    "name_plural": "sets of fleece blankets",
+    "price": 50,
+    "bucket": "50-100",
+    "OriginalItem": "Fleece Blankets",
+    "comment": "-"
+  },
+  {
+    "name": "placehold",
+    "name_plural": "placeholds",
+    "price": 56,
+    "bucket": "50-100",
+    "OriginalItem": "placehold",
+    "comment": "-"
+  },
+  {
+    "name": "winter survival kit",
+    "name_plural": "winter survival kits",
+    "price": 116,
+    "bucket": "100-499",
+    "OriginalItem": "Winter Survival Kit",
+    "comment": "-"
+  },
+  {
+    "name": "blackboard",
+    "name_plural": "blackboards",
+    "price": 120,
+    "bucket": "100-499",
+    "OriginalItem": "Blackboard",
+    "comment": "-"
+  },
+  {
+    "name": "school garden",
+    "name_plural": "school gardens",
+    "price": 250,
+    "bucket": "100-499",
+    "OriginalItem": "School Garden",
+    "comment": "-"
+  },
+  {
+    "name": "placehold",
+    "name_plural": "placeholds",
+    "price": 444,
+    "bucket": "100-499",
+    "OriginalItem": "placehold",
+    "comment": "-"
+  },
+  {
+    "name": "family tent",
+    "name_plural": "family tents",
+    "price": 560,
+    "bucket": "greater than 500",
+    "OriginalItem": "Family Tents",
+    "comment": "-"
+  },
+  {
+    "name": "placehold",
+    "name_plural": "placeholds",
+    "price": 555,
+    "bucket": "greater than 500",
+    "OriginalItem": "placehold",
+    "comment": "-"
+  },
+  {
+    "name": "placehold",
+    "name_plural": "placeholds",
+    "price": 555,
+    "bucket": "greater than 500",
+    "OriginalItem": "placehold",
+    "comment": "-"
+  },
+  {
+    "name": "placehold",
+    "name_plural": "placeholds",
+    "price": 555,
+    "bucket": "greater than 500",
+    "OriginalItem": "placehold",
+    "comment": "-"
+  }
+]
