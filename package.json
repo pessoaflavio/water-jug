@@ -4,9 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
-    "serve": "webpack-dev-server --open",
+    "dev": "npm run clean:local && http-server ./dist -p 0 -c -1 & npm run watch:development",
+    "watch:development": "webpack --config webpack.dev.js --watch --progress --colors",
+    "clean:local": "rm -rf dist/local/ && mkdir -p dist/local",
+    "prod": "npm run clean:remote && http-server ./dist -p 0 -c -1 & npm run watch:production",
+    "watch:production": "webpack --config webpack.prod.js --watch --progress --colors",
+    "clean:remote": "rm -rf dist/remote/ && mkdir -p dist/remote",
     "flow": "flow"
   },
   "repository": {
@@ -20,29 +23,28 @@
   },
   "homepage": "https://github.com/gianordoli/water-jug#readme",
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.3",
-    "babel-loader": "^7.1.5",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-flow": "^6.23.0",
-    "css-loader": "^1.0.0",
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.2",
+    "css-loader": "^0.28.8",
     "file-loader": "^2.0.0",
     "flow-bin": "^0.82.0",
     "html-webpack-plugin": "^3.2.0",
+    "http-server": "^0.11.1",
+    "mini-css-extract-plugin": "^0.4.3",
     "node-sass": "^4.9.3",
-    "sass-loader": "^7.1.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "postcss-loader": "^3.0.0",
+    "sass-loader": "^7.0.1",
     "style-loader": "^0.23.0",
+    "uglifyjs-webpack-plugin": "^2.0.1",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "^3.1.8"
+    "webpack-merge": "^4.1.4",
+    "webpack-shell-plugin": "^0.5.0"
   },
-  "dependencies": {
-    "d3-array": "^1.2.4",
-    "d3-axis": "^1.0.12",
-    "d3-scale": "^2.1.2",
-    "d3-selection": "^1.3.2",
-    "lodash": "^4.17.11",
-    "three-fbx-loader": "^1.0.3"
-  }
+  "dependencies": {}
 }

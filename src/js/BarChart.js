@@ -1,5 +1,3 @@
-import d3 from './d3.js';
-
 export default class BarChart {
 
   constructor(opts) {

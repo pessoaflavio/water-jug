@@ -3,17 +3,15 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  devtool: 'source-map',
+  entry: {
+    app: './src/index.js'
+  },
   output: {
-    filename: '[name].[hash].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    path: path.resolve(__dirname, 'dist'),
+    library: "water-jug",
+    libraryTarget: 'umd'
   },
-  devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
-    hot: true,
-    port: 3000
-  },
-  devtool: 'eval-source-map',
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -29,7 +27,7 @@ module.exports = {
         use: [{
           loader: 'babel-loader',
           options: {
-            presets: ['es2015', 'flow']
+            presets: ['@babel/preset-flow']
           }
         }]
       },
@@ -45,18 +43,6 @@ module.exports = {
         test: /\.(png|svg|jpg|gif)$/,
         use: [
           'file-loader?name=images/[name].[ext]'
-        ]
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          'file-loader?name=fonts/[name].[ext]'
-        ]
-      },
-      {
-        test: /\.(FBX)$/,
-        use: [
-          'file-loader?name=models/[name].[ext]'
         ]
       }
     ]
