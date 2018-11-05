@@ -1,7 +1,11 @@
-@import "./components/barChart";
-
 // Fonts
 $font-sans: 'Roboto', Arial, Helvetica, sans-serif;
+$hed: 'Teko', Arial, Helvetica, sans-serif;
+
+
+@import "./components/barChart";
+@import "./components/panelCity";
+
 
 // Colors
 
@@ -31,7 +35,7 @@ html, body {
 }
 
 body {
-  background-color: #facada;
+  background-color: white;
   color: blue;
   display: flex;
   flex-direction: row;
@@ -47,7 +51,7 @@ body {
 }
 
 .panel--city {
-  background-color: #bbd8f6;
+  // background-color: #bbd8f6;
 }
 
 .panel--gift {
@@ -55,11 +59,10 @@ body {
 }
 
 .header {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
+  // position: absolute;
+  // top: 50%;
+  // left: 50%;
+  // transform: translate(-50%, -50%);
   .header__frame {
     opacity: 0;
     transition: opacity 0.5s;
@@ -68,4 +71,11 @@ body {
       opacity: 1;
     }
   }
+}
+
+.panel--gift .header{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

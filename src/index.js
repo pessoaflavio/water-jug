@@ -12,10 +12,12 @@ function App() {
   const cityPanelEl = document.querySelector('.panel--city');
   const giftPanelEl = document.querySelector('.panel--gift');
 
+  const currentCity = "New York"
+
   const barChart = new BarChart({
     el: document.querySelector('.donations-chart'),
     data: contribution,
-    city: "New York"
+    city: currentCity
   });
 
   const model = new RenderGift({
@@ -30,11 +32,11 @@ function App() {
     function sampleUpdate() {
 
       // City panel
-      const city = 'Chicago';
+      const city = currentCity;
       const donations = 8500;
       const bucket = [1000, 9999];
 
-      cityPanel.update(city, donations, bucket);
+      cityPanel.update(currentCity, donations, bucket);
 
       // Gift panel
       const giftValue = 1890;

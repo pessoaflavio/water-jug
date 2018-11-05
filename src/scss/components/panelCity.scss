@@ -1,0 +1,20 @@
+.panel--city{
+  font-family: $font-sans;
+  .kicker__hed{
+    font-size: 32px;
+    letter-spacing: 0.8px;
+    margin-block-end: 0em;
+  }
+  .kicker__subhed{
+      text-transform: uppercase;
+      font-size: 14px;
+      letter-spacing: 1px;
+      margin-block-start: 0.5em;
+  }
+  span.js-city.number--big{
+    font-size: 52px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: $hed;
+  }
+}

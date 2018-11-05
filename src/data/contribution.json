@@ -1,4 +1,5 @@
-[{
+{
+"Alexandria":[{
     "city": "Alexandria",
     "contribution": "less than 10",
     "amount": 1482.0
@@ -37,8 +38,9 @@
     "city": "Alexandria",
     "contribution": "greater than 500",
     "amount": 63.0
-  },
-  {
+  }],
+  "Arlington":
+  [{
     "city": "Arlington",
     "contribution": "less than 10",
     "amount": 1746.0
@@ -77,8 +79,9 @@
     "city": "Arlington",
     "contribution": "greater than 500",
     "amount": 72.0
-  },
-  {
+  }],
+  "Brooklyn":
+  [{
     "city": "Brooklyn",
     "contribution": "less than 10",
     "amount": 1331.0
@@ -117,8 +120,9 @@
     "city": "Brooklyn",
     "contribution": "greater than 500",
     "amount": 154.0
-  },
-  {
+  }],
+  "Chicago":
+  [{
     "city": "Chicago",
     "contribution": "less than 10",
     "amount": 928.0
@@ -157,8 +161,8 @@
     "city": "Chicago",
     "contribution": "greater than 500",
     "amount": 169.0
-  },
-  {
+  }],
+  "Houston": [{
     "city": "Houston",
     "contribution": "less than 10",
     "amount": 611.0
@@ -197,8 +201,8 @@
     "city": "Houston",
     "contribution": "greater than 500",
     "amount": 93.0
-  },
-  {
+  }],
+  "Los Angeles": [{
     "city": "Los Angeles",
     "contribution": "less than 10",
     "amount": 6006.0
@@ -237,8 +241,8 @@
     "city": "Los Angeles",
     "contribution": "greater than 500",
     "amount": 149.0
-  },
-  {
+  }],
+  "Miami":[{
     "city": "Miami",
     "contribution": "less than 10",
     "amount": 1914.0
@@ -277,8 +281,8 @@
     "city": "Miami",
     "contribution": "greater than 500",
     "amount": 15.0
-  },
-  {
+  }],
+  "New York":[{
     "city": "New York",
     "contribution": "less than 10",
     "amount": 1814.0
@@ -317,8 +321,8 @@
     "city": "New York",
     "contribution": "greater than 500",
     "amount": 546.0
-  },
-  {
+  }],
+  "Philadelphia":[{
     "city": "Philadelphia",
     "contribution": "less than 10",
     "amount": 782.0
@@ -357,8 +361,8 @@
     "city": "Philadelphia",
     "contribution": "greater than 500",
     "amount": 90.0
-  },
-  {
+  }],
+  "Phoenix":[{
     "city": "Phoenix",
     "contribution": "less than 10",
     "amount": 1532.0
@@ -397,8 +401,8 @@
     "city": "Phoenix",
     "contribution": "greater than 500",
     "amount": 23.0
-  },
-  {
+  }],
+  "San Diego":[{
     "city": "San Diego",
     "contribution": "less than 10",
     "amount": 2588.0
@@ -437,8 +441,8 @@
     "city": "San Diego",
     "contribution": "greater than 500",
     "amount": 83.0
-  },
-  {
+  }],
+  "San Francisco":[{
     "city": "San Francisco",
     "contribution": "less than 10",
     "amount": 859.0
@@ -477,8 +481,8 @@
     "city": "San Francisco",
     "contribution": "greater than 500",
     "amount": 249.0
-  },
-  {
+  }],
+  "Seattle":[{
     "city": "Seattle",
     "contribution": "less than 10",
     "amount": 650.0
@@ -517,8 +521,8 @@
     "city": "Seattle",
     "contribution": "greater than 500",
     "amount": 181.0
-  },
-  {
+  }],
+  "Silver Spring":[{
     "city": "Silver Spring",
     "contribution": "less than 10",
     "amount": 1717.0
@@ -557,8 +561,8 @@
     "city": "Silver Spring",
     "contribution": "greater than 500",
     "amount": 112.0
-  },
-  {
+  }],
+  "Washington": [{
     "city": "Washington",
     "contribution": "less than 10",
     "amount": 4016.0
@@ -597,5 +601,5 @@
     "city": "Washington",
     "contribution": "greater than 500",
     "amount": 291.0
-  }
-]
+  }]
+}
