@@ -1,0 +1,84 @@
+.donations-chart {
+  width: 100%; }
+  .donations-chart rect {
+    fill: #90b9f7; }
+  .donations-chart path.domain {
+    display: none; }
+  .donations-chart .x.axis g.tick text {
+    fill: rgba(255, 255, 255, 0.4); }
+  .donations-chart .x.axis g.tick line {
+    stroke: rgba(255, 255, 255, 0.4); }
+  .donations-chart .y.axis g.tick text {
+    fill: #83a8d2;
+    text-anchor: start;
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px; }
+  .donations-chart .y.axis g.tick line {
+    display: none; }
+
+.panel--city {
+  font-family: "Roboto", Arial, Helvetica, sans-serif; }
+  .panel--city .kicker__hed {
+    font-size: 32px;
+    letter-spacing: 0.8px;
+    -webkit-margin-after: 0em;
+            margin-block-end: 0em; }
+  .panel--city .kicker__subhed {
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 1px;
+    -webkit-margin-before: 0.5em;
+            margin-block-start: 0.5em; }
+  .panel--city span.js-city.number--big {
+    font-size: 52px;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: "Teko", Arial, Helvetica, sans-serif; }
+
+html {
+  box-sizing: border-box; }
+
+*, *:before, *:after {
+  box-sizing: inherit; }
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+body {
+  background-color: white;
+  color: blue;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: row;
+      flex-direction: row; }
+
+.panel--city,
+.panel--gift {
+  position: relative;
+  width: 50vw;
+  height: 100vh;
+  text-align: center;
+  color: #333; }
+
+.panel--gift {
+  background-color: #4c95eb; }
+
+.header .header__frame {
+  opacity: 0;
+  transition: opacity 0.5s; }
+  .header .header__frame.active {
+    opacity: 1; }
+
+.panel--gift .header {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+
+/*# sourceMappingURL=app.css.map*/

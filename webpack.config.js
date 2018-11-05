@@ -1,6 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+
 
 module.exports = {
   devtool: 'source-map',
@@ -9,9 +11,10 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
-    library: "water-jug",
+    library: "yodda",
     libraryTarget: 'umd'
   },
+  devtool: 'source-map',
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
@@ -22,21 +25,23 @@ module.exports = {
   ],
   module: {
     rules: [{
+        test: /\.(handlebars|hbs)$/,
+        loader: "handlebars-loader"
+      },
+      {
         test: /\.js?$/,
         exclude: /node_modules/,
         use: [{
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-flow']
-          }
+          loader: 'babel-loader'
         }]
       },
       {
-        test: /\.(scss|css)$/,
+        test: /\.scss|css$/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
-          'sass-loader',
+          'postcss-loader',
+          'sass-loader'
         ]
       },
       {
