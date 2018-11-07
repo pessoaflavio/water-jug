@@ -74,7 +74,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "0cbf45987b546b71495b";
+/******/ 	var hotCurrentHash = "854dd9df20e2926e2c12";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -18103,7 +18103,7 @@ function () {
       left: 5
     };
     this.width = parseInt(this.el.style('width')) - this.margin.left - this.margin.right;
-    this.height = parseInt(this.el.style('width')) * 0.4 - this.margin.top - this.margin.bottom;
+    this.height = parseInt(this.el.style('width')) * 0.2 - this.margin.top - this.margin.bottom;
     this.draw();
     window.addEventListener("resize", function () {
       _this.resize();
@@ -18132,7 +18132,8 @@ function () {
         return _this2.x(d.amount);
       }).attr("y", function (d) {
         return _this2.y(d.contribution);
-      }).attr("height", this.y.bandwidth()).attr("width", function (d) {
+      }).attr("height", this.y.bandwidth()) // .attr("height", this.y.bandwidth())
+      .attr("width", function (d) {
         return _this2.width - _this2.x(d.amount);
       }).attr("class", "rect").style("opacity", 0.9);
       this.g.append("g").attr("class", "x axis").attr("transform", "translate(0," + this.height + ")").call(d3.axisBottom(this.x).ticks(5));
@@ -18208,6 +18209,7 @@ function () {
       Array.prototype.forEach.call(headerFrames, function (el, i) {
         if (i === frameNumber) {
           el.classList.add('active');
+          console.log('paint me please');
         } else {
           el.classList.remove('active');
         }
@@ -18224,7 +18226,7 @@ function () {
       Array.prototype.forEach.call(citySpans, function (el) {
         return el.innerHTML = city;
       });
-      donationsTotal.innerHTML = "".concat(donations, " donations");
+      donationsTotal.innerHTML = "".concat(donations, " donations<br>");
       donationsBucket.innerHTML = "between $".concat(bucket[0], " and $").concat(bucket[1]);
       self.toggleFrame(0);
     }

@@ -25,6 +25,7 @@ export default class CityPanel {
     Array.prototype.forEach.call(headerFrames, (el, i) => {
       if (i === frameNumber) {
         el.classList.add('active');
+        console.log('paint me please');
       } else {
         el.classList.remove('active');
       }
@@ -41,7 +42,7 @@ export default class CityPanel {
     console.log(donationsTotal, donationsBucket);
 
     Array.prototype.forEach.call(citySpans, el => el.innerHTML = city);
-    donationsTotal.innerHTML = `${donations} donations`;
+    donationsTotal.innerHTML = `${donations} donations<br>`;
     donationsBucket.innerHTML = `between $${bucket[0]} and $${bucket[1]}`;
 
     self.toggleFrame(0);

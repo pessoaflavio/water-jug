@@ -1,13 +1,23 @@
 // Fonts
-$font-sans: 'Roboto', Arial, Helvetica, sans-serif;
-$hed: 'Teko', Arial, Helvetica, sans-serif;
+@font-face {
+    font-family: 'TIMMONS_NY_FINAL';
+    src: url('~/fonts/TIMMONS_NY_FINAL.woff2');
+}
 
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,700');
 
-@import "./components/barChart";
-@import "./components/panelCity";
+$hed: 'TIMMONS_NY_FINAL', Arial, Helvetica, sans-serif;
+$font-sans: 'IBM Plex Mono', monospace;
 
 
 // Colors
+$blue: #0072BC;
+$lighterBlue: #E5F0F8;
+
+// Import Style Modules
+@import "./components/barChart";
+@import "./components/panelCity";
+@import "./components/panelGifts";
 
 // Responsive
 
@@ -51,7 +61,8 @@ body {
 }
 
 .panel--city {
-  // background-color: #bbd8f6;
+  // background-color: pink;
+  // align-items: flex-start;
 }
 
 .panel--gift {
@@ -73,7 +84,15 @@ body {
   }
 }
 
+.donations-chart{
+
+  align-self: flex-end;
+}
+
 .panel--gift .header{
+  font-family: $font-sans;
+  color: white;
+  font-weight: 300;
   position: absolute;
   top: 50%;
   left: 50%;

@@ -1,5 +1,6 @@
 .panel--city{
   font-family: $font-sans;
+  font-weight: 300;
   .kicker__hed{
     font-size: 32px;
     letter-spacing: 0.8px;
@@ -12,9 +13,23 @@
       margin-block-start: 0.5em;
   }
   span.js-city.number--big{
-    font-size: 52px;
-    font-weight: 700;
+    font-size: 172px;
+    // font-weight: 700;
     text-transform: uppercase;
     font-family: $hed;
   }
+}
+span.js-donations-total.number--big{
+  font-family: $hed;
+  font-size: 172px;
+  text-transform: uppercase;
+
+}
+span.js-donations-bucket.number--medium{
+  font-family: $hed;
+  font-size: 80px;
+  line-height: 30px;
+  text-transform: uppercase;
+  color: $blue;
+  letter-spacing: 2px;
 }
