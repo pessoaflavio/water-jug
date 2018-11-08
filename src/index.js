@@ -38,6 +38,10 @@ function App() {
     const randomIndex = Math.floor(Math.random() * objectsClone.length);
 
     // Do the splice to get that object from that index
+    const object = objectsClone[randomIndex];
+    objectsClone.splice(randomIndex, 1);
+
+    return object;
   }
 
   function pickRandomBucket() {
