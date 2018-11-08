@@ -74,7 +74,7 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/ 	var hotApplyOnUpdate = true;
 /******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "84535c583dd1fbe6271c";
+/******/ 	var hotCurrentHash = "07b3fc275e0b7936a8b9";
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule;
@@ -18031,6 +18031,33 @@ function App() {
     el: giftPanelEl,
     model: "jerrycan"
   });
+  var citiesClone = [];
+  var bucketsClone = [];
+  var objectsClone = [];
+
+  function pickRandomObject() {
+    if (objectsClone.length === 0) {} // Create a new clone of that array
+    // Pick a random index from a given array
+
+
+    var randomIndex = Math.floor(Math.random() * objectsClone.length); // Do the splice to get that object from that index
+
+    var object = objectsClone[randomIndex];
+    objectsClone.splice(randomIndex, 1);
+    return object;
+  }
+
+  function pickRandomBucket() {}
+
+  function pickRandomCity() {}
+
+  function pickRandomScene() {
+    var city = pickRandomCity();
+    var bucket = pickRandomBucket();
+    var object = pickRandomObject(); // Send city and bucket and (data) to the BarChart class
+    // Send model, number of objects, and callback to three.js
+    // model.replace(name, number, pickRandomScene);
+  }
 
   if (cityPanelEl && giftPanelEl) {
     var sampleUpdate = function sampleUpdate() {
@@ -18095,6 +18122,7 @@ function () {
     var self = this;
     self.el = d3.select(opts.el);
     self.city = opts.city;
+    self.bucket = opts.bucket;
     self.data = opts.data[self.city];
     this.margin = {
       top: 20,
@@ -18338,6 +18366,7 @@ function () {
     self.el = opts.el;
     self.canvas = self.el.querySelector('.scene');
     self.modelName = opts.model;
+    self.callback = opts.callback;
     self.scale = 10;
     self.model;
     var size = self.getParentSize(self.el);
