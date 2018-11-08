@@ -29,6 +29,8 @@ function App() {
   let bucketsClone = [];
   let objectsClone = [];
 
+console.log('testing HotReload removal;')
+
   function pickRandomObject() {
     if (objectsClone.length === 0) {
       // Create a new clone of that array
