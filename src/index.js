@@ -25,6 +25,41 @@ function App() {
     model: "jerrycan"
   });
 
+  let citiesClone = [];
+  let bucketsClone = [];
+  let objectsClone = [];
+
+  function pickRandomObject() {
+    if (objectsClone.length === 0) {
+      // Create a new clone of that array
+    }
+
+    // Pick a random index from a given array
+    const randomIndex = Math.floor(Math.random() * objectsClone.length);
+
+    // Do the splice to get that object from that index
+  }
+
+  function pickRandomBucket() {
+
+  }
+
+  function pickRandomCity() {
+
+  }
+
+  function pickRandomScene() {
+    const city = pickRandomCity();
+    const bucket = pickRandomBucket();
+    const object = pickRandomObject();
+
+    // Send city and bucket and (data) to the BarChart class
+
+    // Send model, number of objects, and callback to three.js
+    // model.replace(name, number, pickRandomScene);
+
+  }
+
   if (cityPanelEl && giftPanelEl) {
     const cityPanel = new CityPanel(cityPanelEl);
     const giftPanel = new GiftPanel(giftPanelEl);

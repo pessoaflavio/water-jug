@@ -4,6 +4,7 @@ export default class BarChart {
     const self = this;
     self.el = d3.select(opts.el);
     self.city = opts.city;
+    self.bucket = opts.bucket;
     self.data = opts.data[self.city];
     this.margin = {
       top: 20,

@@ -4,6 +4,7 @@ export default class RenderGift {
     self.el = opts.el;
     self.canvas = self.el.querySelector('.scene');
     self.modelName = opts.model;
+    self.callback = opts.callback;
     self.scale = 10;
     self.model;
 
