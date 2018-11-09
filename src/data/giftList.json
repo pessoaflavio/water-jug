@@ -12,7 +12,7 @@
     "name_plural": "glasses",
     "price": 10,
     "bucket": "less than 10",
-    "OriginalItem": "Glasses %u2013�The Gift of Sight",
+    "OriginalItem": "Glasses – The Gift of Sight",
     "comment": "-"
   },
   {
@@ -46,14 +46,6 @@
     "bucket": "less than 10",
     "OriginalItem": "Birth Certificate",
     "comment": "Actual Price is 20 dollars for 5 certificates"
-  },
-  {
-    "name": "placehold",
-    "name_plural": "placeholds",
-    "price": 13,
-    "bucket": "11-15",
-    "OriginalItem": "placehold",
-    "comment": "-"
   },
   {
     "name": "set of warm blankets and mat",
@@ -96,19 +88,11 @@
     "comment": "-"
   },
   {
-    "name": "placehold",
-    "name_plural": "placeholds",
-    "price": 17,
-    "bucket": "16-20",
-    "OriginalItem": "placehold",
-    "comment": "-"
-  },
-  {
     "name": "school kit",
     "name_plural": "school kits",
     "price": 21,
     "bucket": "21-30",
-    "OriginalItem": "School Kit %u2013�Educate a Child",
+    "OriginalItem": "School Kit – Educate a Child",
     "comment": "-"
   },
   {
@@ -144,22 +128,6 @@
     "comment": "-"
   },
   {
-    "name": "placehold",
-    "name_plural": "placeholds",
-    "price": 43,
-    "bucket": "31-49",
-    "OriginalItem": "placehold",
-    "comment": "-"
-  },
-  {
-    "name": "placehold",
-    "name_plural": "placeholds",
-    "price": 34,
-    "bucket": "31-49",
-    "OriginalItem": "placehold",
-    "comment": "-"
-  },
-  {
     "name": "batch of vaccines",
     "name_plural": "batches of vaccines",
     "price": 50,
@@ -181,14 +149,6 @@
     "price": 50,
     "bucket": "50-100",
     "OriginalItem": "Fleece Blankets",
-    "comment": "-"
-  },
-  {
-    "name": "placehold",
-    "name_plural": "placeholds",
-    "price": 56,
-    "bucket": "50-100",
-    "OriginalItem": "placehold",
     "comment": "-"
   },
   {
@@ -216,14 +176,6 @@
     "comment": "-"
   },
   {
-    "name": "placehold",
-    "name_plural": "placeholds",
-    "price": 444,
-    "bucket": "100-499",
-    "OriginalItem": "placehold",
-    "comment": "-"
-  },
-  {
     "name": "family tent",
     "name_plural": "family tents",
     "price": 560,
@@ -232,27 +184,27 @@
     "comment": "-"
   },
   {
-    "name": "placehold",
-    "name_plural": "placeholds",
-    "price": 555,
-    "bucket": "greater than 500",
-    "OriginalItem": "placehold",
+    "name": "kerosene stove",
+    "name_plural": "kerosene stoves",
+    "price": 92,
+    "bucket": "50-100",
+    "OriginalItem": "Kerosene stove/heater",
     "comment": "-"
   },
   {
-    "name": "placehold",
-    "name_plural": "placeholds",
-    "price": 555,
+    "name": "a kit of seeds & garden tools",
+    "name_plural": "kits of seeds & garden tools",
+    "price": 95,
     "bucket": "greater than 500",
-    "OriginalItem": "placehold",
+    "OriginalItem": "Seeds & Tools",
     "comment": "-"
   },
   {
-    "name": "placehold",
-    "name_plural": "placeholds",
-    "price": 555,
-    "bucket": "greater than 500",
-    "OriginalItem": "placehold",
+    "name": "a box of therapeutic food",
+    "name_plural": "boxes of therapeutic food",
+    "price": 24,
+    "bucket": "21-30",
+    "OriginalItem": "Therapeutic Food",
     "comment": "-"
   }
 ]
