@@ -1,4 +1,5 @@
 // @flow weak
+import { numbercommas } from '../js/util';
 
 export default class CityPanel {
 
@@ -25,7 +26,6 @@ export default class CityPanel {
     Array.prototype.forEach.call(headerFrames, (el, i) => {
       if (i === frameNumber) {
         el.classList.add('active');
-        console.log('paint me please');
       } else {
         el.classList.remove('active');
       }
@@ -40,9 +40,9 @@ export default class CityPanel {
     const self = this;
     const { citySpans, donationsTotal, donationsBucket } = self;
     console.log(donationsTotal, donationsBucket);
-
+    const formDon = numbercommas(donations);
     Array.prototype.forEach.call(citySpans, el => el.innerHTML = city);
-    donationsTotal.innerHTML = `${donations} donations<br>`;
+    donationsTotal.innerHTML = `${formDon} donations<br>`;
     donationsBucket.innerHTML = `between $${bucket[0]} and $${bucket[1]}`;
 
     self.toggleFrame(0);

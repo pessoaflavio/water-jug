@@ -1,4 +1,5 @@
 // @flow weak
+import { numbercommas } from '../js/util';
 
 export default class GiftPanel {
 
@@ -52,9 +53,12 @@ export default class GiftPanel {
       giftNumberTotal,
       giftItemPlural } = self;
 
-    giftValue.innerHTML = `$${value}`;
+    const formValue = numbercommas(value);
+    const formTotalValue = numbercommas(valueTotal);
+
+    giftValue.innerHTML = `$${formValue}`;
     giftItem.innerHTML = item;
-    giftValueTotal.innerHTML = `$${valueTotal}`;
+    giftValueTotal.innerHTML = `$${formTotalValue}`;
     giftNumberTotal.innerHTML = numberTotal.toString();
     giftItemPlural.innerHTML = itemPlural;
 
