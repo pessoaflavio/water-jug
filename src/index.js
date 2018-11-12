@@ -13,8 +13,6 @@ function App() {
   const cityPanelEl = document.querySelector('.panel--city');
   const giftPanelEl = document.querySelector('.panel--gift');
 
-  // const currentCity = "New York"
-
   let citiesClone = [];
   let bucketsClone = [];
   let objectsClone = [];
@@ -30,26 +28,26 @@ function App() {
     }
 
     // Pick a random index from a given array
-    const randomIndex = Math.floor(Math.random() * objectsClone.length);
+    const randomIndex = Math.floor(Math.random() * (citiesClone.length-1));
 
     // Do the splice to get that object from that index
-    const object = objectsClone[randomIndex];
-    objectsClone.splice(randomIndex, 1);
+    const newCity = citiesClone[randomIndex];
+    citiesClone.splice(randomIndex, 1);
 
-    return city;
+    return newCity;
 
   }
 
   function pickRandomObject() {
     if (objectsClone.length === 0) {
       // Create a new clone of that array
-      gits.forEach(function(item){
+      gifts.forEach(function(item){
         objectsClone.push(item);
       });
     }
 
     // Pick a random index from a given array
-    const randomIndex = Math.floor(Math.random() * objectsClone.length);
+    const randomIndex = Math.floor(Math.random() * (objectsClone.length-1));
 
     // Do the splice to get that object from that index
     const object = objectsClone[randomIndex];
@@ -67,38 +65,52 @@ function App() {
     }
 
     // Pick a random index from a given array
-    const randomIndex = Math.floor(Math.random() * bucketsClone.length);
+    const randomIndex = Math.floor(Math.random() * (bucketsClone.length-1));
 
     // Do the splice to get that object from that index
     const currentBucket = bucketsClone[randomIndex];
     bucketsClone.splice(randomIndex, 1);
 
-    return bucket;
+    return currentBucket;
 
   }
 
   function pickRandomScene() {
-    const currentCity = pickRandomCity();
+    const newCity = pickRandomCity();
     const currentBucket = pickRandomBucket();
     const currentGift = pickRandomObject();
 
+    //logging data
+    console.log('random scene funct working')
+    console.log(newCity + ' ' + currentBucket);
+    console.log('city array is ' + citiesClone);
+    console.log('bucket array is ' + bucketsClone);
     // Send city and bucket and (data) to the BarChart class;
 
     // Send model, number of objects, and callback to three.js
     // model.replace(name, number, pickRandomScene);
 
+    return {newCity, currentGift, currentBucket};
+
   }
+
+  let {newCity, currentBucket, currentGift} = pickRandomScene();
+
+  console.log(currentGift);
+
+  console.log(newCity);
 
   const barChart = new BarChart({
     el: document.querySelector('.donations-chart'),
     data: contribution,
-    city: currentCity,
+    city: newCity,
     bucket: currentBucket
   });
 
   const model = new RenderGift({
     el: giftPanelEl,
-    model: "jerrycan"
+    model: "jerrycan",
+    callback: pickRandomCity
   });
 
   if (cityPanelEl && giftPanelEl) {
@@ -107,12 +119,13 @@ function App() {
 
     function sampleUpdate() {
 
+      // pickRandomScene();
       // City panel
-      const city = currentCity;
+      // const city = currentCity;
       const donations = 8500;
       const bucket = [1000, 9999];
 
-      cityPanel.update(city, donations, bucket);
+      cityPanel.update(newCity, donations, bucket);
 
       // Gift panel
       const giftValue = 1890;

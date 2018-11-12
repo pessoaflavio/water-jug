@@ -227,6 +227,7 @@ export default class RenderGift {
     renderer.render(scene, camera);
     requestAnimationFrame(() => {
       self.update(scene);
+      // self.callback;
     });
   }
 }

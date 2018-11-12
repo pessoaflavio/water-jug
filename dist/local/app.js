@@ -17326,8 +17326,7 @@ var _data_giftList_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__
 
 function App() {
   var cityPanelEl = document.querySelector('.panel--city');
-  var giftPanelEl = document.querySelector('.panel--gift'); // const currentCity = "New York"
-
+  var giftPanelEl = document.querySelector('.panel--gift');
   var citiesClone = [];
   var bucketsClone = [];
   var objectsClone = [];
@@ -17342,23 +17341,23 @@ function App() {
     } // Pick a random index from a given array
 
 
-    var randomIndex = Math.floor(Math.random() * objectsClone.length); // Do the splice to get that object from that index
+    var randomIndex = Math.floor(Math.random() * (citiesClone.length - 1)); // Do the splice to get that object from that index
 
-    var object = objectsClone[randomIndex];
-    objectsClone.splice(randomIndex, 1);
-    return city;
+    var newCity = citiesClone[randomIndex];
+    citiesClone.splice(randomIndex, 1);
+    return newCity;
   }
 
   function pickRandomObject() {
     if (objectsClone.length === 0) {
       // Create a new clone of that array
-      gits.forEach(function (item) {
+      _data_giftList_json__WEBPACK_IMPORTED_MODULE_7__.forEach(function (item) {
         objectsClone.push(item);
       });
     } // Pick a random index from a given array
 
 
-    var randomIndex = Math.floor(Math.random() * objectsClone.length); // Do the splice to get that object from that index
+    var randomIndex = Math.floor(Math.random() * (objectsClone.length - 1)); // Do the splice to get that object from that index
 
     var object = objectsClone[randomIndex];
     objectsClone.splice(randomIndex, 1);
@@ -17374,39 +17373,59 @@ function App() {
     } // Pick a random index from a given array
 
 
-    var randomIndex = Math.floor(Math.random() * bucketsClone.length); // Do the splice to get that object from that index
+    var randomIndex = Math.floor(Math.random() * (bucketsClone.length - 1)); // Do the splice to get that object from that index
 
     var currentBucket = bucketsClone[randomIndex];
     bucketsClone.splice(randomIndex, 1);
-    return bucket;
+    return currentBucket;
   }
 
   function pickRandomScene() {
-    var currentCity = pickRandomCity();
+    var newCity = pickRandomCity();
     var currentBucket = pickRandomBucket();
-    var currentGift = pickRandomObject(); // Send city and bucket and (data) to the BarChart class;
+    var currentGift = pickRandomObject(); //logging data
+
+    console.log('random scene funct working');
+    console.log(newCity + ' ' + currentBucket);
+    console.log('city array is ' + citiesClone);
+    console.log('bucket array is ' + bucketsClone); // Send city and bucket and (data) to the BarChart class;
     // Send model, number of objects, and callback to three.js
     // model.replace(name, number, pickRandomScene);
+
+    return {
+      newCity: newCity,
+      currentGift: currentGift,
+      currentBucket: currentBucket
+    };
   }
 
+  var _pickRandomScene = pickRandomScene(),
+      newCity = _pickRandomScene.newCity,
+      currentBucket = _pickRandomScene.currentBucket,
+      currentGift = _pickRandomScene.currentGift;
+
+  console.log(currentGift);
+  console.log(newCity);
   var barChart = new _js_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"]({
     el: document.querySelector('.donations-chart'),
     data: _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__,
-    city: currentCity,
+    city: newCity,
     bucket: currentBucket
   });
   var model = new _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__["default"]({
     el: giftPanelEl,
-    model: "jerrycan"
+    model: "jerrycan",
+    callback: pickRandomCity
   });
 
   if (cityPanelEl && giftPanelEl) {
     var sampleUpdate = function sampleUpdate() {
+      // pickRandomScene();
       // City panel
-      var city = currentCity;
+      // const city = currentCity;
       var donations = 8500;
       var bucket = [1000, 9999];
-      cityPanel.update(city, donations, bucket); // Gift panel
+      cityPanel.update(newCity, donations, bucket); // Gift panel
 
       var giftValue = 1890;
       var giftItem = 'refugee housing unit';
@@ -17919,7 +17938,7 @@ function () {
           camera = self.camera;
       renderer.render(scene, camera);
       requestAnimationFrame(function () {
-        self.update(scene);
+        self.update(scene); // self.callback;
       });
     }
   }]);
