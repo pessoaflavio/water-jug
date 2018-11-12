@@ -7,33 +7,45 @@ import BarChart from './js/BarChart';
 import RenderGift from './js/RenderGift';
 
 import contribution from './data/contribution.json';
+import gifts from './data/giftList.json';
 
 function App() {
   const cityPanelEl = document.querySelector('.panel--city');
   const giftPanelEl = document.querySelector('.panel--gift');
 
-  const currentCity = "New York"
-
-  const barChart = new BarChart({
-    el: document.querySelector('.donations-chart'),
-    data: contribution,
-    city: currentCity
-  });
-
-  const model = new RenderGift({
-    el: giftPanelEl,
-    model: "jerrycan"
-  });
+  // const currentCity = "New York"
 
   let citiesClone = [];
   let bucketsClone = [];
   let objectsClone = [];
 
-console.log('testing HotReload removal;')
+  function pickRandomCity() {
+
+    if (citiesClone.length === 0) {
+      // Create a new clone of that array
+      const cityList = Object.keys(contribution);
+      cityList.forEach(function(item){
+        citiesClone.push(item);
+      });
+    }
+
+    // Pick a random index from a given array
+    const randomIndex = Math.floor(Math.random() * objectsClone.length);
+
+    // Do the splice to get that object from that index
+    const object = objectsClone[randomIndex];
+    objectsClone.splice(randomIndex, 1);
+
+    return city;
+
+  }
 
   function pickRandomObject() {
     if (objectsClone.length === 0) {
       // Create a new clone of that array
+      gits.forEach(function(item){
+        objectsClone.push(item);
+      });
     }
 
     // Pick a random index from a given array
@@ -47,24 +59,47 @@ console.log('testing HotReload removal;')
   }
 
   function pickRandomBucket() {
+    if (bucketsClone.length === 0) {
+      let bucketList = ['less than 10', '11-15', '16-20', '21-30', '31-49', '50-100', '101-499', 'greater than 500'];
+      bucketList.forEach(function(item){
+        bucketsClone.push(item);
+      });
+    }
 
-  }
+    // Pick a random index from a given array
+    const randomIndex = Math.floor(Math.random() * bucketsClone.length);
 
-  function pickRandomCity() {
+    // Do the splice to get that object from that index
+    const currentBucket = bucketsClone[randomIndex];
+    bucketsClone.splice(randomIndex, 1);
+
+    return bucket;
 
   }
 
   function pickRandomScene() {
-    const city = pickRandomCity();
-    const bucket = pickRandomBucket();
-    const object = pickRandomObject();
+    const currentCity = pickRandomCity();
+    const currentBucket = pickRandomBucket();
+    const currentGift = pickRandomObject();
 
-    // Send city and bucket and (data) to the BarChart class
+    // Send city and bucket and (data) to the BarChart class;
 
     // Send model, number of objects, and callback to three.js
     // model.replace(name, number, pickRandomScene);
 
   }
+
+  const barChart = new BarChart({
+    el: document.querySelector('.donations-chart'),
+    data: contribution,
+    city: currentCity,
+    bucket: currentBucket
+  });
+
+  const model = new RenderGift({
+    el: giftPanelEl,
+    model: "jerrycan"
+  });
 
   if (cityPanelEl && giftPanelEl) {
     const cityPanel = new CityPanel(cityPanelEl);
@@ -77,7 +112,7 @@ console.log('testing HotReload removal;')
       const donations = 8500;
       const bucket = [1000, 9999];
 
-      cityPanel.update(currentCity, donations, bucket);
+      cityPanel.update(city, donations, bucket);
 
       // Gift panel
       const giftValue = 1890;
@@ -94,7 +129,7 @@ console.log('testing HotReload removal;')
       }, 2000);
     }
 
-    document.addEventListener('keypress', (event) => {
+      document.addEventListener('keypress', (event) => {
       const keyName = event.key;
       if (keyName === '1') {
         sampleUpdate();

@@ -17282,6 +17282,17 @@ module.exports = {"Alexandria":[{"city":"Alexandria","contribution":"less than 1
 
 /***/ }),
 
+/***/ "./src/data/giftList.json":
+/*!********************************!*\
+  !*** ./src/data/giftList.json ***!
+  \********************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, default */
+/***/ (function(module) {
+
+module.exports = [{"name":"pair of warm gloves","name_plural":"pairs of warm gloves","price":5,"bucket":"less than 10","OriginalItem":"Warm Gloves","comment":"-"},{"name":"glasses","name_plural":"glasses","price":10,"bucket":"less than 10","OriginalItem":"Glasses – The Gift of Sight","comment":"-"},{"name":"sleeping bag","name_plural":"sleeping bags","price":10,"bucket":"less than 10","OriginalItem":"Sleeping Bag","comment":"-"},{"name":"jerry can","name_plural":"jerry cans","price":2,"bucket":"less than 10","OriginalItem":"Jerry Cans","comment":"Actual Price is 10 dollars for 5 jerry cans"},{"name":"mosquito net","name_plural":"mosquito nets","price":8,"bucket":"less than 10","OriginalItem":"Mosquito Nets","comment":"Actual Price is 40 dollars for 5 nets"},{"name":"birth certificate","name_plural":"birth certificates","price":4,"bucket":"less than 10","OriginalItem":"Birth Certificate","comment":"Actual Price is 20 dollars for 5 certificates"},{"name":"set of warm blankets and mat","name_plural":"sets of warm blankets and mat","price":15,"bucket":"11-15","OriginalItem":"Warm Blankets & Mats","comment":"-"},{"name":"school uniform","name_plural":"school uniforms","price":16,"bucket":"11-15","OriginalItem":"School Uniform","comment":"-"},{"name":"set of winter clothes","name_plural":"sets of winter clothes","price":17,"bucket":"11-15","OriginalItem":"Winter Clothes","comment":"-"},{"name":"school desk","name_plural":"school desks","price":20,"bucket":"16-20","OriginalItem":"School Desk","comment":"-"},{"name":"kitchen set of stoves, pots & cutlery","name_plural":"kitchen sets of stoves, pots & cutlery","price":20,"bucket":"16-20","OriginalItem":"Stoves, Pots & Cutlery","comment":"-"},{"name":"school kit","name_plural":"school kits","price":21,"bucket":"21-30","OriginalItem":"School Kit – Educate a Child","comment":"-"},{"name":"personal hygiene kit","name_plural":"personal hygiene kits","price":25,"bucket":"21-30","OriginalItem":"Personal Hygiene Kit","comment":"-"},{"name":"emergency rescue kit","name_plural":"emergency rescue kits","price":30,"bucket":"21-30","OriginalItem":"Emergency Rescue Kit","comment":"-"},{"name":"water filter","name_plural":"water filters","price":30,"bucket":"21-30","OriginalItem":"Water Filter","comment":"-"},{"name":"solar lantern","name_plural":"solar lanterns","price":45,"bucket":"31-49","OriginalItem":"Solar Lanterns","comment":"-"},{"name":"batch of vaccines","name_plural":"batches of vaccines","price":50,"bucket":"50-100","OriginalItem":"Vaccines","comment":"-"},{"name":"dental care treatment","name_plural":"dental care treatments","price":50,"bucket":"50-100","OriginalItem":"Dental Care?","comment":"-"},{"name":"set of fleece blankets","name_plural":"sets of fleece blankets","price":50,"bucket":"50-100","OriginalItem":"Fleece Blankets","comment":"-"},{"name":"winter survival kit","name_plural":"winter survival kits","price":116,"bucket":"100-499","OriginalItem":"Winter Survival Kit","comment":"-"},{"name":"blackboard","name_plural":"blackboards","price":120,"bucket":"100-499","OriginalItem":"Blackboard","comment":"-"},{"name":"school garden","name_plural":"school gardens","price":250,"bucket":"100-499","OriginalItem":"School Garden","comment":"-"},{"name":"family tent","name_plural":"family tents","price":560,"bucket":"greater than 500","OriginalItem":"Family Tents","comment":"-"},{"name":"kerosene stove","name_plural":"kerosene stoves","price":92,"bucket":"50-100","OriginalItem":"Kerosene stove/heater","comment":"-"},{"name":"a kit of seeds & garden tools","name_plural":"kits of seeds & garden tools","price":95,"bucket":"greater than 500","OriginalItem":"Seeds & Tools","comment":"-"},{"name":"a box of therapeutic food","name_plural":"boxes of therapeutic food","price":24,"bucket":"21-30","OriginalItem":"Therapeutic Food","comment":"-"}];
+
+/***/ }),
+
 /***/ "./src/index.js":
 /*!**********************!*\
   !*** ./src/index.js ***!
@@ -17301,6 +17312,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/RenderGift */ "./src/js/RenderGift.js");
 /* harmony import */ var _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./data/contribution.json */ "./src/data/contribution.json");
 var _data_contribution_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./data/contribution.json */ "./src/data/contribution.json", 1);
+/* harmony import */ var _data_giftList_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./data/giftList.json */ "./src/data/giftList.json");
+var _data_giftList_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./data/giftList.json */ "./src/data/giftList.json", 1);
 
  // import cat from './images/cat.jpg';
 
@@ -17310,27 +17323,39 @@ var _data_contribution_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__
 
 
 
+
 function App() {
   var cityPanelEl = document.querySelector('.panel--city');
-  var giftPanelEl = document.querySelector('.panel--gift');
-  var currentCity = "New York";
-  var barChart = new _js_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"]({
-    el: document.querySelector('.donations-chart'),
-    data: _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__,
-    city: currentCity
-  });
-  var model = new _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__["default"]({
-    el: giftPanelEl,
-    model: "jerrycan"
-  });
+  var giftPanelEl = document.querySelector('.panel--gift'); // const currentCity = "New York"
+
   var citiesClone = [];
   var bucketsClone = [];
   var objectsClone = [];
-  console.log('testing HotReload removal;');
+
+  function pickRandomCity() {
+    if (citiesClone.length === 0) {
+      // Create a new clone of that array
+      var cityList = Object.keys(_data_contribution_json__WEBPACK_IMPORTED_MODULE_6__);
+      cityList.forEach(function (item) {
+        citiesClone.push(item);
+      });
+    } // Pick a random index from a given array
+
+
+    var randomIndex = Math.floor(Math.random() * objectsClone.length); // Do the splice to get that object from that index
+
+    var object = objectsClone[randomIndex];
+    objectsClone.splice(randomIndex, 1);
+    return city;
+  }
 
   function pickRandomObject() {
-    if (objectsClone.length === 0) {} // Create a new clone of that array
-    // Pick a random index from a given array
+    if (objectsClone.length === 0) {
+      // Create a new clone of that array
+      gits.forEach(function (item) {
+        objectsClone.push(item);
+      });
+    } // Pick a random index from a given array
 
 
     var randomIndex = Math.floor(Math.random() * objectsClone.length); // Do the splice to get that object from that index
@@ -17340,17 +17365,40 @@ function App() {
     return object;
   }
 
-  function pickRandomBucket() {}
+  function pickRandomBucket() {
+    if (bucketsClone.length === 0) {
+      var bucketList = ['less than 10', '11-15', '16-20', '21-30', '31-49', '50-100', '101-499', 'greater than 500'];
+      bucketList.forEach(function (item) {
+        bucketsClone.push(item);
+      });
+    } // Pick a random index from a given array
 
-  function pickRandomCity() {}
+
+    var randomIndex = Math.floor(Math.random() * bucketsClone.length); // Do the splice to get that object from that index
+
+    var currentBucket = bucketsClone[randomIndex];
+    bucketsClone.splice(randomIndex, 1);
+    return bucket;
+  }
 
   function pickRandomScene() {
-    var city = pickRandomCity();
-    var bucket = pickRandomBucket();
-    var object = pickRandomObject(); // Send city and bucket and (data) to the BarChart class
+    var currentCity = pickRandomCity();
+    var currentBucket = pickRandomBucket();
+    var currentGift = pickRandomObject(); // Send city and bucket and (data) to the BarChart class;
     // Send model, number of objects, and callback to three.js
     // model.replace(name, number, pickRandomScene);
   }
+
+  var barChart = new _js_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"]({
+    el: document.querySelector('.donations-chart'),
+    data: _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__,
+    city: currentCity,
+    bucket: currentBucket
+  });
+  var model = new _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__["default"]({
+    el: giftPanelEl,
+    model: "jerrycan"
+  });
 
   if (cityPanelEl && giftPanelEl) {
     var sampleUpdate = function sampleUpdate() {
@@ -17358,7 +17406,7 @@ function App() {
       var city = currentCity;
       var donations = 8500;
       var bucket = [1000, 9999];
-      cityPanel.update(currentCity, donations, bucket); // Gift panel
+      cityPanel.update(city, donations, bucket); // Gift panel
 
       var giftValue = 1890;
       var giftItem = 'refugee housing unit';
