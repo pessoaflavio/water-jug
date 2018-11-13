@@ -22,8 +22,9 @@ function App() {
 
   const model = new RenderGift({
     el: giftPanelEl,
-    model: "jerrycan"
+    model: "vaccines"
   });
+
 
   if (cityPanelEl && giftPanelEl) {
     const cityPanel = new CityPanel(cityPanelEl);
