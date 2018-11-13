@@ -17509,9 +17509,7 @@ function () {
       this.x = d3.scaleLinear().range([this.width, 0]);
       this.y = d3.scaleBand().rangeRound([0, this.height]).padding(0.1); // Scale the range of the data
 
-      this.x.domain([0, d3.max(this.data, function (d) {
-        return d.amount;
-      })]);
+      this.x.domain([0, 7000]);
       this.y.domain(this.data.map(function (d) {
         return d.contribution;
       }));
@@ -17523,7 +17521,7 @@ function () {
       .attr("width", function (d) {
         return _this2.width - _this2.x(d.amount);
       }).attr("class", "rect").style("opacity", 0.9);
-      this.g.append("g").attr("class", "x axis").attr("transform", "translate(0," + this.height + ")").call(d3.axisBottom(this.x).ticks(5));
+      this.g.append("g").attr("class", "x axis").attr("transform", "translate(0," + this.height + ")").call(d3.axisBottom(this.x).ticks(6));
       this.g.append("g").attr("class", "y axis").attr("transform", "translate(0,0)").call(d3.axisLeft(this.y));
       this.g.select('.y.axis').selectAll('text').attr('x', 10);
     }
