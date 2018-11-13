@@ -38,7 +38,7 @@ export default class BarChart {
 
 
     // Scale the range of the data
-    this.x.domain([0, d3.max(this.data, d => d.amount)]);
+    this.x.domain([0, 7000]);
     this.y.domain(this.data.map(d => d.contribution));
 
     this.g.selectAll("rect")
@@ -55,7 +55,7 @@ export default class BarChart {
     this.g.append("g")
       .attr("class", "x axis")
       .attr("transform", "translate(0," + this.height + ")")
-      .call(d3.axisBottom(this.x).ticks(5));
+      .call(d3.axisBottom(this.x).ticks(6));
 
     this.g.append("g")
       .attr("class", "y axis")
