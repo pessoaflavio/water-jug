@@ -50,10 +50,10 @@ function App() {
     const randomIndex = Math.floor(Math.random() * (objectsClone.length - 1));
 
     // Do the splice to get that object from that index
-    const object = objectsClone[randomIndex];
+    const currentGift = objectsClone[randomIndex];
     objectsClone.splice(randomIndex, 1);
 
-    return object;
+    return currentGift;
   }
 
   function pickRandomBucket() {
@@ -117,7 +117,8 @@ function App() {
 
   const model = new RenderGift({
     el: giftPanelEl,
-    model: "vaccines"
+    model: "vaccines",
+    callback: pickRandomCity()
   });
 
 
@@ -129,9 +130,33 @@ function App() {
 
       // pickRandomScene();
       // City panel
-      // const city = currentCity;
-      const donations = 8500;
-      const bucket = [1000, 9999];
+
+      console.log('the real bucket is ' + currentBucket);
+
+      let bucketInd;
+
+      if (currentBucket === 'less than 10') {
+        bucketInd = 0
+      } else if (currentBucket === '11-15') {
+        bucketInd = 1
+      } else if (currentBucket === '16-20') {
+        bucketInd = 2
+      } else if (currentBucket === '21-30') {
+        bucketInd = 3
+      } else if (currentBucket === '31-49') {
+        bucketInd = 4
+      } else if (currentBucket === '50-100') {
+        bucketInd = 5
+      } else if (currentBucket === '101-499') {
+        bucketInd = 6
+      } else {
+        bucketInd = 7
+      };
+
+      console.log(bucketInd);
+      const bucket = currentBucket;
+      const donations = contribution[newCity][bucketInd].amount;
+
 
       cityPanel.update(newCity, donations, bucket);
 
@@ -150,12 +175,17 @@ function App() {
       }, 2000);
     }
 
-    document.addEventListener('keypress', (event) => {
-      const keyName = event.key;
-      if (keyName === '1') {
-        sampleUpdate();
-      }
-    });
+    // document.addEventListener('keypress', (event) => {
+    //   const keyName = event.key;
+    //   if (keyName === '1') {
+    //     sampleUpdate();
+    //   }
+    // });
+
+    setTimeout(() => {
+      console.log('let me hear this')
+      sampleUpdate();
+    }, 2000);
   }
 }
 

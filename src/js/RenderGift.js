@@ -308,7 +308,6 @@ export default class RenderGift {
     TWEEN.update();
     requestAnimationFrame(() => {
       self.update(scene);
-      // self.callback;
     });
   }
 }

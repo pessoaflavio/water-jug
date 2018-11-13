@@ -17359,9 +17359,9 @@ function App() {
 
     var randomIndex = Math.floor(Math.random() * (objectsClone.length - 1)); // Do the splice to get that object from that index
 
-    var object = objectsClone[randomIndex];
+    var currentGift = objectsClone[randomIndex];
     objectsClone.splice(randomIndex, 1);
-    return object;
+    return currentGift;
   }
 
   function pickRandomBucket() {
@@ -17414,16 +17414,39 @@ function App() {
   });
   var model = new _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__["default"]({
     el: giftPanelEl,
-    model: "vaccines"
+    model: "vaccines",
+    callback: pickRandomCity()
   });
 
   if (cityPanelEl && giftPanelEl) {
     var sampleUpdate = function sampleUpdate() {
       // pickRandomScene();
       // City panel
-      // const city = currentCity;
-      var donations = 8500;
-      var bucket = [1000, 9999];
+      console.log('the real bucket is ' + currentBucket);
+      var bucketInd;
+
+      if (currentBucket === 'less than 10') {
+        bucketInd = 0;
+      } else if (currentBucket === '11-15') {
+        bucketInd = 1;
+      } else if (currentBucket === '16-20') {
+        bucketInd = 2;
+      } else if (currentBucket === '21-30') {
+        bucketInd = 3;
+      } else if (currentBucket === '31-49') {
+        bucketInd = 4;
+      } else if (currentBucket === '50-100') {
+        bucketInd = 5;
+      } else if (currentBucket === '101-499') {
+        bucketInd = 6;
+      } else {
+        bucketInd = 7;
+      }
+
+      ;
+      console.log(bucketInd);
+      var bucket = currentBucket;
+      var donations = _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__[newCity][bucketInd].amount;
       cityPanel.update(newCity, donations, bucket); // Gift panel
 
       var giftValue = 1890;
@@ -17436,17 +17459,20 @@ function App() {
         cityPanel.toggleFrame(1);
         giftPanel.toggleFrame(1);
       }, 2000);
-    };
+    }; // document.addEventListener('keypress', (event) => {
+    //   const keyName = event.key;
+    //   if (keyName === '1') {
+    //     sampleUpdate();
+    //   }
+    // });
+
 
     var cityPanel = new _js_CityPanel__WEBPACK_IMPORTED_MODULE_2__["default"](cityPanelEl);
     var giftPanel = new _js_GiftPanel__WEBPACK_IMPORTED_MODULE_3__["default"](giftPanelEl);
-    document.addEventListener('keypress', function (event) {
-      var keyName = event.key;
-
-      if (keyName === '1') {
-        sampleUpdate();
-      }
-    });
+    setTimeout(function () {
+      console.log('let me hear this');
+      sampleUpdate();
+    }, 2000);
   }
 }
 
@@ -17615,7 +17641,19 @@ function () {
         return el.innerHTML = city;
       });
       donationsTotal.innerHTML = "".concat(formDon, " donations<br>");
-      donationsBucket.innerHTML = "between $".concat(bucket[0], " and $").concat(bucket[1]);
+
+      if (bucket === 'less than 10' || bucket === 'greater than 500') {
+        var nameSplit = bucket.split(' ');
+        donationsBucket.innerHTML = "that were ".concat(nameSplit[0], " ").concat(nameSplit[1], " $").concat(nameSplit[2]);
+        console.log('first conditional');
+      } else if (bucket === '11-15' || bucket === '16-20' || bucket === '21-30' || bucket === '31-49' || bucket === '50-100') {
+        var _nameSplit = bucket.split('-');
+
+        donationsBucket.innerHTML = "between $".concat(_nameSplit[0], " and $").concat(_nameSplit[1]);
+        console.log('second conditional');
+      }
+
+      ;
       self.toggleFrame(0);
     }
   }]);
@@ -18015,7 +18053,7 @@ function () {
       renderer.render(scene, camera);
       TWEEN.update();
       requestAnimationFrame(function () {
-        self.update(scene); // self.callback;
+        self.update(scene);
       });
     }
   }]);
