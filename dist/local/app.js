@@ -17751,15 +17751,32 @@ function () {
       self.model.castShadow = true;
       var scene = self.getScene();
       self.scene = scene;
-      self.scene.add(self.model); // self.renderNumber(self.number)
+      self.scene.add(self.model); // self.multiplyGift(self.number)
 
       self.update(scene);
     });
   }
 
   _createClass(RenderGift, [{
-    key: "renderNumber",
-    value: function renderNumber(amount) {
+    key: "animateCamera",
+    value: function animateCamera() {
+      self.cameraTween = new TWEEN.Tween(initTween).to({
+        scale: 1,
+        progress: 100
+      }, 4000).onStart(function () {
+        self.object.add(self.camera);
+        document.getElementById("icon-explainer-wrapper-camera").classList.add("active");
+        document.getElementById("progress-pagination__current").innerHTML = "3";
+      }).easing(TWEEN.Easing.Linear.None).onUpdate(function (obj) {
+        document.getElementById("progress-bar__inner").style.width = obj.progress + "%";
+      }).onComplete(function () {
+        self.object.remove(self.camera);
+        document.getElementById("icon-explainer-wrapper-camera").classList.remove("active");
+      });
+    }
+  }, {
+    key: "multiplyGift",
+    value: function multiplyGift(amount) {
       var self = this;
       var x = 0,
           y = 0,
@@ -17993,6 +18010,7 @@ function () {
       var renderer = self.renderer,
           camera = self.camera;
       renderer.render(scene, camera);
+      TWEEN.update();
       requestAnimationFrame(function () {
         self.update(scene); // self.callback;
       });

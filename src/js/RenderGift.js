@@ -25,16 +25,31 @@ export default class RenderGift {
         const scene = self.getScene();
         self.scene = scene;
         self.scene.add(self.model);
-
-        // self.renderNumber(self.number)
-
+        // self.multiplyGift(self.number)
         self.update(scene);
       })
-
-
   }
-
-  renderNumber(amount) {
+  animateCamera() {
+    self.cameraTween = new TWEEN.Tween(initTween)
+      .to({
+        scale: 1,
+        progress: 100
+      }, 4000)
+      .onStart(function() {
+        self.object.add(self.camera);
+        document.getElementById("icon-explainer-wrapper-camera").classList.add("active")
+        document.getElementById("progress-pagination__current").innerHTML = "3";
+      })
+      .easing(TWEEN.Easing.Linear.None)
+      .onUpdate(function(obj) {
+        document.getElementById("progress-bar__inner").style.width = obj.progress + "%";
+      })
+      .onComplete(function() {
+        self.object.remove(self.camera);
+        document.getElementById("icon-explainer-wrapper-camera").classList.remove("active")
+      })
+  }
+  multiplyGift(amount) {
     const self = this;
     var x = 0,
       y = 0,
@@ -280,6 +295,7 @@ export default class RenderGift {
       camera,
     } = self;
     renderer.render(scene, camera);
+    TWEEN.update();
     requestAnimationFrame(() => {
       self.update(scene);
       // self.callback;
