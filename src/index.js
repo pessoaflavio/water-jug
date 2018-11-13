@@ -22,13 +22,13 @@ function App() {
     if (citiesClone.length === 0) {
       // Create a new clone of that array
       const cityList = Object.keys(contribution);
-      cityList.forEach(function(item){
+      cityList.forEach(function(item) {
         citiesClone.push(item);
       });
     }
 
     // Pick a random index from a given array
-    const randomIndex = Math.floor(Math.random() * (citiesClone.length-1));
+    const randomIndex = Math.floor(Math.random() * (citiesClone.length - 1));
 
     // Do the splice to get that object from that index
     const newCity = citiesClone[randomIndex];
@@ -41,13 +41,13 @@ function App() {
   function pickRandomObject() {
     if (objectsClone.length === 0) {
       // Create a new clone of that array
-      gifts.forEach(function(item){
+      gifts.forEach(function(item) {
         objectsClone.push(item);
       });
     }
 
     // Pick a random index from a given array
-    const randomIndex = Math.floor(Math.random() * (objectsClone.length-1));
+    const randomIndex = Math.floor(Math.random() * (objectsClone.length - 1));
 
     // Do the splice to get that object from that index
     const object = objectsClone[randomIndex];
@@ -59,13 +59,13 @@ function App() {
   function pickRandomBucket() {
     if (bucketsClone.length === 0) {
       let bucketList = ['less than 10', '11-15', '16-20', '21-30', '31-49', '50-100', '101-499', 'greater than 500'];
-      bucketList.forEach(function(item){
+      bucketList.forEach(function(item) {
         bucketsClone.push(item);
       });
     }
 
     // Pick a random index from a given array
-    const randomIndex = Math.floor(Math.random() * (bucketsClone.length-1));
+    const randomIndex = Math.floor(Math.random() * (bucketsClone.length - 1));
 
     // Do the splice to get that object from that index
     const currentBucket = bucketsClone[randomIndex];
@@ -90,11 +90,19 @@ function App() {
     // Send model, number of objects, and callback to three.js
     // model.replace(name, number, pickRandomScene);
 
-    return {newCity, currentGift, currentBucket};
+    return {
+      newCity,
+      currentGift,
+      currentBucket
+    };
 
   }
 
-  let {newCity, currentBucket, currentGift} = pickRandomScene();
+  let {
+    newCity,
+    currentBucket,
+    currentGift
+  } = pickRandomScene();
 
   console.log(currentGift);
 
@@ -109,9 +117,9 @@ function App() {
 
   const model = new RenderGift({
     el: giftPanelEl,
-    model: "jerrycan",
-    callback: pickRandomCity
+    model: "vaccines"
   });
+
 
   if (cityPanelEl && giftPanelEl) {
     const cityPanel = new CityPanel(cityPanelEl);
@@ -142,7 +150,7 @@ function App() {
       }, 2000);
     }
 
-      document.addEventListener('keypress', (event) => {
+    document.addEventListener('keypress', (event) => {
       const keyName = event.key;
       if (keyName === '1') {
         sampleUpdate();

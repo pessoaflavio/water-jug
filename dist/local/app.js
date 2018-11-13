@@ -17414,8 +17414,7 @@ function App() {
   });
   var model = new _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__["default"]({
     el: giftPanelEl,
-    model: "jerrycan",
-    callback: pickRandomCity
+    model: "vaccines"
   });
 
   if (cityPanelEl && giftPanelEl) {
@@ -17733,27 +17732,86 @@ function () {
     self.canvas = self.el.querySelector('.scene');
     self.modelName = opts.model;
     self.callback = opts.callback;
-    self.scale = 10;
+    self.number = 1200;
+    self.scale = 5;
     self.model;
     var size = self.getParentSize(self.el);
     self.renderer = self.getRenderer(self.canvas, size);
-    self.camera = self.getCamera();
-    self.gui = new dat.GUI();
+    self.camera = self.getCamera(); // self.gui = new dat.GUI();
+
     self.loadModel(self.modelName).then(function (object) {
       return self.setupObject(object);
     }).then(function (object) {
       self.model = object;
       self.model.scale.set(self.scale, self.scale, self.scale);
       self.model.position.set(0, 0, 0);
-      self.model.rotation.set(Math.PI / 8, Math.PI / 4, 0);
+      self.model.rotation.set(0, Math.PI / 4, 0);
       self.model.castShadow = true;
       var scene = self.getScene();
       self.scene = scene;
+      self.scene.add(self.model); // self.renderNumber(self.number)
+
       self.update(scene);
     });
   }
 
   _createClass(RenderGift, [{
+    key: "renderNumber",
+    value: function renderNumber(amount) {
+      var self = this;
+      var x = 0,
+          y = 0,
+          max = 0;
+      var xInc = 0,
+          yInc = 0;
+
+      for (var i = 0; i < amount; ++i) {
+        // console.log(i + ": (" + x + "," + y + ")");
+        var obj = self.model.clone(true);
+        obj.position.x = x * 4;
+        obj.position.z = y * 4; // obj.position.y = y;
+        // obj.position.y = 0;
+        // obj.position.z = i * separationMultiplier;
+
+        obj.scale.set(self.scale, self.scale, self.scale); // obj.rotation.set(Math.PI / 8, Math.PI / 4, 0);
+
+        obj.castShadow = true;
+        self.scene.add(obj);
+
+        if (max > 0) {
+          if (x === max && y === max) {
+            // go down
+            xInc = 0;
+            yInc = -1;
+          } else if (x === max && y === -max) {
+            // go left
+            xInc = -1;
+            yInc = 0;
+          } else if (x === -max && y === -max) {
+            // go up
+            xInc = 0;
+            yInc = 1;
+          } else if (x === -max && y === max) {
+            // go right
+            xInc = 1;
+            yInc = 0;
+          }
+
+          x += xInc;
+          y += yInc;
+        }
+
+        if (x === 0 && y === max) {
+          // go to next tier
+          ++max;
+          xInc = 1;
+          yInc = 0;
+          x = 0;
+          y = max;
+        }
+      }
+    }
+  }, {
     key: "getParentSize",
     value: function getParentSize(parentElement) {
       var self = this;
@@ -17772,7 +17830,7 @@ function () {
     value: function loadModel(name) {
       var self = this;
       return new Promise(function (resolve, reject) {
-        new THREE.GLTFLoader().load("models/".concat(name, "_baked.gltf"), function (object) {
+        new THREE.GLTFLoader().load("models/".concat(name, ".gltf"), function (object) {
           resolve(object.scene);
         }, // on progress
         function (xhr) {
@@ -17828,7 +17886,7 @@ function () {
       var near = 0.01;
       var far = 1000;
       var camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-      camera.position.set(0, 0, 30);
+      camera.position.set(0, 5, 7);
       camera.lookAt(new THREE.Vector3(0, 0, 0));
       return camera;
     }
@@ -17853,30 +17911,28 @@ function () {
       var ambientLight = self.getAmbientLight(0xffffff, 1);
       ambientLight.name = "ambientLight";
       scene.add(ambientLight);
-      var spotLight = self.getSpotLight(0xffffff, 0.2, 100, Math.PI / 3);
+      var spotLight = self.getSpotLight(0xffffff, 0.4, 100, Math.PI / 3);
       spotLight.name = "spotLight";
-      scene.add(spotLight); //
-      // const directionalLight = self.getDirectionalLight(0xffffff, 1);
-      // directionalLight.name = "directionalLight";
-      // scene.add(directionalLight);
+      scene.add(spotLight); // const thisSpotlight = self.gui.addFolder('spotlight');
+      // // lights.add(ambientLight, 'intensity', 0, 1);
+      // thisSpotlight.add(spotLight.rotation, 'x', -Math.PI, Math.PI);
+      // thisSpotlight.add(spotLight.rotation, 'y', -Math.PI, Math.PI);
+      // thisSpotlight.add(spotLight.rotation, 'z', -Math.PI, Math.PI);
+      // thisSpotlight.add(spotLight.position, 'x', -100, 100);
+      // thisSpotlight.add(spotLight.position, 'y', -100, 100);
+      // thisSpotlight.add(spotLight.position, 'z', -100, 100);
 
-      var thisSpotlight = self.gui.addFolder('spotlight'); // lights.add(ambientLight, 'intensity', 0, 1);
-
-      thisSpotlight.add(spotLight.rotation, 'x', -Math.PI, Math.PI);
-      thisSpotlight.add(spotLight.rotation, 'y', -Math.PI, Math.PI);
-      thisSpotlight.add(spotLight.rotation, 'z', -Math.PI, Math.PI);
-      thisSpotlight.add(spotLight.position, 'x', -100, 100);
-      thisSpotlight.add(spotLight.position, 'y', -100, 100);
-      thisSpotlight.add(spotLight.position, 'z', -100, 100);
       var plane = self.getPlane(1000, 1000, 0x4c95eb);
       plane.name = "plane";
-      plane.receiveShadow = true;
-      var thisPlane = self.gui.addFolder('plane');
-      thisPlane.add(plane.rotation, 'x', -Math.PI, Math.PI);
-      thisPlane.add(plane.rotation, 'y', -Math.PI, Math.PI);
-      thisPlane.add(plane.rotation, 'z', -Math.PI, Math.PI);
+      plane.receiveShadow = true; // const thisPlane = self.gui.addFolder('plane');
+      // thisPlane.add(plane.rotation, 'x', -Math.PI, Math.PI);
+      // thisPlane.add(plane.rotation, 'y', -Math.PI, Math.PI);
+      // thisPlane.add(plane.rotation, 'z', -Math.PI, Math.PI);
+      // thisPlane.add(plane.position, 'x', -10, 10);
+      // thisPlane.add(plane.position, 'y', -10, 10);
+      // thisPlane.add(plane.position, 'z', -10, 10);
+
       scene.add(plane);
-      scene.add(self.model);
       return scene;
     }
   }, {
@@ -17925,7 +17981,7 @@ function () {
       });
       var mesh = new THREE.Mesh(geometry, material);
       mesh.receiveShadow = true;
-      mesh.rotation.x = -1.17;
+      mesh.rotation.x = -Math.PI / 2;
       return mesh;
     }
   }, {
