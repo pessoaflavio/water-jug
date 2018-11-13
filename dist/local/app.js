@@ -9,708 +9,6 @@
 		root["yodda"] = factory();
 })(window, function() {
 return /******/ (function(modules) { // webpackBootstrap
-/******/ 	function hotDisposeChunk(chunkId) {
-/******/ 		delete installedChunks[chunkId];
-/******/ 	}
-/******/ 	var parentHotUpdateCallback = window["webpackHotUpdateyodda"];
-/******/ 	window["webpackHotUpdateyodda"] = // eslint-disable-next-line no-unused-vars
-/******/ 	function webpackHotUpdateCallback(chunkId, moreModules) {
-/******/ 		hotAddUpdateChunk(chunkId, moreModules);
-/******/ 		if (parentHotUpdateCallback) parentHotUpdateCallback(chunkId, moreModules);
-/******/ 	} ;
-/******/
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	function hotDownloadUpdateChunk(chunkId) {
-/******/ 		var head = document.getElementsByTagName("head")[0];
-/******/ 		var script = document.createElement("script");
-/******/ 		script.charset = "utf-8";
-/******/ 		script.src = __webpack_require__.p + "" + chunkId + "." + hotCurrentHash + ".hot-update.js";
-/******/ 		if (null) script.crossOrigin = null;
-/******/ 		head.appendChild(script);
-/******/ 	}
-/******/
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	function hotDownloadManifest(requestTimeout) {
-/******/ 		requestTimeout = requestTimeout || 10000;
-/******/ 		return new Promise(function(resolve, reject) {
-/******/ 			if (typeof XMLHttpRequest === "undefined") {
-/******/ 				return reject(new Error("No browser support"));
-/******/ 			}
-/******/ 			try {
-/******/ 				var request = new XMLHttpRequest();
-/******/ 				var requestPath = __webpack_require__.p + "" + hotCurrentHash + ".hot-update.json";
-/******/ 				request.open("GET", requestPath, true);
-/******/ 				request.timeout = requestTimeout;
-/******/ 				request.send(null);
-/******/ 			} catch (err) {
-/******/ 				return reject(err);
-/******/ 			}
-/******/ 			request.onreadystatechange = function() {
-/******/ 				if (request.readyState !== 4) return;
-/******/ 				if (request.status === 0) {
-/******/ 					// timeout
-/******/ 					reject(
-/******/ 						new Error("Manifest request to " + requestPath + " timed out.")
-/******/ 					);
-/******/ 				} else if (request.status === 404) {
-/******/ 					// no update available
-/******/ 					resolve();
-/******/ 				} else if (request.status !== 200 && request.status !== 304) {
-/******/ 					// other failure
-/******/ 					reject(new Error("Manifest request to " + requestPath + " failed."));
-/******/ 				} else {
-/******/ 					// success
-/******/ 					try {
-/******/ 						var update = JSON.parse(request.responseText);
-/******/ 					} catch (e) {
-/******/ 						reject(e);
-/******/ 						return;
-/******/ 					}
-/******/ 					resolve(update);
-/******/ 				}
-/******/ 			};
-/******/ 		});
-/******/ 	}
-/******/
-/******/ 	var hotApplyOnUpdate = true;
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentHash = "67c74f705dbd40f72bc5";
-/******/ 	var hotRequestTimeout = 10000;
-/******/ 	var hotCurrentModuleData = {};
-/******/ 	var hotCurrentChildModule;
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentParents = [];
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	var hotCurrentParentsTemp = [];
-/******/
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	function hotCreateRequire(moduleId) {
-/******/ 		var me = installedModules[moduleId];
-/******/ 		if (!me) return __webpack_require__;
-/******/ 		var fn = function(request) {
-/******/ 			if (me.hot.active) {
-/******/ 				if (installedModules[request]) {
-/******/ 					if (installedModules[request].parents.indexOf(moduleId) === -1) {
-/******/ 						installedModules[request].parents.push(moduleId);
-/******/ 					}
-/******/ 				} else {
-/******/ 					hotCurrentParents = [moduleId];
-/******/ 					hotCurrentChildModule = request;
-/******/ 				}
-/******/ 				if (me.children.indexOf(request) === -1) {
-/******/ 					me.children.push(request);
-/******/ 				}
-/******/ 			} else {
-/******/ 				console.warn(
-/******/ 					"[HMR] unexpected require(" +
-/******/ 						request +
-/******/ 						") from disposed module " +
-/******/ 						moduleId
-/******/ 				);
-/******/ 				hotCurrentParents = [];
-/******/ 			}
-/******/ 			return __webpack_require__(request);
-/******/ 		};
-/******/ 		var ObjectFactory = function ObjectFactory(name) {
-/******/ 			return {
-/******/ 				configurable: true,
-/******/ 				enumerable: true,
-/******/ 				get: function() {
-/******/ 					return __webpack_require__[name];
-/******/ 				},
-/******/ 				set: function(value) {
-/******/ 					__webpack_require__[name] = value;
-/******/ 				}
-/******/ 			};
-/******/ 		};
-/******/ 		for (var name in __webpack_require__) {
-/******/ 			if (
-/******/ 				Object.prototype.hasOwnProperty.call(__webpack_require__, name) &&
-/******/ 				name !== "e" &&
-/******/ 				name !== "t"
-/******/ 			) {
-/******/ 				Object.defineProperty(fn, name, ObjectFactory(name));
-/******/ 			}
-/******/ 		}
-/******/ 		fn.e = function(chunkId) {
-/******/ 			if (hotStatus === "ready") hotSetStatus("prepare");
-/******/ 			hotChunksLoading++;
-/******/ 			return __webpack_require__.e(chunkId).then(finishChunkLoading, function(err) {
-/******/ 				finishChunkLoading();
-/******/ 				throw err;
-/******/ 			});
-/******/
-/******/ 			function finishChunkLoading() {
-/******/ 				hotChunksLoading--;
-/******/ 				if (hotStatus === "prepare") {
-/******/ 					if (!hotWaitingFilesMap[chunkId]) {
-/******/ 						hotEnsureUpdateChunk(chunkId);
-/******/ 					}
-/******/ 					if (hotChunksLoading === 0 && hotWaitingFiles === 0) {
-/******/ 						hotUpdateDownloaded();
-/******/ 					}
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 		fn.t = function(value, mode) {
-/******/ 			if (mode & 1) value = fn(value);
-/******/ 			return __webpack_require__.t(value, mode & ~1);
-/******/ 		};
-/******/ 		return fn;
-/******/ 	}
-/******/
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	function hotCreateModule(moduleId) {
-/******/ 		var hot = {
-/******/ 			// private stuff
-/******/ 			_acceptedDependencies: {},
-/******/ 			_declinedDependencies: {},
-/******/ 			_selfAccepted: false,
-/******/ 			_selfDeclined: false,
-/******/ 			_disposeHandlers: [],
-/******/ 			_main: hotCurrentChildModule !== moduleId,
-/******/
-/******/ 			// Module API
-/******/ 			active: true,
-/******/ 			accept: function(dep, callback) {
-/******/ 				if (dep === undefined) hot._selfAccepted = true;
-/******/ 				else if (typeof dep === "function") hot._selfAccepted = dep;
-/******/ 				else if (typeof dep === "object")
-/******/ 					for (var i = 0; i < dep.length; i++)
-/******/ 						hot._acceptedDependencies[dep[i]] = callback || function() {};
-/******/ 				else hot._acceptedDependencies[dep] = callback || function() {};
-/******/ 			},
-/******/ 			decline: function(dep) {
-/******/ 				if (dep === undefined) hot._selfDeclined = true;
-/******/ 				else if (typeof dep === "object")
-/******/ 					for (var i = 0; i < dep.length; i++)
-/******/ 						hot._declinedDependencies[dep[i]] = true;
-/******/ 				else hot._declinedDependencies[dep] = true;
-/******/ 			},
-/******/ 			dispose: function(callback) {
-/******/ 				hot._disposeHandlers.push(callback);
-/******/ 			},
-/******/ 			addDisposeHandler: function(callback) {
-/******/ 				hot._disposeHandlers.push(callback);
-/******/ 			},
-/******/ 			removeDisposeHandler: function(callback) {
-/******/ 				var idx = hot._disposeHandlers.indexOf(callback);
-/******/ 				if (idx >= 0) hot._disposeHandlers.splice(idx, 1);
-/******/ 			},
-/******/
-/******/ 			// Management API
-/******/ 			check: hotCheck,
-/******/ 			apply: hotApply,
-/******/ 			status: function(l) {
-/******/ 				if (!l) return hotStatus;
-/******/ 				hotStatusHandlers.push(l);
-/******/ 			},
-/******/ 			addStatusHandler: function(l) {
-/******/ 				hotStatusHandlers.push(l);
-/******/ 			},
-/******/ 			removeStatusHandler: function(l) {
-/******/ 				var idx = hotStatusHandlers.indexOf(l);
-/******/ 				if (idx >= 0) hotStatusHandlers.splice(idx, 1);
-/******/ 			},
-/******/
-/******/ 			//inherit from previous dispose call
-/******/ 			data: hotCurrentModuleData[moduleId]
-/******/ 		};
-/******/ 		hotCurrentChildModule = undefined;
-/******/ 		return hot;
-/******/ 	}
-/******/
-/******/ 	var hotStatusHandlers = [];
-/******/ 	var hotStatus = "idle";
-/******/
-/******/ 	function hotSetStatus(newStatus) {
-/******/ 		hotStatus = newStatus;
-/******/ 		for (var i = 0; i < hotStatusHandlers.length; i++)
-/******/ 			hotStatusHandlers[i].call(null, newStatus);
-/******/ 	}
-/******/
-/******/ 	// while downloading
-/******/ 	var hotWaitingFiles = 0;
-/******/ 	var hotChunksLoading = 0;
-/******/ 	var hotWaitingFilesMap = {};
-/******/ 	var hotRequestedFilesMap = {};
-/******/ 	var hotAvailableFilesMap = {};
-/******/ 	var hotDeferred;
-/******/
-/******/ 	// The update info
-/******/ 	var hotUpdate, hotUpdateNewHash;
-/******/
-/******/ 	function toModuleId(id) {
-/******/ 		var isNumber = +id + "" === id;
-/******/ 		return isNumber ? +id : id;
-/******/ 	}
-/******/
-/******/ 	function hotCheck(apply) {
-/******/ 		if (hotStatus !== "idle") {
-/******/ 			throw new Error("check() is only allowed in idle status");
-/******/ 		}
-/******/ 		hotApplyOnUpdate = apply;
-/******/ 		hotSetStatus("check");
-/******/ 		return hotDownloadManifest(hotRequestTimeout).then(function(update) {
-/******/ 			if (!update) {
-/******/ 				hotSetStatus("idle");
-/******/ 				return null;
-/******/ 			}
-/******/ 			hotRequestedFilesMap = {};
-/******/ 			hotWaitingFilesMap = {};
-/******/ 			hotAvailableFilesMap = update.c;
-/******/ 			hotUpdateNewHash = update.h;
-/******/
-/******/ 			hotSetStatus("prepare");
-/******/ 			var promise = new Promise(function(resolve, reject) {
-/******/ 				hotDeferred = {
-/******/ 					resolve: resolve,
-/******/ 					reject: reject
-/******/ 				};
-/******/ 			});
-/******/ 			hotUpdate = {};
-/******/ 			var chunkId = "app";
-/******/ 			// eslint-disable-next-line no-lone-blocks
-/******/ 			{
-/******/ 				/*globals chunkId */
-/******/ 				hotEnsureUpdateChunk(chunkId);
-/******/ 			}
-/******/ 			if (
-/******/ 				hotStatus === "prepare" &&
-/******/ 				hotChunksLoading === 0 &&
-/******/ 				hotWaitingFiles === 0
-/******/ 			) {
-/******/ 				hotUpdateDownloaded();
-/******/ 			}
-/******/ 			return promise;
-/******/ 		});
-/******/ 	}
-/******/
-/******/ 	// eslint-disable-next-line no-unused-vars
-/******/ 	function hotAddUpdateChunk(chunkId, moreModules) {
-/******/ 		if (!hotAvailableFilesMap[chunkId] || !hotRequestedFilesMap[chunkId])
-/******/ 			return;
-/******/ 		hotRequestedFilesMap[chunkId] = false;
-/******/ 		for (var moduleId in moreModules) {
-/******/ 			if (Object.prototype.hasOwnProperty.call(moreModules, moduleId)) {
-/******/ 				hotUpdate[moduleId] = moreModules[moduleId];
-/******/ 			}
-/******/ 		}
-/******/ 		if (--hotWaitingFiles === 0 && hotChunksLoading === 0) {
-/******/ 			hotUpdateDownloaded();
-/******/ 		}
-/******/ 	}
-/******/
-/******/ 	function hotEnsureUpdateChunk(chunkId) {
-/******/ 		if (!hotAvailableFilesMap[chunkId]) {
-/******/ 			hotWaitingFilesMap[chunkId] = true;
-/******/ 		} else {
-/******/ 			hotRequestedFilesMap[chunkId] = true;
-/******/ 			hotWaitingFiles++;
-/******/ 			hotDownloadUpdateChunk(chunkId);
-/******/ 		}
-/******/ 	}
-/******/
-/******/ 	function hotUpdateDownloaded() {
-/******/ 		hotSetStatus("ready");
-/******/ 		var deferred = hotDeferred;
-/******/ 		hotDeferred = null;
-/******/ 		if (!deferred) return;
-/******/ 		if (hotApplyOnUpdate) {
-/******/ 			// Wrap deferred object in Promise to mark it as a well-handled Promise to
-/******/ 			// avoid triggering uncaught exception warning in Chrome.
-/******/ 			// See https://bugs.chromium.org/p/chromium/issues/detail?id=465666
-/******/ 			Promise.resolve()
-/******/ 				.then(function() {
-/******/ 					return hotApply(hotApplyOnUpdate);
-/******/ 				})
-/******/ 				.then(
-/******/ 					function(result) {
-/******/ 						deferred.resolve(result);
-/******/ 					},
-/******/ 					function(err) {
-/******/ 						deferred.reject(err);
-/******/ 					}
-/******/ 				);
-/******/ 		} else {
-/******/ 			var outdatedModules = [];
-/******/ 			for (var id in hotUpdate) {
-/******/ 				if (Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
-/******/ 					outdatedModules.push(toModuleId(id));
-/******/ 				}
-/******/ 			}
-/******/ 			deferred.resolve(outdatedModules);
-/******/ 		}
-/******/ 	}
-/******/
-/******/ 	function hotApply(options) {
-/******/ 		if (hotStatus !== "ready")
-/******/ 			throw new Error("apply() is only allowed in ready status");
-/******/ 		options = options || {};
-/******/
-/******/ 		var cb;
-/******/ 		var i;
-/******/ 		var j;
-/******/ 		var module;
-/******/ 		var moduleId;
-/******/
-/******/ 		function getAffectedStuff(updateModuleId) {
-/******/ 			var outdatedModules = [updateModuleId];
-/******/ 			var outdatedDependencies = {};
-/******/
-/******/ 			var queue = outdatedModules.slice().map(function(id) {
-/******/ 				return {
-/******/ 					chain: [id],
-/******/ 					id: id
-/******/ 				};
-/******/ 			});
-/******/ 			while (queue.length > 0) {
-/******/ 				var queueItem = queue.pop();
-/******/ 				var moduleId = queueItem.id;
-/******/ 				var chain = queueItem.chain;
-/******/ 				module = installedModules[moduleId];
-/******/ 				if (!module || module.hot._selfAccepted) continue;
-/******/ 				if (module.hot._selfDeclined) {
-/******/ 					return {
-/******/ 						type: "self-declined",
-/******/ 						chain: chain,
-/******/ 						moduleId: moduleId
-/******/ 					};
-/******/ 				}
-/******/ 				if (module.hot._main) {
-/******/ 					return {
-/******/ 						type: "unaccepted",
-/******/ 						chain: chain,
-/******/ 						moduleId: moduleId
-/******/ 					};
-/******/ 				}
-/******/ 				for (var i = 0; i < module.parents.length; i++) {
-/******/ 					var parentId = module.parents[i];
-/******/ 					var parent = installedModules[parentId];
-/******/ 					if (!parent) continue;
-/******/ 					if (parent.hot._declinedDependencies[moduleId]) {
-/******/ 						return {
-/******/ 							type: "declined",
-/******/ 							chain: chain.concat([parentId]),
-/******/ 							moduleId: moduleId,
-/******/ 							parentId: parentId
-/******/ 						};
-/******/ 					}
-/******/ 					if (outdatedModules.indexOf(parentId) !== -1) continue;
-/******/ 					if (parent.hot._acceptedDependencies[moduleId]) {
-/******/ 						if (!outdatedDependencies[parentId])
-/******/ 							outdatedDependencies[parentId] = [];
-/******/ 						addAllToSet(outdatedDependencies[parentId], [moduleId]);
-/******/ 						continue;
-/******/ 					}
-/******/ 					delete outdatedDependencies[parentId];
-/******/ 					outdatedModules.push(parentId);
-/******/ 					queue.push({
-/******/ 						chain: chain.concat([parentId]),
-/******/ 						id: parentId
-/******/ 					});
-/******/ 				}
-/******/ 			}
-/******/
-/******/ 			return {
-/******/ 				type: "accepted",
-/******/ 				moduleId: updateModuleId,
-/******/ 				outdatedModules: outdatedModules,
-/******/ 				outdatedDependencies: outdatedDependencies
-/******/ 			};
-/******/ 		}
-/******/
-/******/ 		function addAllToSet(a, b) {
-/******/ 			for (var i = 0; i < b.length; i++) {
-/******/ 				var item = b[i];
-/******/ 				if (a.indexOf(item) === -1) a.push(item);
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// at begin all updates modules are outdated
-/******/ 		// the "outdated" status can propagate to parents if they don't accept the children
-/******/ 		var outdatedDependencies = {};
-/******/ 		var outdatedModules = [];
-/******/ 		var appliedUpdate = {};
-/******/
-/******/ 		var warnUnexpectedRequire = function warnUnexpectedRequire() {
-/******/ 			console.warn(
-/******/ 				"[HMR] unexpected require(" + result.moduleId + ") to disposed module"
-/******/ 			);
-/******/ 		};
-/******/
-/******/ 		for (var id in hotUpdate) {
-/******/ 			if (Object.prototype.hasOwnProperty.call(hotUpdate, id)) {
-/******/ 				moduleId = toModuleId(id);
-/******/ 				/** @type {TODO} */
-/******/ 				var result;
-/******/ 				if (hotUpdate[id]) {
-/******/ 					result = getAffectedStuff(moduleId);
-/******/ 				} else {
-/******/ 					result = {
-/******/ 						type: "disposed",
-/******/ 						moduleId: id
-/******/ 					};
-/******/ 				}
-/******/ 				/** @type {Error|false} */
-/******/ 				var abortError = false;
-/******/ 				var doApply = false;
-/******/ 				var doDispose = false;
-/******/ 				var chainInfo = "";
-/******/ 				if (result.chain) {
-/******/ 					chainInfo = "\nUpdate propagation: " + result.chain.join(" -> ");
-/******/ 				}
-/******/ 				switch (result.type) {
-/******/ 					case "self-declined":
-/******/ 						if (options.onDeclined) options.onDeclined(result);
-/******/ 						if (!options.ignoreDeclined)
-/******/ 							abortError = new Error(
-/******/ 								"Aborted because of self decline: " +
-/******/ 									result.moduleId +
-/******/ 									chainInfo
-/******/ 							);
-/******/ 						break;
-/******/ 					case "declined":
-/******/ 						if (options.onDeclined) options.onDeclined(result);
-/******/ 						if (!options.ignoreDeclined)
-/******/ 							abortError = new Error(
-/******/ 								"Aborted because of declined dependency: " +
-/******/ 									result.moduleId +
-/******/ 									" in " +
-/******/ 									result.parentId +
-/******/ 									chainInfo
-/******/ 							);
-/******/ 						break;
-/******/ 					case "unaccepted":
-/******/ 						if (options.onUnaccepted) options.onUnaccepted(result);
-/******/ 						if (!options.ignoreUnaccepted)
-/******/ 							abortError = new Error(
-/******/ 								"Aborted because " + moduleId + " is not accepted" + chainInfo
-/******/ 							);
-/******/ 						break;
-/******/ 					case "accepted":
-/******/ 						if (options.onAccepted) options.onAccepted(result);
-/******/ 						doApply = true;
-/******/ 						break;
-/******/ 					case "disposed":
-/******/ 						if (options.onDisposed) options.onDisposed(result);
-/******/ 						doDispose = true;
-/******/ 						break;
-/******/ 					default:
-/******/ 						throw new Error("Unexception type " + result.type);
-/******/ 				}
-/******/ 				if (abortError) {
-/******/ 					hotSetStatus("abort");
-/******/ 					return Promise.reject(abortError);
-/******/ 				}
-/******/ 				if (doApply) {
-/******/ 					appliedUpdate[moduleId] = hotUpdate[moduleId];
-/******/ 					addAllToSet(outdatedModules, result.outdatedModules);
-/******/ 					for (moduleId in result.outdatedDependencies) {
-/******/ 						if (
-/******/ 							Object.prototype.hasOwnProperty.call(
-/******/ 								result.outdatedDependencies,
-/******/ 								moduleId
-/******/ 							)
-/******/ 						) {
-/******/ 							if (!outdatedDependencies[moduleId])
-/******/ 								outdatedDependencies[moduleId] = [];
-/******/ 							addAllToSet(
-/******/ 								outdatedDependencies[moduleId],
-/******/ 								result.outdatedDependencies[moduleId]
-/******/ 							);
-/******/ 						}
-/******/ 					}
-/******/ 				}
-/******/ 				if (doDispose) {
-/******/ 					addAllToSet(outdatedModules, [result.moduleId]);
-/******/ 					appliedUpdate[moduleId] = warnUnexpectedRequire;
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// Store self accepted outdated modules to require them later by the module system
-/******/ 		var outdatedSelfAcceptedModules = [];
-/******/ 		for (i = 0; i < outdatedModules.length; i++) {
-/******/ 			moduleId = outdatedModules[i];
-/******/ 			if (
-/******/ 				installedModules[moduleId] &&
-/******/ 				installedModules[moduleId].hot._selfAccepted
-/******/ 			)
-/******/ 				outdatedSelfAcceptedModules.push({
-/******/ 					module: moduleId,
-/******/ 					errorHandler: installedModules[moduleId].hot._selfAccepted
-/******/ 				});
-/******/ 		}
-/******/
-/******/ 		// Now in "dispose" phase
-/******/ 		hotSetStatus("dispose");
-/******/ 		Object.keys(hotAvailableFilesMap).forEach(function(chunkId) {
-/******/ 			if (hotAvailableFilesMap[chunkId] === false) {
-/******/ 				hotDisposeChunk(chunkId);
-/******/ 			}
-/******/ 		});
-/******/
-/******/ 		var idx;
-/******/ 		var queue = outdatedModules.slice();
-/******/ 		while (queue.length > 0) {
-/******/ 			moduleId = queue.pop();
-/******/ 			module = installedModules[moduleId];
-/******/ 			if (!module) continue;
-/******/
-/******/ 			var data = {};
-/******/
-/******/ 			// Call dispose handlers
-/******/ 			var disposeHandlers = module.hot._disposeHandlers;
-/******/ 			for (j = 0; j < disposeHandlers.length; j++) {
-/******/ 				cb = disposeHandlers[j];
-/******/ 				cb(data);
-/******/ 			}
-/******/ 			hotCurrentModuleData[moduleId] = data;
-/******/
-/******/ 			// disable module (this disables requires from this module)
-/******/ 			module.hot.active = false;
-/******/
-/******/ 			// remove module from cache
-/******/ 			delete installedModules[moduleId];
-/******/
-/******/ 			// when disposing there is no need to call dispose handler
-/******/ 			delete outdatedDependencies[moduleId];
-/******/
-/******/ 			// remove "parents" references from all children
-/******/ 			for (j = 0; j < module.children.length; j++) {
-/******/ 				var child = installedModules[module.children[j]];
-/******/ 				if (!child) continue;
-/******/ 				idx = child.parents.indexOf(moduleId);
-/******/ 				if (idx >= 0) {
-/******/ 					child.parents.splice(idx, 1);
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// remove outdated dependency from module children
-/******/ 		var dependency;
-/******/ 		var moduleOutdatedDependencies;
-/******/ 		for (moduleId in outdatedDependencies) {
-/******/ 			if (
-/******/ 				Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)
-/******/ 			) {
-/******/ 				module = installedModules[moduleId];
-/******/ 				if (module) {
-/******/ 					moduleOutdatedDependencies = outdatedDependencies[moduleId];
-/******/ 					for (j = 0; j < moduleOutdatedDependencies.length; j++) {
-/******/ 						dependency = moduleOutdatedDependencies[j];
-/******/ 						idx = module.children.indexOf(dependency);
-/******/ 						if (idx >= 0) module.children.splice(idx, 1);
-/******/ 					}
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// Not in "apply" phase
-/******/ 		hotSetStatus("apply");
-/******/
-/******/ 		hotCurrentHash = hotUpdateNewHash;
-/******/
-/******/ 		// insert new code
-/******/ 		for (moduleId in appliedUpdate) {
-/******/ 			if (Object.prototype.hasOwnProperty.call(appliedUpdate, moduleId)) {
-/******/ 				modules[moduleId] = appliedUpdate[moduleId];
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// call accept handlers
-/******/ 		var error = null;
-/******/ 		for (moduleId in outdatedDependencies) {
-/******/ 			if (
-/******/ 				Object.prototype.hasOwnProperty.call(outdatedDependencies, moduleId)
-/******/ 			) {
-/******/ 				module = installedModules[moduleId];
-/******/ 				if (module) {
-/******/ 					moduleOutdatedDependencies = outdatedDependencies[moduleId];
-/******/ 					var callbacks = [];
-/******/ 					for (i = 0; i < moduleOutdatedDependencies.length; i++) {
-/******/ 						dependency = moduleOutdatedDependencies[i];
-/******/ 						cb = module.hot._acceptedDependencies[dependency];
-/******/ 						if (cb) {
-/******/ 							if (callbacks.indexOf(cb) !== -1) continue;
-/******/ 							callbacks.push(cb);
-/******/ 						}
-/******/ 					}
-/******/ 					for (i = 0; i < callbacks.length; i++) {
-/******/ 						cb = callbacks[i];
-/******/ 						try {
-/******/ 							cb(moduleOutdatedDependencies);
-/******/ 						} catch (err) {
-/******/ 							if (options.onErrored) {
-/******/ 								options.onErrored({
-/******/ 									type: "accept-errored",
-/******/ 									moduleId: moduleId,
-/******/ 									dependencyId: moduleOutdatedDependencies[i],
-/******/ 									error: err
-/******/ 								});
-/******/ 							}
-/******/ 							if (!options.ignoreErrored) {
-/******/ 								if (!error) error = err;
-/******/ 							}
-/******/ 						}
-/******/ 					}
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// Load self accepted modules
-/******/ 		for (i = 0; i < outdatedSelfAcceptedModules.length; i++) {
-/******/ 			var item = outdatedSelfAcceptedModules[i];
-/******/ 			moduleId = item.module;
-/******/ 			hotCurrentParents = [moduleId];
-/******/ 			try {
-/******/ 				__webpack_require__(moduleId);
-/******/ 			} catch (err) {
-/******/ 				if (typeof item.errorHandler === "function") {
-/******/ 					try {
-/******/ 						item.errorHandler(err);
-/******/ 					} catch (err2) {
-/******/ 						if (options.onErrored) {
-/******/ 							options.onErrored({
-/******/ 								type: "self-accept-error-handler-errored",
-/******/ 								moduleId: moduleId,
-/******/ 								error: err2,
-/******/ 								originalError: err
-/******/ 							});
-/******/ 						}
-/******/ 						if (!options.ignoreErrored) {
-/******/ 							if (!error) error = err2;
-/******/ 						}
-/******/ 						if (!error) error = err;
-/******/ 					}
-/******/ 				} else {
-/******/ 					if (options.onErrored) {
-/******/ 						options.onErrored({
-/******/ 							type: "self-accept-errored",
-/******/ 							moduleId: moduleId,
-/******/ 							error: err
-/******/ 						});
-/******/ 					}
-/******/ 					if (!options.ignoreErrored) {
-/******/ 						if (!error) error = err;
-/******/ 					}
-/******/ 				}
-/******/ 			}
-/******/ 		}
-/******/
-/******/ 		// handle errors in accept handlers and self accepted module load
-/******/ 		if (error) {
-/******/ 			hotSetStatus("fail");
-/******/ 			return Promise.reject(error);
-/******/ 		}
-/******/
-/******/ 		hotSetStatus("idle");
-/******/ 		return new Promise(function(resolve) {
-/******/ 			resolve(outdatedModules);
-/******/ 		});
-/******/ 	}
-/******/
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -725,14 +23,11 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 		var module = installedModules[moduleId] = {
 /******/ 			i: moduleId,
 /******/ 			l: false,
-/******/ 			exports: {},
-/******/ 			hot: hotCreateModule(moduleId),
-/******/ 			parents: (hotCurrentParentsTemp = hotCurrentParents, hotCurrentParents = [], hotCurrentParentsTemp),
-/******/ 			children: []
+/******/ 			exports: {}
 /******/ 		};
 /******/
 /******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, hotCreateRequire(moduleId));
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/
 /******/ 		// Flag the module as loaded
 /******/ 		module.l = true;
@@ -794,12 +89,9 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// __webpack_public_path__
 /******/ 	__webpack_require__.p = "";
 /******/
-/******/ 	// __webpack_hash__
-/******/ 	__webpack_require__.h = function() { return hotCurrentHash; };
-/******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return hotCreateRequire("./src/index.js")(__webpack_require__.s = "./src/index.js");
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -17986,7 +17278,18 @@ module.exports = function(module) {
 /*! exports provided: Alexandria, Arlington, Brooklyn, Chicago, Houston, Los Angeles, Miami, New York, Philadelphia, Phoenix, San Diego, San Francisco, Seattle, Silver Spring, Washington, default */
 /***/ (function(module) {
 
-module.exports = {"Alexandria":[{"city":"Alexandria","contribution":"less than 10","amount":1482},{"city":"Alexandria","contribution":"11-15","amount":2961},{"city":"Alexandria","contribution":"16-20","amount":3469},{"city":"Alexandria","contribution":"21-30","amount":3016},{"city":"Alexandria","contribution":"31-49","amount":805},{"city":"Alexandria","contribution":"50-100","amount":1272},{"city":"Alexandria","contribution":"101-499","amount":327},{"city":"Alexandria","contribution":"greater than 500","amount":63}],"Arlington":[{"city":"Arlington","contribution":"less than 10","amount":1746},{"city":"Arlington","contribution":"11-15","amount":2876},{"city":"Arlington","contribution":"16-20","amount":3570},{"city":"Arlington","contribution":"21-30","amount":2908},{"city":"Arlington","contribution":"31-49","amount":834},{"city":"Arlington","contribution":"50-100","amount":1475},{"city":"Arlington","contribution":"101-499","amount":347},{"city":"Arlington","contribution":"greater than 500","amount":72}],"Brooklyn":[{"city":"Brooklyn","contribution":"less than 10","amount":1331},{"city":"Brooklyn","contribution":"11-15","amount":2405},{"city":"Brooklyn","contribution":"16-20","amount":3368},{"city":"Brooklyn","contribution":"21-30","amount":3323},{"city":"Brooklyn","contribution":"31-49","amount":1116},{"city":"Brooklyn","contribution":"50-100","amount":2516},{"city":"Brooklyn","contribution":"101-499","amount":619},{"city":"Brooklyn","contribution":"greater than 500","amount":154}],"Chicago":[{"city":"Chicago","contribution":"less than 10","amount":928},{"city":"Chicago","contribution":"11-15","amount":483},{"city":"Chicago","contribution":"16-20","amount":1182},{"city":"Chicago","contribution":"21-30","amount":2304},{"city":"Chicago","contribution":"31-49","amount":1042},{"city":"Chicago","contribution":"50-100","amount":2325},{"city":"Chicago","contribution":"101-499","amount":463},{"city":"Chicago","contribution":"greater than 500","amount":169}],"Houston":[{"city":"Houston","contribution":"less than 10","amount":611},{"city":"Houston","contribution":"11-15","amount":331},{"city":"Houston","contribution":"16-20","amount":622},{"city":"Houston","contribution":"21-30","amount":1550},{"city":"Houston","contribution":"31-49","amount":585},{"city":"Houston","contribution":"50-100","amount":1330},{"city":"Houston","contribution":"101-499","amount":401},{"city":"Houston","contribution":"greater than 500","amount":93}],"Los Angeles":[{"city":"Los Angeles","contribution":"less than 10","amount":6006},{"city":"Los Angeles","contribution":"11-15","amount":6117},{"city":"Los Angeles","contribution":"16-20","amount":6273},{"city":"Los Angeles","contribution":"21-30","amount":4661},{"city":"Los Angeles","contribution":"31-49","amount":983},{"city":"Los Angeles","contribution":"50-100","amount":2446},{"city":"Los Angeles","contribution":"101-499","amount":601},{"city":"Los Angeles","contribution":"greater than 500","amount":149}],"Miami":[{"city":"Miami","contribution":"less than 10","amount":1914},{"city":"Miami","contribution":"11-15","amount":2040},{"city":"Miami","contribution":"16-20","amount":2784},{"city":"Miami","contribution":"21-30","amount":2140},{"city":"Miami","contribution":"31-49","amount":277},{"city":"Miami","contribution":"50-100","amount":563},{"city":"Miami","contribution":"101-499","amount":94},{"city":"Miami","contribution":"greater than 500","amount":15}],"New York":[{"city":"New York","contribution":"less than 10","amount":1814},{"city":"New York","contribution":"11-15","amount":2894},{"city":"New York","contribution":"16-20","amount":3243},{"city":"New York","contribution":"21-30","amount":4865},{"city":"New York","contribution":"31-49","amount":1781},{"city":"New York","contribution":"50-100","amount":5536},{"city":"New York","contribution":"101-499","amount":1239},{"city":"New York","contribution":"greater than 500","amount":546}],"Philadelphia":[{"city":"Philadelphia","contribution":"less than 10","amount":782},{"city":"Philadelphia","contribution":"11-15","amount":2382},{"city":"Philadelphia","contribution":"16-20","amount":2280},{"city":"Philadelphia","contribution":"21-30","amount":1921},{"city":"Philadelphia","contribution":"31-49","amount":362},{"city":"Philadelphia","contribution":"50-100","amount":1213},{"city":"Philadelphia","contribution":"101-499","amount":261},{"city":"Philadelphia","contribution":"greater than 500","amount":90}],"Phoenix":[{"city":"Phoenix","contribution":"less than 10","amount":1532},{"city":"Phoenix","contribution":"11-15","amount":1383},{"city":"Phoenix","contribution":"16-20","amount":1625},{"city":"Phoenix","contribution":"21-30","amount":1190},{"city":"Phoenix","contribution":"31-49","amount":180},{"city":"Phoenix","contribution":"50-100","amount":687},{"city":"Phoenix","contribution":"101-499","amount":123},{"city":"Phoenix","contribution":"greater than 500","amount":23}],"San Diego":[{"city":"San Diego","contribution":"less than 10","amount":2588},{"city":"San Diego","contribution":"11-15","amount":3964},{"city":"San Diego","contribution":"16-20","amount":3027},{"city":"San Diego","contribution":"21-30","amount":2986},{"city":"San Diego","contribution":"31-49","amount":837},{"city":"San Diego","contribution":"50-100","amount":1650},{"city":"San Diego","contribution":"101-499","amount":249},{"city":"San Diego","contribution":"greater than 500","amount":83}],"San Francisco":[{"city":"San Francisco","contribution":"less than 10","amount":859},{"city":"San Francisco","contribution":"11-15","amount":634},{"city":"San Francisco","contribution":"16-20","amount":858},{"city":"San Francisco","contribution":"21-30","amount":1811},{"city":"San Francisco","contribution":"31-49","amount":921},{"city":"San Francisco","contribution":"50-100","amount":2625},{"city":"San Francisco","contribution":"101-499","amount":626},{"city":"San Francisco","contribution":"greater than 500","amount":249}],"Seattle":[{"city":"Seattle","contribution":"less than 10","amount":650},{"city":"Seattle","contribution":"11-15","amount":578},{"city":"Seattle","contribution":"16-20","amount":709},{"city":"Seattle","contribution":"21-30","amount":1615},{"city":"Seattle","contribution":"31-49","amount":614},{"city":"Seattle","contribution":"50-100","amount":2028},{"city":"Seattle","contribution":"101-499","amount":506},{"city":"Seattle","contribution":"greater than 500","amount":181}],"Silver Spring":[{"city":"Silver Spring","contribution":"less than 10","amount":1717},{"city":"Silver Spring","contribution":"11-15","amount":2318},{"city":"Silver Spring","contribution":"16-20","amount":2111},{"city":"Silver Spring","contribution":"21-30","amount":2124},{"city":"Silver Spring","contribution":"31-49","amount":580},{"city":"Silver Spring","contribution":"50-100","amount":1046},{"city":"Silver Spring","contribution":"101-499","amount":183},{"city":"Silver Spring","contribution":"greater than 500","amount":112}],"Washington":[{"city":"Washington","contribution":"less than 10","amount":4016},{"city":"Washington","contribution":"11-15","amount":5962},{"city":"Washington","contribution":"16-20","amount":6636},{"city":"Washington","contribution":"21-30","amount":6665},{"city":"Washington","contribution":"31-49","amount":1776},{"city":"Washington","contribution":"50-100","amount":3327},{"city":"Washington","contribution":"101-499","amount":824},{"city":"Washington","contribution":"greater than 500","amount":291}]};
+module.exports = {"Alexandria":[{"city":"Alexandria","contribution":"less than 10","amount":1482,"totalContribution":13375},{"city":"Alexandria","contribution":"11-15","amount":2961,"totalContribution":43875},{"city":"Alexandria","contribution":"16-20","amount":3469,"totalContribution":67318},{"city":"Alexandria","contribution":"21-30","amount":3016,"totalContribution":80454},{"city":"Alexandria","contribution":"31-49","amount":805,"totalContribution":31779.87},{"city":"Alexandria","contribution":"50-100","amount":1272,"totalContribution":83405},{"city":"Alexandria","contribution":"101-499","amount":327,"totalContribution":61734},{"city":"Alexandria","contribution":"greater than 500","amount":63,"totalContribution":71269.98}],"Arlington":[{"city":"Arlington","contribution":"less than 10","amount":1746,"totalContribution":15252.84},{"city":"Arlington","contribution":"11-15","amount":2876,"totalContribution":42789},{"city":"Arlington","contribution":"16-20","amount":3570,"totalContribution":69005.5},{"city":"Arlington","contribution":"21-30","amount":2908,"totalContribution":77344},{"city":"Arlington","contribution":"31-49","amount":834,"totalContribution":31690.08},{"city":"Arlington","contribution":"50-100","amount":1475,"totalContribution":101341},{"city":"Arlington","contribution":"101-499","amount":347,"totalContribution":68263.75},{"city":"Arlington","contribution":"greater than 500","amount":72,"totalContribution":73188}],"Brooklyn":[{"city":"Brooklyn","contribution":"less than 10","amount":1331,"totalContribution":11231.17},{"city":"Brooklyn","contribution":"11-15","amount":2405,"totalContribution":35633.5},{"city":"Brooklyn","contribution":"16-20","amount":3368,"totalContribution":65556.5},{"city":"Brooklyn","contribution":"21-30","amount":3323,"totalContribution":90583.01},{"city":"Brooklyn","contribution":"31-49","amount":1116,"totalContribution":43169.66},{"city":"Brooklyn","contribution":"50-100","amount":2516,"totalContribution":169564.04},{"city":"Brooklyn","contribution":"101-499","amount":619,"totalContribution":127559.37},{"city":"Brooklyn","contribution":"greater than 500","amount":154,"totalContribution":165646.78}],"Chicago":[{"city":"Chicago","contribution":"less than 10","amount":928,"totalContribution":7633.08},{"city":"Chicago","contribution":"11-15","amount":483,"totalContribution":7135.61},{"city":"Chicago","contribution":"16-20","amount":1182,"totalContribution":23245},{"city":"Chicago","contribution":"21-30","amount":2304,"totalContribution":61018},{"city":"Chicago","contribution":"31-49","amount":1042,"totalContribution":39504.5},{"city":"Chicago","contribution":"50-100","amount":2325,"totalContribution":161843},{"city":"Chicago","contribution":"101-499","amount":463,"totalContribution":93508.85},{"city":"Chicago","contribution":"greater than 500","amount":169,"totalContribution":165133.66}],"Houston":[{"city":"Houston","contribution":"less than 10","amount":611,"totalContribution":5671.33},{"city":"Houston","contribution":"11-15","amount":331,"totalContribution":4938.5},{"city":"Houston","contribution":"16-20","amount":622,"totalContribution":12279.5},{"city":"Houston","contribution":"21-30","amount":1550,"totalContribution":40636.23},{"city":"Houston","contribution":"31-49","amount":585,"totalContribution":21705},{"city":"Houston","contribution":"50-100","amount":1330,"totalContribution":92409.06},{"city":"Houston","contribution":"101-499","amount":401,"totalContribution":77427.9},{"city":"Houston","contribution":"greater than 500","amount":93,"totalContribution":83637.33}],"Los Angeles":[{"city":"Los Angeles","contribution":"less than 10","amount":6006,"totalContribution":53937},{"city":"Los Angeles","contribution":"11-15","amount":6117,"totalContribution":90760},{"city":"Los Angeles","contribution":"16-20","amount":6273,"totalContribution":119038},{"city":"Los Angeles","contribution":"21-30","amount":4661,"totalContribution":124014},{"city":"Los Angeles","contribution":"31-49","amount":983,"totalContribution":38149},{"city":"Los Angeles","contribution":"50-100","amount":2446,"totalContribution":164067},{"city":"Los Angeles","contribution":"101-499","amount":601,"totalContribution":112861.3},{"city":"Los Angeles","contribution":"greater than 500","amount":149,"totalContribution":238750}],"Miami":[{"city":"Miami","contribution":"less than 10","amount":1914,"totalContribution":17869},{"city":"Miami","contribution":"11-15","amount":2040,"totalContribution":30091.21},{"city":"Miami","contribution":"16-20","amount":2784,"totalContribution":53584},{"city":"Miami","contribution":"21-30","amount":2140,"totalContribution":55771},{"city":"Miami","contribution":"31-49","amount":277,"totalContribution":11127},{"city":"Miami","contribution":"50-100","amount":563,"totalContribution":39491},{"city":"Miami","contribution":"101-499","amount":94,"totalContribution":17998},{"city":"Miami","contribution":"greater than 500","amount":15,"totalContribution":14775}],"New York":[{"city":"New York","contribution":"less than 10","amount":1814,"totalContribution":14908.76},{"city":"New York","contribution":"11-15","amount":2894,"totalContribution":43194.5},{"city":"New York","contribution":"16-20","amount":3243,"totalContribution":63250.5},{"city":"New York","contribution":"21-30","amount":4865,"totalContribution":129029},{"city":"New York","contribution":"31-49","amount":1781,"totalContribution":69758},{"city":"New York","contribution":"50-100","amount":5536,"totalContribution":402335.86},{"city":"New York","contribution":"101-499","amount":1239,"totalContribution":254015.62},{"city":"New York","contribution":"greater than 500","amount":546,"totalContribution":739819.6}],"Philadelphia":[{"city":"Philadelphia","contribution":"less than 10","amount":782,"totalContribution":6251.68},{"city":"Philadelphia","contribution":"11-15","amount":2382,"totalContribution":35708.4},{"city":"Philadelphia","contribution":"16-20","amount":2280,"totalContribution":44527.5},{"city":"Philadelphia","contribution":"21-30","amount":1921,"totalContribution":51381.5},{"city":"Philadelphia","contribution":"31-49","amount":362,"totalContribution":14000.13},{"city":"Philadelphia","contribution":"50-100","amount":1213,"totalContribution":88143},{"city":"Philadelphia","contribution":"101-499","amount":261,"totalContribution":52192.96},{"city":"Philadelphia","contribution":"greater than 500","amount":90,"totalContribution":68006.11}],"Phoenix":[{"city":"Phoenix","contribution":"less than 10","amount":1532,"totalContribution":13877},{"city":"Phoenix","contribution":"11-15","amount":1383,"totalContribution":20256.5},{"city":"Phoenix","contribution":"16-20","amount":1625,"totalContribution":30672},{"city":"Phoenix","contribution":"21-30","amount":1190,"totalContribution":31251},{"city":"Phoenix","contribution":"31-49","amount":180,"totalContribution":6797},{"city":"Phoenix","contribution":"50-100","amount":687,"totalContribution":46940},{"city":"Phoenix","contribution":"101-499","amount":123,"totalContribution":24083},{"city":"Phoenix","contribution":"greater than 500","amount":23,"totalContribution":14550}],"San Diego":[{"city":"San Diego","contribution":"less than 10","amount":2588,"totalContribution":22964},{"city":"San Diego","contribution":"11-15","amount":3964,"totalContribution":58689},{"city":"San Diego","contribution":"16-20","amount":3027,"totalContribution":57892},{"city":"San Diego","contribution":"21-30","amount":2986,"totalContribution":79424},{"city":"San Diego","contribution":"31-49","amount":837,"totalContribution":32491},{"city":"San Diego","contribution":"50-100","amount":1650,"totalContribution":120234},{"city":"San Diego","contribution":"101-499","amount":249,"totalContribution":50049},{"city":"San Diego","contribution":"greater than 500","amount":83,"totalContribution":99751}],"San Francisco":[{"city":"San Francisco","contribution":"less than 10","amount":859,"totalContribution":7452.12},{"city":"San Francisco","contribution":"11-15","amount":634,"totalContribution":9303},{"city":"San Francisco","contribution":"16-20","amount":858,"totalContribution":17000},{"city":"San Francisco","contribution":"21-30","amount":1811,"totalContribution":48967},{"city":"San Francisco","contribution":"31-49","amount":921,"totalContribution":34929.59},{"city":"San Francisco","contribution":"50-100","amount":2625,"totalContribution":195286},{"city":"San Francisco","contribution":"101-499","amount":626,"totalContribution":127266.5},{"city":"San Francisco","contribution":"greater than 500","amount":249,"totalContribution":302757.89}],"Seattle":[{"city":"Seattle","contribution":"less than 10","amount":650,"totalContribution":5940.77},{"city":"Seattle","contribution":"11-15","amount":578,"totalContribution":8610},{"city":"Seattle","contribution":"16-20","amount":709,"totalContribution":13903.78},{"city":"Seattle","contribution":"21-30","amount":1615,"totalContribution":43471.37},{"city":"Seattle","contribution":"31-49","amount":614,"totalContribution":23556.45},{"city":"Seattle","contribution":"50-100","amount":2028,"totalContribution":140700.99},{"city":"Seattle","contribution":"101-499","amount":506,"totalContribution":102693.5},{"city":"Seattle","contribution":"greater than 500","amount":181,"totalContribution":224681.53}],"Silver Spring":[{"city":"Silver Spring","contribution":"less than 10","amount":1717,"totalContribution":16448},{"city":"Silver Spring","contribution":"11-15","amount":2318,"totalContribution":34343.5},{"city":"Silver Spring","contribution":"16-20","amount":2111,"totalContribution":41590},{"city":"Silver Spring","contribution":"21-30","amount":2124,"totalContribution":56666.49},{"city":"Silver Spring","contribution":"31-49","amount":580,"totalContribution":22628},{"city":"Silver Spring","contribution":"50-100","amount":1046,"totalContribution":72827},{"city":"Silver Spring","contribution":"101-499","amount":183,"totalContribution":39382},{"city":"Silver Spring","contribution":"greater than 500","amount":112,"totalContribution":110500}],"Washington":[{"city":"Washington","contribution":"less than 10","amount":4016,"totalContribution":36148.1},{"city":"Washington","contribution":"11-15","amount":5962,"totalContribution":88965.14},{"city":"Washington","contribution":"16-20","amount":6636,"totalContribution":129046.67},{"city":"Washington","contribution":"21-30","amount":6665,"totalContribution":178631.29},{"city":"Washington","contribution":"31-49","amount":1776,"totalContribution":68633},{"city":"Washington","contribution":"50-100","amount":3327,"totalContribution":225604.95},{"city":"Washington","contribution":"101-499","amount":824,"totalContribution":161067.12},{"city":"Washington","contribution":"greater than 500","amount":291,"totalContribution":364863.1}]};
+
+/***/ }),
+
+/***/ "./src/data/giftList.json":
+/*!********************************!*\
+  !*** ./src/data/giftList.json ***!
+  \********************************/
+/*! exports provided: 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, default */
+/***/ (function(module) {
+
+module.exports = [{"name":"pair of warm gloves","name_plural":"pairs of warm gloves","price":5,"bucket":"less than 10","OriginalItem":"Warm Gloves","comment":"-"},{"name":"glasses","name_plural":"glasses","price":10,"bucket":"less than 10","OriginalItem":"Glasses – The Gift of Sight","comment":"-"},{"name":"sleeping bag","name_plural":"sleeping bags","price":10,"bucket":"less than 10","OriginalItem":"Sleeping Bag","comment":"-"},{"name":"jerry can","name_plural":"jerry cans","price":2,"bucket":"less than 10","OriginalItem":"Jerry Cans","comment":"Actual Price is 10 dollars for 5 jerry cans"},{"name":"mosquito net","name_plural":"mosquito nets","price":8,"bucket":"less than 10","OriginalItem":"Mosquito Nets","comment":"Actual Price is 40 dollars for 5 nets"},{"name":"birth certificate","name_plural":"birth certificates","price":4,"bucket":"less than 10","OriginalItem":"Birth Certificate","comment":"Actual Price is 20 dollars for 5 certificates"},{"name":"set of warm blankets and mat","name_plural":"sets of warm blankets and mat","price":15,"bucket":"11-15","OriginalItem":"Warm Blankets & Mats","comment":"-"},{"name":"school uniform","name_plural":"school uniforms","price":16,"bucket":"11-15","OriginalItem":"School Uniform","comment":"-"},{"name":"set of winter clothes","name_plural":"sets of winter clothes","price":17,"bucket":"11-15","OriginalItem":"Winter Clothes","comment":"-"},{"name":"school desk","name_plural":"school desks","price":20,"bucket":"16-20","OriginalItem":"School Desk","comment":"-"},{"name":"kitchen set of stoves, pots & cutlery","name_plural":"kitchen sets of stoves, pots & cutlery","price":20,"bucket":"16-20","OriginalItem":"Stoves, Pots & Cutlery","comment":"-"},{"name":"school kit","name_plural":"school kits","price":21,"bucket":"21-30","OriginalItem":"School Kit – Educate a Child","comment":"-"},{"name":"personal hygiene kit","name_plural":"personal hygiene kits","price":25,"bucket":"21-30","OriginalItem":"Personal Hygiene Kit","comment":"-"},{"name":"emergency rescue kit","name_plural":"emergency rescue kits","price":30,"bucket":"21-30","OriginalItem":"Emergency Rescue Kit","comment":"-"},{"name":"water filter","name_plural":"water filters","price":30,"bucket":"21-30","OriginalItem":"Water Filter","comment":"-"},{"name":"solar lantern","name_plural":"solar lanterns","price":45,"bucket":"31-49","OriginalItem":"Solar Lanterns","comment":"-"},{"name":"batch of vaccines","name_plural":"batches of vaccines","price":50,"bucket":"50-100","OriginalItem":"Vaccines","comment":"-"},{"name":"dental care treatment","name_plural":"dental care treatments","price":50,"bucket":"50-100","OriginalItem":"Dental Care?","comment":"-"},{"name":"set of fleece blankets","name_plural":"sets of fleece blankets","price":50,"bucket":"50-100","OriginalItem":"Fleece Blankets","comment":"-"},{"name":"winter survival kit","name_plural":"winter survival kits","price":116,"bucket":"100-499","OriginalItem":"Winter Survival Kit","comment":"-"},{"name":"blackboard","name_plural":"blackboards","price":120,"bucket":"100-499","OriginalItem":"Blackboard","comment":"-"},{"name":"school garden","name_plural":"school gardens","price":250,"bucket":"100-499","OriginalItem":"School Garden","comment":"-"},{"name":"family tent","name_plural":"family tents","price":560,"bucket":"greater than 500","OriginalItem":"Family Tents","comment":"-"},{"name":"kerosene stove","name_plural":"kerosene stoves","price":92,"bucket":"50-100","OriginalItem":"Kerosene stove/heater","comment":"-"},{"name":"a kit of seeds & garden tools","name_plural":"kits of seeds & garden tools","price":95,"bucket":"greater than 500","OriginalItem":"Seeds & Tools","comment":"-"},{"name":"a box of therapeutic food","name_plural":"boxes of therapeutic food","price":24,"bucket":"21-30","OriginalItem":"Therapeutic Food","comment":"-"}];
 
 /***/ }),
 
@@ -18009,8 +17312,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./js/RenderGift */ "./src/js/RenderGift.js");
 /* harmony import */ var _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./data/contribution.json */ "./src/data/contribution.json");
 var _data_contribution_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./data/contribution.json */ "./src/data/contribution.json", 1);
+/* harmony import */ var _data_giftList_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./data/giftList.json */ "./src/data/giftList.json");
+var _data_giftList_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./data/giftList.json */ "./src/data/giftList.json", 1);
 
  // import cat from './images/cat.jpg';
+
 
 
 
@@ -18021,11 +17327,90 @@ var _data_contribution_json__WEBPACK_IMPORTED_MODULE_6___namespace = /*#__PURE__
 function App() {
   var cityPanelEl = document.querySelector('.panel--city');
   var giftPanelEl = document.querySelector('.panel--gift');
-  var currentCity = "New York";
+  var citiesClone = [];
+  var bucketsClone = [];
+  var objectsClone = [];
+
+  function pickRandomCity() {
+    if (citiesClone.length === 0) {
+      // Create a new clone of that array
+      var cityList = Object.keys(_data_contribution_json__WEBPACK_IMPORTED_MODULE_6__);
+      cityList.forEach(function (item) {
+        citiesClone.push(item);
+      });
+    } // Pick a random index from a given array
+
+
+    var randomIndex = Math.floor(Math.random() * (citiesClone.length - 1)); // Do the splice to get that object from that index
+
+    var newCity = citiesClone[randomIndex];
+    citiesClone.splice(randomIndex, 1);
+    return newCity;
+  }
+
+  function pickRandomObject() {
+    if (objectsClone.length === 0) {
+      // Create a new clone of that array
+      _data_giftList_json__WEBPACK_IMPORTED_MODULE_7__.forEach(function (item) {
+        objectsClone.push(item);
+      });
+    } // Pick a random index from a given array
+
+
+    var randomIndex = Math.floor(Math.random() * (objectsClone.length - 1)); // Do the splice to get that object from that index
+
+    var object = objectsClone[randomIndex];
+    objectsClone.splice(randomIndex, 1);
+    return object;
+  }
+
+  function pickRandomBucket() {
+    if (bucketsClone.length === 0) {
+      var bucketList = ['less than 10', '11-15', '16-20', '21-30', '31-49', '50-100', '101-499', 'greater than 500'];
+      bucketList.forEach(function (item) {
+        bucketsClone.push(item);
+      });
+    } // Pick a random index from a given array
+
+
+    var randomIndex = Math.floor(Math.random() * (bucketsClone.length - 1)); // Do the splice to get that object from that index
+
+    var currentBucket = bucketsClone[randomIndex];
+    bucketsClone.splice(randomIndex, 1);
+    return currentBucket;
+  }
+
+  function pickRandomScene() {
+    var newCity = pickRandomCity();
+    var currentBucket = pickRandomBucket();
+    var currentGift = pickRandomObject(); //logging data
+
+    console.log('random scene funct working');
+    console.log(newCity + ' ' + currentBucket);
+    console.log('city array is ' + citiesClone);
+    console.log('bucket array is ' + bucketsClone); // Send city and bucket and (data) to the BarChart class;
+    // Send model, number of objects, and callback to three.js
+    // model.replace(name, number, pickRandomScene);
+
+    return {
+      newCity: newCity,
+      currentGift: currentGift,
+      currentBucket: currentBucket
+    };
+  }
+
+  var _pickRandomScene = pickRandomScene(),
+      newCity = _pickRandomScene.newCity,
+      currentBucket = _pickRandomScene.currentBucket,
+      currentGift = _pickRandomScene.currentGift;
+
+  console.log(currentGift);
+  console.log(newCity);
   var barChart = new _js_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"]({
     el: document.querySelector('.donations-chart'),
     data: _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__,
-    city: currentCity
+    city: newCity,
+    bucket: currentBucket
   });
   var model = new _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__["default"]({
     el: giftPanelEl,
@@ -18034,11 +17419,12 @@ function App() {
 
   if (cityPanelEl && giftPanelEl) {
     var sampleUpdate = function sampleUpdate() {
+      // pickRandomScene();
       // City panel
-      var city = currentCity;
+      // const city = currentCity;
       var donations = 8500;
       var bucket = [1000, 9999];
-      cityPanel.update(currentCity, donations, bucket); // Gift panel
+      cityPanel.update(newCity, donations, bucket); // Gift panel
 
       var giftValue = 1890;
       var giftItem = 'refugee housing unit';
@@ -18095,6 +17481,7 @@ function () {
     var self = this;
     self.el = d3.select(opts.el);
     self.city = opts.city;
+    self.bucket = opts.bucket;
     self.data = opts.data[self.city];
     this.margin = {
       top: 20,
@@ -18103,7 +17490,7 @@ function () {
       left: 5
     };
     this.width = parseInt(this.el.style('width')) - this.margin.left - this.margin.right;
-    this.height = parseInt(this.el.style('width')) * 0.4 - this.margin.top - this.margin.bottom;
+    this.height = parseInt(this.el.style('width')) * 0.2 - this.margin.top - this.margin.bottom;
     this.draw();
     window.addEventListener("resize", function () {
       _this.resize();
@@ -18132,7 +17519,8 @@ function () {
         return _this2.x(d.amount);
       }).attr("y", function (d) {
         return _this2.y(d.contribution);
-      }).attr("height", this.y.bandwidth()).attr("width", function (d) {
+      }).attr("height", this.y.bandwidth()) // .attr("height", this.y.bandwidth())
+      .attr("width", function (d) {
         return _this2.width - _this2.x(d.amount);
       }).attr("class", "rect").style("opacity", 0.9);
       this.g.append("g").attr("class", "x axis").attr("transform", "translate(0," + this.height + ")").call(d3.axisBottom(this.x).ticks(5));
@@ -18178,6 +17566,7 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CityPanel; });
+/* harmony import */ var _js_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../js/util */ "./src/js/util.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -18185,6 +17574,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 //  weak
+
+
 var CityPanel =
 /*#__PURE__*/
 function () {
@@ -18221,10 +17612,11 @@ function () {
           donationsTotal = self.donationsTotal,
           donationsBucket = self.donationsBucket;
       console.log(donationsTotal, donationsBucket);
+      var formDon = Object(_js_util__WEBPACK_IMPORTED_MODULE_0__["numbercommas"])(donations);
       Array.prototype.forEach.call(citySpans, function (el) {
         return el.innerHTML = city;
       });
-      donationsTotal.innerHTML = "".concat(donations, " donations");
+      donationsTotal.innerHTML = "".concat(formDon, " donations<br>");
       donationsBucket.innerHTML = "between $".concat(bucket[0], " and $").concat(bucket[1]);
       self.toggleFrame(0);
     }
@@ -18247,6 +17639,7 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return GiftPanel; });
+/* harmony import */ var _js_util__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../js/util */ "./src/js/util.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -18254,6 +17647,8 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 //  weak
+
+
 var GiftPanel =
 /*#__PURE__*/
 function () {
@@ -18294,9 +17689,11 @@ function () {
           giftValueTotal = self.giftValueTotal,
           giftNumberTotal = self.giftNumberTotal,
           giftItemPlural = self.giftItemPlural;
-      giftValue.innerHTML = "$".concat(value);
+      var formValue = Object(_js_util__WEBPACK_IMPORTED_MODULE_0__["numbercommas"])(value);
+      var formTotalValue = Object(_js_util__WEBPACK_IMPORTED_MODULE_0__["numbercommas"])(valueTotal);
+      giftValue.innerHTML = "$".concat(formValue);
       giftItem.innerHTML = item;
-      giftValueTotal.innerHTML = "$".concat(valueTotal);
+      giftValueTotal.innerHTML = "$".concat(formTotalValue);
       giftNumberTotal.innerHTML = numberTotal.toString();
       giftItemPlural.innerHTML = itemPlural;
       self.toggleFrame(0);
@@ -18606,6 +18003,33 @@ function () {
 }();
 
 
+
+/***/ }),
+
+/***/ "./src/js/util.js":
+/*!************************!*\
+  !*** ./src/js/util.js ***!
+  \************************/
+/*! exports provided: constrain, map, numbercommas */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "constrain", function() { return constrain; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "map", function() { return map; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "numbercommas", function() { return numbercommas; });
+function constrain(n, low, high) {
+  return Math.max(Math.min(n, high), low);
+}
+;
+function map(val, in_min, in_max, out_min, out_max) {
+  return (val - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
+;
+function numbercommas(val) {
+  return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+;
 
 /***/ }),
 

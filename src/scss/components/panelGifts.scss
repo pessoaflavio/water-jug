@@ -1,0 +1,24 @@
+.panel--gift{
+  font-family: $font-sans;
+  font-weight: 300;
+
+
+
+  span.number--small{
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  span.js-gift-value-total.number--big{
+    font-family: $hed;
+    font-size: 172px;
+    text-transform: uppercase;
+  }
+}
+
+span.js-gift-value.number--big{
+  font-family: $hed;
+  font-size: 172px;
+  text-transform: uppercase;
+}

@@ -21,8 +21,11 @@ module.exports = {
       template: 'index.html'
     }),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin()
+    // new webpack.HotModuleReplacementPlugin()
   ],
+  devServer : {
+    hot: false
+  },
   module: {
     rules: [{
         test: /\.(handlebars|hbs)$/,

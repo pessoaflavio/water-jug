@@ -1,7 +1,12 @@
+@import url(https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,700);
+@font-face {
+  font-family: 'TIMMONS_NY_FINAL';
+  src: url("/fonts/TIMMONS_NY_FINAL.woff2"); }
+
 .donations-chart {
   width: 100%; }
   .donations-chart rect {
-    fill: #90b9f7; }
+    fill: #E5F0F8; }
   .donations-chart path.domain {
     display: none; }
   .donations-chart .x.axis g.tick text {
@@ -9,16 +14,18 @@
   .donations-chart .x.axis g.tick line {
     stroke: rgba(255, 255, 255, 0.4); }
   .donations-chart .y.axis g.tick text {
-    fill: #83a8d2;
+    fill: black;
     text-anchor: start;
     text-transform: uppercase;
-    font-size: 14px;
+    font-size: 12px;
+    font-family: "IBM Plex Mono", monospace;
     letter-spacing: 1px; }
   .donations-chart .y.axis g.tick line {
     display: none; }
 
 .panel--city {
-  font-family: "Roboto", Arial, Helvetica, sans-serif; }
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 300; }
   .panel--city .kicker__hed {
     font-size: 32px;
     letter-spacing: 0.8px;
@@ -31,10 +38,40 @@
     -webkit-margin-before: 0.5em;
             margin-block-start: 0.5em; }
   .panel--city span.js-city.number--big {
-    font-size: 52px;
+    font-size: 172px;
+    text-transform: uppercase;
+    font-family: "TIMMONS_NY_FINAL", Arial, Helvetica, sans-serif; }
+
+span.js-donations-total.number--big {
+  font-family: "TIMMONS_NY_FINAL", Arial, Helvetica, sans-serif;
+  font-size: 172px;
+  text-transform: uppercase; }
+
+span.js-donations-bucket.number--medium {
+  font-family: "TIMMONS_NY_FINAL", Arial, Helvetica, sans-serif;
+  font-size: 80px;
+  line-height: 30px;
+  text-transform: uppercase;
+  color: #0072BC;
+  letter-spacing: 2px; }
+
+.panel--gift {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 300; }
+  .panel--gift span.number--small {
+    font-size: 30px;
     font-weight: 700;
     text-transform: uppercase;
-    font-family: "Teko", Arial, Helvetica, sans-serif; }
+    letter-spacing: 2px; }
+  .panel--gift span.js-gift-value-total.number--big {
+    font-family: "TIMMONS_NY_FINAL", Arial, Helvetica, sans-serif;
+    font-size: 172px;
+    text-transform: uppercase; }
+
+span.js-gift-value.number--big {
+  font-family: "TIMMONS_NY_FINAL", Arial, Helvetica, sans-serif;
+  font-size: 172px;
+  text-transform: uppercase; }
 
 html {
   box-sizing: border-box; }
@@ -74,7 +111,14 @@ body {
   .header .header__frame.active {
     opacity: 1; }
 
+.donations-chart {
+  -ms-flex-item-align: end;
+      align-self: flex-end; }
+
 .panel--gift .header {
+  font-family: "IBM Plex Mono", monospace;
+  color: white;
+  font-weight: 300;
   position: absolute;
   top: 50%;
   left: 50%;

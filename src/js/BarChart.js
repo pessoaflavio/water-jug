@@ -4,6 +4,7 @@ export default class BarChart {
     const self = this;
     self.el = d3.select(opts.el);
     self.city = opts.city;
+    self.bucket = opts.bucket;
     self.data = opts.data[self.city];
     this.margin = {
       top: 20,
@@ -13,7 +14,7 @@ export default class BarChart {
     };
 
     this.width = parseInt(this.el.style('width')) - this.margin.left - this.margin.right;
-    this.height = parseInt(this.el.style('width')) * 0.4 - this.margin.top - this.margin.bottom;
+    this.height = parseInt(this.el.style('width')) * 0.2 - this.margin.top - this.margin.bottom;
 
     this.draw();
 
@@ -46,6 +47,7 @@ export default class BarChart {
       .attr("x", d => this.x(d.amount))
       .attr("y", d => this.y(d.contribution))
       .attr("height", this.y.bandwidth())
+      // .attr("height", this.y.bandwidth())
       .attr("width", d => this.width - this.x(d.amount))
       .attr("class", "rect")
       .style("opacity", 0.9);
