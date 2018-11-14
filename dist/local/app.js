@@ -17406,6 +17406,36 @@ function App() {
 
   console.log(currentGift);
   console.log(newCity);
+  var bucketInd;
+
+  if (currentBucket === 'less than 10') {
+    bucketInd = 0;
+  } else if (currentBucket === '11-15') {
+    bucketInd = 1;
+  } else if (currentBucket === '16-20') {
+    bucketInd = 2;
+  } else if (currentBucket === '21-30') {
+    bucketInd = 3;
+  } else if (currentBucket === '31-49') {
+    bucketInd = 4;
+  } else if (currentBucket === '50-100') {
+    bucketInd = 5;
+  } else if (currentBucket === '101-499') {
+    bucketInd = 6;
+  } else {
+    bucketInd = 7;
+  }
+
+  ;
+  console.log(bucketInd);
+  var bucket = currentBucket;
+  var donations = _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__[newCity][bucketInd].amount;
+  var donationSum = _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__[newCity][bucketInd].totalContribution;
+  var giftValue = currentGift["price"];
+  var giftValueTotal = donationSum;
+  var giftNumberTotal = Math.round(giftValueTotal / giftValue);
+  var giftItem = currentGift["name"];
+  var giftItemPlural = currentGift["name_plural"];
   var barChart = new _js_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"]({
     el: document.querySelector('.donations-chart'),
     data: _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__,
@@ -17415,47 +17445,16 @@ function App() {
   var model = new _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__["default"]({
     el: giftPanelEl,
     model: currentGift.model,
-    amount: 250,
+    amount: giftNumberTotal,
     callback: pickRandomCity()
   });
 
   if (cityPanelEl && giftPanelEl) {
     var sampleUpdate = function sampleUpdate() {
-      // pickRandomScene();
       // City panel
       console.log('the real bucket is ' + currentBucket);
-      var bucketInd;
-
-      if (currentBucket === 'less than 10') {
-        bucketInd = 0;
-      } else if (currentBucket === '11-15') {
-        bucketInd = 1;
-      } else if (currentBucket === '16-20') {
-        bucketInd = 2;
-      } else if (currentBucket === '21-30') {
-        bucketInd = 3;
-      } else if (currentBucket === '31-49') {
-        bucketInd = 4;
-      } else if (currentBucket === '50-100') {
-        bucketInd = 5;
-      } else if (currentBucket === '101-499') {
-        bucketInd = 6;
-      } else {
-        bucketInd = 7;
-      }
-
-      ;
-      console.log(bucketInd);
-      var bucket = currentBucket;
-      var donations = _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__[newCity][bucketInd].amount;
-      var donationSum = _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__[newCity][bucketInd].totalContribution;
       cityPanel.update(newCity, donations, bucket); // Gift panel
 
-      var giftValue = currentGift["price"];
-      var giftItem = currentGift["name"];
-      var giftValueTotal = donationSum;
-      var giftNumberTotal = Math.round(giftValueTotal / giftValue);
-      var giftItemPlural = currentGift["name_plural"];
       giftPanel.update(giftValue, giftItem, giftValueTotal, giftNumberTotal, giftItemPlural);
       setTimeout(function () {
         cityPanel.toggleFrame(1);
