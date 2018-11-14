@@ -1,9 +1,13 @@
 .panel--gift{
   font-family: $font-sans;
   font-weight: 300;
-
-
-
+  .js-header-frame.header__frame{
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    width: 100%;
+    color: white;
+  }
   span.number--small{
     font-size: 30px;
     font-weight: 700;

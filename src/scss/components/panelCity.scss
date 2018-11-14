@@ -1,6 +1,13 @@
 .panel--city{
   font-family: $font-sans;
   font-weight: 300;
+  .js-header-frame.header__frame{
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    width: 100%;
+
+  }
   .kicker__hed{
     font-size: 32px;
     letter-spacing: 0.8px;

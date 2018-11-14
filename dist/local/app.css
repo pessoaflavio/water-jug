@@ -4,7 +4,9 @@
   src: url("/fonts/TIMMONS_NY_FINAL.woff2"); }
 
 .donations-chart {
-  width: 100%; }
+  width: 100%;
+  position: absolute;
+  bottom: 15px; }
   .donations-chart rect {
     fill: #E5F0F8; }
   .donations-chart path.domain {
@@ -26,6 +28,11 @@
 .panel--city {
   font-family: "IBM Plex Mono", monospace;
   font-weight: 300; }
+  .panel--city .js-header-frame.header__frame {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    width: 100%; }
   .panel--city .kicker__hed {
     font-size: 32px;
     letter-spacing: 0.8px;
@@ -58,6 +65,12 @@ span.js-donations-bucket.number--medium {
 .panel--gift {
   font-family: "IBM Plex Mono", monospace;
   font-weight: 300; }
+  .panel--gift .js-header-frame.header__frame {
+    position: absolute;
+    transform: translateY(-50%);
+    top: 50%;
+    width: 100%;
+    color: white; }
   .panel--gift span.number--small {
     font-size: 30px;
     font-weight: 700;
@@ -116,15 +129,6 @@ body {
 .donations-chart {
   -ms-flex-item-align: end;
       align-self: flex-end; }
-
-.panel--gift .header {
-  font-family: "IBM Plex Mono", monospace;
-  color: white;
-  font-weight: 300;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); }
 
 
 /*# sourceMappingURL=app.css.map*/

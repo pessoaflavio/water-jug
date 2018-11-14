@@ -14,7 +14,7 @@ export default class BarChart {
     };
 
     this.width = parseInt(this.el.style('width')) - this.margin.left - this.margin.right;
-    this.height = parseInt(this.el.style('width')) * 0.2 - this.margin.top - this.margin.bottom;
+    this.height = parseInt(this.el.style('width')) * 0.3 - this.margin.top - this.margin.bottom;
 
     this.draw();
 
@@ -79,7 +79,7 @@ export default class BarChart {
   }
   resize() {
     this.width = parseInt(this.el.style('width')) - this.margin.left - this.margin.right;
-    this.height = parseInt(this.el.style('width')) * 0.6 - this.margin.top - this.margin.bottom;
+    this.height = parseInt(this.el.style('width')) * 0.3 - this.margin.top - this.margin.bottom;
 
     this.draw();
 

@@ -17518,7 +17518,7 @@ function () {
       left: 5
     };
     this.width = parseInt(this.el.style('width')) - this.margin.left - this.margin.right;
-    this.height = parseInt(this.el.style('width')) * 0.2 - this.margin.top - this.margin.bottom;
+    this.height = parseInt(this.el.style('width')) * 0.3 - this.margin.top - this.margin.bottom;
     this.draw();
     window.addEventListener("resize", function () {
       _this.resize();
@@ -17573,7 +17573,7 @@ function () {
     key: "resize",
     value: function resize() {
       this.width = parseInt(this.el.style('width')) - this.margin.left - this.margin.right;
-      this.height = parseInt(this.el.style('width')) * 0.6 - this.margin.top - this.margin.bottom;
+      this.height = parseInt(this.el.style('width')) * 0.3 - this.margin.top - this.margin.bottom;
       this.draw();
     }
   }]);
