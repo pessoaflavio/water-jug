@@ -17643,7 +17643,7 @@ function () {
       Array.prototype.forEach.call(citySpans, function (el) {
         return el.innerHTML = city;
       });
-      donationsTotal.innerHTML = "".concat(formDon, " donations<br>");
+      donationsTotal.innerHTML = "".concat(formDon, " DOnATiONS<br>");
 
       if (bucket === 'less than 10' || bucket === 'greater than 500') {
         var nameSplit = bucket.split(' ');
