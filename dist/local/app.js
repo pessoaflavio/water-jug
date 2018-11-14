@@ -17452,9 +17452,11 @@ function App() {
   });
 
   if (cityPanelEl && giftPanelEl) {
-    var sampleUpdate = function sampleUpdate() {
-      // City panel
-      console.log('the real bucket is ' + currentBucket);
+    var cityPanel = new _js_CityPanel__WEBPACK_IMPORTED_MODULE_2__["default"](cityPanelEl);
+    var giftPanel = new _js_GiftPanel__WEBPACK_IMPORTED_MODULE_3__["default"](giftPanelEl);
+    setTimeout(function () {
+      console.log('the real bucket is ' + currentBucket); // City panel
+
       cityPanel.update(newCity, donations, bucket); // Gift panel
 
       giftPanel.update(giftValue, giftItem, giftValueTotal, giftNumberTotal, giftItemPlural);
@@ -17463,13 +17465,6 @@ function App() {
         giftPanel.toggleFrame(1);
         barChart.highlight(bucket);
       }, 5000);
-    };
-
-    var cityPanel = new _js_CityPanel__WEBPACK_IMPORTED_MODULE_2__["default"](cityPanelEl);
-    var giftPanel = new _js_GiftPanel__WEBPACK_IMPORTED_MODULE_3__["default"](giftPanelEl);
-    setTimeout(function () {
-      console.log('let me hear this');
-      sampleUpdate();
     }, 2000);
   }
 }
