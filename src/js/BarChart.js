@@ -4,7 +4,7 @@ export default class BarChart {
     const self = this;
     self.el = d3.select(opts.el);
     self.city = opts.city;
-    self.bucket = opts.bucket;
+    // self.bucket = opts.bucket;
     self.data = opts.data[self.city];
     this.margin = {
       top: 20,
@@ -67,6 +67,14 @@ export default class BarChart {
       .attr('x', 10)
 
 
+  }
+  highlight(bucket) {
+    this.g.selectAll("rect")
+      .transition()
+      .duration(200)
+      .style("fill", d => {
+        return d.contribution == bucket ? "#0072BC" : "#E5F0F8"
+      });
   }
   numberFormat(d) {
     return d3.format(',')(d);

@@ -111,8 +111,7 @@ function App() {
   const barChart = new BarChart({
     el: document.querySelector('.donations-chart'),
     data: contribution,
-    city: newCity,
-    bucket: currentBucket
+    city: newCity
   });
 
   const model = new RenderGift({
@@ -175,15 +174,9 @@ function App() {
       setTimeout(() => {
         cityPanel.toggleFrame(1);
         giftPanel.toggleFrame(1);
+        barChart.highlight(bucket);
       }, 5000);
     }
-
-    // document.addEventListener('keypress', (event) => {
-    //   const keyName = event.key;
-    //   if (keyName === '1') {
-    //     sampleUpdate();
-    //   }
-    // });
 
     setTimeout(() => {
       console.log('let me hear this')

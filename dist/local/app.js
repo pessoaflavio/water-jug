@@ -17409,8 +17409,7 @@ function App() {
   var barChart = new _js_BarChart__WEBPACK_IMPORTED_MODULE_4__["default"]({
     el: document.querySelector('.donations-chart'),
     data: _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__,
-    city: newCity,
-    bucket: currentBucket
+    city: newCity
   });
   var model = new _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__["default"]({
     el: giftPanelEl,
@@ -17460,14 +17459,9 @@ function App() {
       setTimeout(function () {
         cityPanel.toggleFrame(1);
         giftPanel.toggleFrame(1);
+        barChart.highlight(bucket);
       }, 5000);
-    }; // document.addEventListener('keypress', (event) => {
-    //   const keyName = event.key;
-    //   if (keyName === '1') {
-    //     sampleUpdate();
-    //   }
-    // });
-
+    };
 
     var cityPanel = new _js_CityPanel__WEBPACK_IMPORTED_MODULE_2__["default"](cityPanelEl);
     var giftPanel = new _js_GiftPanel__WEBPACK_IMPORTED_MODULE_3__["default"](giftPanelEl);
@@ -17508,8 +17502,8 @@ function () {
 
     var self = this;
     self.el = d3.select(opts.el);
-    self.city = opts.city;
-    self.bucket = opts.bucket;
+    self.city = opts.city; // self.bucket = opts.bucket;
+
     self.data = opts.data[self.city];
     this.margin = {
       top: 20,
@@ -17555,6 +17549,13 @@ function () {
       this.g.append("g").attr("class", "x axis").attr("transform", "translate(0," + this.height + ")").call(d3.axisBottom(this.x).ticks(6));
       this.g.append("g").attr("class", "y axis").attr("transform", "translate(0,0)").call(d3.axisLeft(this.y));
       this.g.select('.y.axis').selectAll('text').attr('x', 10);
+    }
+  }, {
+    key: "highlight",
+    value: function highlight(bucket) {
+      this.g.selectAll("rect").transition().duration(200).style("fill", function (d) {
+        return d.contribution == bucket ? "#0072BC" : "#E5F0F8";
+      });
     }
   }, {
     key: "numberFormat",
