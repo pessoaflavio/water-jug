@@ -42,7 +42,7 @@ export default class CityPanel {
     console.log(donationsTotal, donationsBucket);
     const formDon = numbercommas(donations);
     Array.prototype.forEach.call(citySpans, el => el.innerHTML = city);
-    donationsTotal.innerHTML = `${formDon} DOnATiONS<br>`;
+    donationsTotal.innerHTML = `${formDon} donations<br>`;
 
     if (bucket === 'less than 10' || bucket === 'greater than 500') {
       const nameSplit = bucket.split(' ');
