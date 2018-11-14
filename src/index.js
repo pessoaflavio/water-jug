@@ -177,13 +177,14 @@ function App() {
         cityPanel.toggleFrame(1);
         giftPanel.toggleFrame(1);
         barChart.highlight(bucket);
-      }, 5000);
+      }, 10000);
     }
 
-    setTimeout(() => {
-      console.log('let me hear this')
-      sampleUpdate();
-    }, 2000);
+    sampleUpdate();
+    // setTimeout(() => {
+    //   console.log('let me hear this')
+    //   sampleUpdate();
+    // }, 2000);
   }
 }
 

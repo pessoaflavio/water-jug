@@ -17462,15 +17462,15 @@ function App() {
         cityPanel.toggleFrame(1);
         giftPanel.toggleFrame(1);
         barChart.highlight(bucket);
-      }, 5000);
+      }, 10000);
     };
 
     var cityPanel = new _js_CityPanel__WEBPACK_IMPORTED_MODULE_2__["default"](cityPanelEl);
     var giftPanel = new _js_GiftPanel__WEBPACK_IMPORTED_MODULE_3__["default"](giftPanelEl);
-    setTimeout(function () {
-      console.log('let me hear this');
-      sampleUpdate();
-    }, 2000);
+    sampleUpdate(); // setTimeout(() => {
+    //   console.log('let me hear this')
+    //   sampleUpdate();
+    // }, 2000);
   }
 }
 
@@ -17811,7 +17811,7 @@ function () {
     key: "animateCamera",
     value: function animateCamera() {
       var self = this;
-      self.cameraDelay = new TWEEN.Tween(self.cameraPos).to(self.cameraPos, 5000).onUpdate(function () {});
+      self.cameraDelay = new TWEEN.Tween(self.cameraPos).to(self.cameraPos, 8000).onUpdate(function () {});
       self.cameraTween = new TWEEN.Tween(self.cameraPos).to({
         x: Math.sqrt(self.number),
         y: Math.sqrt(self.number) * 8,
