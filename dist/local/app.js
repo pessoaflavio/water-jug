@@ -17447,13 +17447,14 @@ function App() {
       console.log(bucketInd);
       var bucket = currentBucket;
       var donations = _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__[newCity][bucketInd].amount;
+      var donationSum = _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__[newCity][bucketInd].totalContribution;
       cityPanel.update(newCity, donations, bucket); // Gift panel
 
-      var giftValue = 1890;
-      var giftItem = 'refugee housing unit';
-      var giftValueTotal = 1200000;
-      var giftNumberTotal = 98;
-      var giftItemPlural = 'refugee housing units';
+      var giftValue = currentGift[price];
+      var giftItem = currentGift[name];
+      var giftValueTotal = donationSum;
+      var giftNumberTotal = giftValueTotal / giftValue;
+      var giftItemPlural = currentGift[name_plural];
       giftPanel.update(giftValue, giftItem, giftValueTotal, giftNumberTotal, giftItemPlural);
       setTimeout(function () {
         cityPanel.toggleFrame(1);
