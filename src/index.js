@@ -157,16 +157,16 @@ function App() {
       console.log(bucketInd);
       const bucket = currentBucket;
       const donations = contribution[newCity][bucketInd].amount;
-
+      const donationSum = contribution[newCity][bucketInd].totalContribution;
 
       cityPanel.update(newCity, donations, bucket);
 
       // Gift panel
-      const giftValue = 1890;
-      const giftItem = 'refugee housing unit';
-      const giftValueTotal = 1200000;
-      const giftNumberTotal = 98;
-      const giftItemPlural = 'refugee housing units';
+      const giftValue = currentGift[price];
+      const giftItem = currentGift[name];
+      const giftValueTotal = donationSum;
+      const giftNumberTotal = giftValueTotal/giftValue;
+      const giftItemPlural = currentGift[name_plural];
 
       giftPanel.update(giftValue, giftItem, giftValueTotal, giftNumberTotal, giftItemPlural);
 
