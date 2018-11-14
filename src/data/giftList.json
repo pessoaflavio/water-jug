@@ -1,9 +1,9 @@
-[
-  {
+[{
     "name": "pair of warm gloves",
     "name_plural": "pairs of warm gloves",
     "price": 5,
     "bucket": "less than 10",
+    "model": "warm_glove",
     "OriginalItem": "Warm Gloves",
     "comment": "-"
   },
@@ -12,6 +12,7 @@
     "name_plural": "glasses",
     "price": 10,
     "bucket": "less than 10",
+    "model": "glasses",
     "OriginalItem": "Glasses – The Gift of Sight",
     "comment": "-"
   },
@@ -20,6 +21,7 @@
     "name_plural": "sleeping bags",
     "price": 10,
     "bucket": "less than 10",
+    "model": "sleeping_bag",
     "OriginalItem": "Sleeping Bag",
     "comment": "-"
   },
@@ -28,6 +30,7 @@
     "name_plural": "jerry cans",
     "price": 2,
     "bucket": "less than 10",
+    "model": "jerrycan",
     "OriginalItem": "Jerry Cans",
     "comment": "Actual Price is 10 dollars for 5 jerry cans"
   },
@@ -36,6 +39,7 @@
     "name_plural": "mosquito nets",
     "price": 8,
     "bucket": "less than 10",
+    "model": "mosquito_net",
     "OriginalItem": "Mosquito Nets",
     "comment": "Actual Price is 40 dollars for 5 nets"
   },
@@ -45,6 +49,7 @@
     "price": 4,
     "bucket": "less than 10",
     "OriginalItem": "Birth Certificate",
+    "model": "birth_certificate",
     "comment": "Actual Price is 20 dollars for 5 certificates"
   },
   {
@@ -52,6 +57,7 @@
     "name_plural": "sets of warm blankets and mat",
     "price": 15,
     "bucket": "11-15",
+    "model": "warm_blanket",
     "OriginalItem": "Warm Blankets & Mats",
     "comment": "-"
   },
@@ -60,6 +66,7 @@
     "name_plural": "school uniforms",
     "price": 16,
     "bucket": "11-15",
+    "model": "school_uniform",
     "OriginalItem": "School Uniform",
     "comment": "-"
   },
@@ -68,6 +75,7 @@
     "name_plural": "sets of winter clothes",
     "price": 17,
     "bucket": "11-15",
+    "model": "winter_clothes",
     "OriginalItem": "Winter Clothes",
     "comment": "-"
   },
@@ -76,6 +84,7 @@
     "name_plural": "school desks",
     "price": 20,
     "bucket": "16-20",
+    "model": "school_desk",
     "OriginalItem": "School Desk",
     "comment": "-"
   },
@@ -84,6 +93,7 @@
     "name_plural": "kitchen sets of stoves, pots & cutlery",
     "price": 20,
     "bucket": "16-20",
+    "model": "pots_cutlery",
     "OriginalItem": "Stoves, Pots & Cutlery",
     "comment": "-"
   },
@@ -92,6 +102,7 @@
     "name_plural": "school kits",
     "price": 21,
     "bucket": "21-30",
+    "model": "school_kit",
     "OriginalItem": "School Kit – Educate a Child",
     "comment": "-"
   },
@@ -100,6 +111,7 @@
     "name_plural": "personal hygiene kits",
     "price": 25,
     "bucket": "21-30",
+    "model": "personal_hygiene_kit",
     "OriginalItem": "Personal Hygiene Kit",
     "comment": "-"
   },
@@ -108,6 +120,7 @@
     "name_plural": "emergency rescue kits",
     "price": 30,
     "bucket": "21-30",
+    "model": "emergency_rescue_kit",
     "OriginalItem": "Emergency Rescue Kit",
     "comment": "-"
   },
@@ -116,6 +129,7 @@
     "name_plural": "water filters",
     "price": 30,
     "bucket": "21-30",
+    "model": "water_filter",
     "OriginalItem": "Water Filter",
     "comment": "-"
   },
@@ -124,6 +138,7 @@
     "name_plural": "solar lanterns",
     "price": 45,
     "bucket": "31-49",
+    "model": "solar_lantern",
     "OriginalItem": "Solar Lanterns",
     "comment": "-"
   },
@@ -132,6 +147,7 @@
     "name_plural": "batches of vaccines",
     "price": 50,
     "bucket": "50-100",
+    "model": "vaccines",
     "OriginalItem": "Vaccines",
     "comment": "-"
   },
@@ -140,6 +156,7 @@
     "name_plural": "dental care treatments",
     "price": 50,
     "bucket": "50-100",
+    "model": "dental_care",
     "OriginalItem": "Dental Care?",
     "comment": "-"
   },
@@ -148,6 +165,7 @@
     "name_plural": "sets of fleece blankets",
     "price": 50,
     "bucket": "50-100",
+    "model": "fleece_blankets",
     "OriginalItem": "Fleece Blankets",
     "comment": "-"
   },
@@ -156,6 +174,7 @@
     "name_plural": "winter survival kits",
     "price": 116,
     "bucket": "100-499",
+    "model": "winter_survival_kit",
     "OriginalItem": "Winter Survival Kit",
     "comment": "-"
   },
@@ -164,6 +183,7 @@
     "name_plural": "blackboards",
     "price": 120,
     "bucket": "100-499",
+    "model": "blackboard",
     "OriginalItem": "Blackboard",
     "comment": "-"
   },
@@ -172,6 +192,7 @@
     "name_plural": "school gardens",
     "price": 250,
     "bucket": "100-499",
+    "model": "school_garden",
     "OriginalItem": "School Garden",
     "comment": "-"
   },
@@ -180,6 +201,7 @@
     "name_plural": "family tents",
     "price": 560,
     "bucket": "greater than 500",
+    "model": "family_tent",
     "OriginalItem": "Family Tents",
     "comment": "-"
   },
@@ -188,6 +210,7 @@
     "name_plural": "kerosene stoves",
     "price": 92,
     "bucket": "50-100",
+    "model": "kerosene_heater",
     "OriginalItem": "Kerosene stove/heater",
     "comment": "-"
   },
@@ -196,6 +219,7 @@
     "name_plural": "kits of seeds & garden tools",
     "price": 95,
     "bucket": "greater than 500",
+    "model": "seeds_and_tools",
     "OriginalItem": "Seeds & Tools",
     "comment": "-"
   },
@@ -204,6 +228,7 @@
     "name_plural": "boxes of therapeutic food",
     "price": 24,
     "bucket": "21-30",
+    "model": "therapeutic_food",
     "OriginalItem": "Therapeutic Food",
     "comment": "-"
   }

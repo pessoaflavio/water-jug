@@ -5,7 +5,7 @@ export default class RenderGift {
     self.canvas = self.el.querySelector('.scene');
     self.modelName = opts.model;
     self.callback = opts.callback;
-    self.number = 200;
+    self.number = opts.amount;
     self.scale = 5;
     self.cameraPos = {
       x: 0,

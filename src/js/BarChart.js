@@ -36,9 +36,8 @@ export default class BarChart {
     this.x = d3.scaleLinear().range([this.width, 0]);
     this.y = d3.scaleBand().rangeRound([0, this.height]).padding(0.1);
 
-
     // Scale the range of the data
-    this.x.domain([0, 7000]);
+    this.x.domain([0, d3.max(this.data, d => d.amount)]);
     this.y.domain(this.data.map(d => d.contribution));
 
     this.g.selectAll("rect")

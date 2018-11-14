@@ -117,7 +117,8 @@ function App() {
 
   const model = new RenderGift({
     el: giftPanelEl,
-    model: "vaccines",
+    model: currentGift.model,
+    amount: Math.round(contribution[newCity].filter(d => d.contribution == currentBucket)[0].totalContribution / currentGift.price),
     callback: pickRandomCity()
   });
 
