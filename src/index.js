@@ -108,6 +108,37 @@ function App() {
 
   console.log(newCity);
 
+  let bucketInd;
+
+  if (currentBucket === 'less than 10') {
+    bucketInd = 0
+  } else if (currentBucket === '11-15') {
+    bucketInd = 1
+  } else if (currentBucket === '16-20') {
+    bucketInd = 2
+  } else if (currentBucket === '21-30') {
+    bucketInd = 3
+  } else if (currentBucket === '31-49') {
+    bucketInd = 4
+  } else if (currentBucket === '50-100') {
+    bucketInd = 5
+  } else if (currentBucket === '101-499') {
+    bucketInd = 6
+  } else {
+    bucketInd = 7
+  };
+
+  console.log(bucketInd);
+  const bucket = currentBucket;
+  const donations = contribution[newCity][bucketInd].amount;
+  const donationSum = contribution[newCity][bucketInd].totalContribution;
+
+  const giftValue = currentGift["price"];
+  const giftValueTotal = donationSum;
+  const giftNumberTotal = Math.round(giftValueTotal / giftValue);
+  const giftItem = currentGift["name"];
+  const giftItemPlural = currentGift["name_plural"];
+
   const barChart = new BarChart({
     el: document.querySelector('.donations-chart'),
     data: contribution,
@@ -117,11 +148,9 @@ function App() {
   const model = new RenderGift({
     el: giftPanelEl,
     model: currentGift.model,
-    amount: 250,
+    amount: giftNumberTotal,
     callback: pickRandomCity()
   });
-
-
 
 
   if (cityPanelEl && giftPanelEl) {
@@ -130,45 +159,13 @@ function App() {
 
     function sampleUpdate() {
 
-      // pickRandomScene();
       // City panel
 
       console.log('the real bucket is ' + currentBucket);
 
-      let bucketInd;
-
-      if (currentBucket === 'less than 10') {
-        bucketInd = 0
-      } else if (currentBucket === '11-15') {
-        bucketInd = 1
-      } else if (currentBucket === '16-20') {
-        bucketInd = 2
-      } else if (currentBucket === '21-30') {
-        bucketInd = 3
-      } else if (currentBucket === '31-49') {
-        bucketInd = 4
-      } else if (currentBucket === '50-100') {
-        bucketInd = 5
-      } else if (currentBucket === '101-499') {
-        bucketInd = 6
-      } else {
-        bucketInd = 7
-      };
-
-      console.log(bucketInd);
-      const bucket = currentBucket;
-      const donations = contribution[newCity][bucketInd].amount;
-      const donationSum = contribution[newCity][bucketInd].totalContribution;
-
       cityPanel.update(newCity, donations, bucket);
 
       // Gift panel
-      const giftValue = currentGift["price"];
-      const giftItem = currentGift["name"];
-      const giftValueTotal = donationSum;
-      const giftNumberTotal = Math.round(giftValueTotal / giftValue);
-      const giftItemPlural = currentGift["name_plural"];
-
       giftPanel.update(giftValue, giftItem, giftValueTotal, giftNumberTotal, giftItemPlural);
 
       setTimeout(() => {
