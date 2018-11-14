@@ -17415,9 +17415,8 @@ function App() {
   var model = new _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__["default"]({
     el: giftPanelEl,
     model: currentGift.model,
-    amount: Math.round(_data_contribution_json__WEBPACK_IMPORTED_MODULE_6__[newCity].filter(function (d) {
-      return d.contribution == currentBucket;
-    })[0].totalContribution / currentGift.price),
+    amount: 100,
+    // amount: Math.round(contribution[newCity].filter(d => d.contribution == currentBucket)[0].totalContribution / currentGift.price),
     callback: pickRandomCity()
   });
 

@@ -118,7 +118,8 @@ function App() {
   const model = new RenderGift({
     el: giftPanelEl,
     model: currentGift.model,
-    amount: Math.round(contribution[newCity].filter(d => d.contribution == currentBucket)[0].totalContribution / currentGift.price),
+    amount: 100,
+    // amount: Math.round(contribution[newCity].filter(d => d.contribution == currentBucket)[0].totalContribution / currentGift.price),
     callback: pickRandomCity()
   });
 
@@ -165,7 +166,7 @@ function App() {
       const giftValue = currentGift[price];
       const giftItem = currentGift[name];
       const giftValueTotal = donationSum;
-      const giftNumberTotal = giftValueTotal/giftValue;
+      const giftNumberTotal = giftValueTotal / giftValue;
       const giftItemPlural = currentGift[name_plural];
 
       giftPanel.update(giftValue, giftItem, giftValueTotal, giftNumberTotal, giftItemPlural);
