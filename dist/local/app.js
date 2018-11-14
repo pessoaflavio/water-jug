@@ -17327,7 +17327,7 @@ var _data_giftList_json__WEBPACK_IMPORTED_MODULE_7___namespace = /*#__PURE__*/__
 function App() {
   setTimeout(function () {
     location = '';
-  }, 10000);
+  }, 30000);
   var cityPanelEl = document.querySelector('.panel--city');
   var giftPanelEl = document.querySelector('.panel--gift');
   var citiesClone = [];

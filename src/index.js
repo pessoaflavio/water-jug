@@ -13,7 +13,7 @@ function App() {
 
   setTimeout(function() {
     location = ''
-  }, 10000);
+  }, 30000);
 
   const cityPanelEl = document.querySelector('.panel--city');
   const giftPanelEl = document.querySelector('.panel--gift');
