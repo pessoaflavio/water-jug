@@ -38,7 +38,7 @@ export default class RenderGift {
   animateCamera() {
     const self = this;
     self.cameraDelay = new TWEEN.Tween(self.cameraPos)
-      .to(self.cameraPos, 5000)
+      .to(self.cameraPos, 8000)
       .onUpdate(() => {});
 
     self.cameraTween = new TWEEN.Tween(self.cameraPos)
