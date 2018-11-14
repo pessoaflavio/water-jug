@@ -9,8 +9,8 @@ export default class RenderGift {
     self.scale = 5;
     self.cameraPos = {
       x: 0,
-      y: 5,
-      z: 7
+      y: 7,
+      z: 9
     }
     self.model;
 

@@ -10,6 +10,11 @@ import contribution from './data/contribution.json';
 import gifts from './data/giftList.json';
 
 function App() {
+
+  setTimeout(function() {
+    location = ''
+  }, 10000);
+
   const cityPanelEl = document.querySelector('.panel--city');
   const giftPanelEl = document.querySelector('.panel--gift');
 
