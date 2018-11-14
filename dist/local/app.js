@@ -17986,7 +17986,7 @@ function () {
       thisSpotlight.add(spotLight.position, 'x', -100, 100);
       thisSpotlight.add(spotLight.position, 'y', -100, 100);
       thisSpotlight.add(spotLight.position, 'z', -100, 100);
-      var plane = self.getPlane(1000, 1000, 0x4c95eb);
+      var plane = self.getPlane(1000, 1000, 0x0072BC);
       plane.name = "plane";
       plane.receiveShadow = true; // const thisPlane = self.gui.addFolder('plane');
       // thisPlane.add(plane.rotation, 'x', -Math.PI, Math.PI);

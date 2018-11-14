@@ -236,7 +236,7 @@ export default class RenderGift {
     thisSpotlight.add(spotLight.position, 'z', -100, 100);
 
 
-    const plane = self.getPlane(1000, 1000, 0x4c95eb);
+    const plane = self.getPlane(1000, 1000, 0x0072BC);
     plane.name = "plane";
     plane.receiveShadow = true;
 
