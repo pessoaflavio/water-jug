@@ -30,7 +30,7 @@ export default class RenderGift {
         const scene = self.getScene();
         self.scene = scene;
         self.scene.add(self.model);
-        // here is where the multiplying magic happen 
+        // here is where the multiplying magic happen
         self.animateCamera()
         self.update(scene);
       })
@@ -43,9 +43,9 @@ export default class RenderGift {
 
     self.cameraTween = new TWEEN.Tween(self.cameraPos)
       .to({
-        x: 50,
-        y: 70,
-        z: 50
+        x: Math.sqrt(self.number),
+        y: Math.sqrt(self.number) * 8,
+        z: Math.sqrt(self.number) * 4
       }, 2000)
       .onStart(function() {
         self.multiplyGift(self.number)
