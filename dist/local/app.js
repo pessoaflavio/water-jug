@@ -17815,6 +17815,7 @@ function () {
         z: Math.sqrt(self.number) * 4
       }, 2000).onStart(function () {
         self.multiplyGift(self.number);
+        self.scene.getObjectByName("spotLight").position.set(-Math.sqrt(self.number) * 4, Math.sqrt(self.number) * 4, Math.sqrt(self.number) * 4);
       }).easing(TWEEN.Easing.Exponential.InOut).onUpdate(function () {
         self.camera.position.set(self.cameraPos.x, self.cameraPos.y, self.cameraPos.z);
         self.camera.lookAt(new THREE.Vector3(0, 0, 0));
@@ -17976,8 +17977,8 @@ function () {
       scene.add(ambientLight);
       var spotLight = self.getSpotLight(0xffffff, 0.4, 100, Math.PI / 3);
       spotLight.name = "spotLight";
-      spotLight.position.y = 58;
-      spotLight.position.z = 58;
+      spotLight.position.y = 10;
+      spotLight.position.z = 10;
       scene.add(spotLight);
       var thisSpotlight = self.gui.addFolder('spotlight'); // lights.add(ambientLight, 'intensity', 0, 1);
 

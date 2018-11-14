@@ -48,7 +48,8 @@ export default class RenderGift {
         z: Math.sqrt(self.number) * 4
       }, 2000)
       .onStart(function() {
-        self.multiplyGift(self.number)
+        self.multiplyGift(self.number);
+        self.scene.getObjectByName("spotLight").position.set(-Math.sqrt(self.number) * 4, Math.sqrt(self.number) * 4, Math.sqrt(self.number) * 4)
       })
       .easing(TWEEN.Easing.Exponential.InOut)
       .onUpdate(() => {
@@ -220,8 +221,8 @@ export default class RenderGift {
 
     const spotLight = self.getSpotLight(0xffffff, 0.4, 100, Math.PI / 3);
     spotLight.name = "spotLight";
-    spotLight.position.y = 58;
-    spotLight.position.z = 58;
+    spotLight.position.y = 10;
+    spotLight.position.z = 10;
     scene.add(spotLight);
 
 
