@@ -46,10 +46,11 @@ export default class BarChart {
       .attr("x", d => this.x(d.amount))
       .attr("y", d => this.y(d.contribution))
       .attr("height", this.y.bandwidth())
-      // .attr("height", this.y.bandwidth())
       .attr("width", d => this.width - this.x(d.amount))
       .attr("class", "rect")
-      .style("opacity", 0.9);
+      .style("opacity", d => {
+        return d.contribution == this.bucket ? 1 : 0.9
+      });
 
     this.g.append("g")
       .attr("class", "x axis")

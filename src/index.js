@@ -118,10 +118,11 @@ function App() {
   const model = new RenderGift({
     el: giftPanelEl,
     model: currentGift.model,
-    amount: 100,
-    // amount: Math.round(contribution[newCity].filter(d => d.contribution == currentBucket)[0].totalContribution / currentGift.price),
+    amount: 250,
     callback: pickRandomCity()
   });
+
+
 
 
   if (cityPanelEl && giftPanelEl) {
@@ -163,18 +164,18 @@ function App() {
       cityPanel.update(newCity, donations, bucket);
 
       // Gift panel
-      const giftValue = currentGift[price];
-      const giftItem = currentGift[name];
+      const giftValue = currentGift["price"];
+      const giftItem = currentGift["name"];
       const giftValueTotal = donationSum;
-      const giftNumberTotal = giftValueTotal / giftValue;
-      const giftItemPlural = currentGift[name_plural];
+      const giftNumberTotal = Math.round(giftValueTotal / giftValue);
+      const giftItemPlural = currentGift["name_plural"];
 
       giftPanel.update(giftValue, giftItem, giftValueTotal, giftNumberTotal, giftItemPlural);
 
       setTimeout(() => {
         cityPanel.toggleFrame(1);
         giftPanel.toggleFrame(1);
-      }, 2000);
+      }, 5000);
     }
 
     // document.addEventListener('keypress', (event) => {

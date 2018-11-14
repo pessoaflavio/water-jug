@@ -30,18 +30,16 @@ export default class RenderGift {
         const scene = self.getScene();
         self.scene = scene;
         self.scene.add(self.model);
+        // here is where the multiplying magic happen 
         self.animateCamera()
-        // self.multiplyGift(self.number)
         self.update(scene);
       })
   }
   animateCamera() {
     const self = this;
     self.cameraDelay = new TWEEN.Tween(self.cameraPos)
-      .to(self.cameraPos, 3000)
-      .onUpdate(() => {
-
-      });
+      .to(self.cameraPos, 5000)
+      .onUpdate(() => {});
 
     self.cameraTween = new TWEEN.Tween(self.cameraPos)
       .to({

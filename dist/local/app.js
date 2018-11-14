@@ -17415,8 +17415,7 @@ function App() {
   var model = new _js_RenderGift__WEBPACK_IMPORTED_MODULE_5__["default"]({
     el: giftPanelEl,
     model: currentGift.model,
-    amount: 100,
-    // amount: Math.round(contribution[newCity].filter(d => d.contribution == currentBucket)[0].totalContribution / currentGift.price),
+    amount: 250,
     callback: pickRandomCity()
   });
 
@@ -17452,16 +17451,16 @@ function App() {
       var donationSum = _data_contribution_json__WEBPACK_IMPORTED_MODULE_6__[newCity][bucketInd].totalContribution;
       cityPanel.update(newCity, donations, bucket); // Gift panel
 
-      var giftValue = currentGift[price];
-      var giftItem = currentGift[name];
+      var giftValue = currentGift["price"];
+      var giftItem = currentGift["name"];
       var giftValueTotal = donationSum;
-      var giftNumberTotal = giftValueTotal / giftValue;
-      var giftItemPlural = currentGift[name_plural];
+      var giftNumberTotal = Math.round(giftValueTotal / giftValue);
+      var giftItemPlural = currentGift["name_plural"];
       giftPanel.update(giftValue, giftItem, giftValueTotal, giftNumberTotal, giftItemPlural);
       setTimeout(function () {
         cityPanel.toggleFrame(1);
         giftPanel.toggleFrame(1);
-      }, 2000);
+      }, 5000);
     }; // document.addEventListener('keypress', (event) => {
     //   const keyName = event.key;
     //   if (keyName === '1') {
@@ -17548,10 +17547,11 @@ function () {
         return _this2.x(d.amount);
       }).attr("y", function (d) {
         return _this2.y(d.contribution);
-      }).attr("height", this.y.bandwidth()) // .attr("height", this.y.bandwidth())
-      .attr("width", function (d) {
+      }).attr("height", this.y.bandwidth()).attr("width", function (d) {
         return _this2.width - _this2.x(d.amount);
-      }).attr("class", "rect").style("opacity", 0.9);
+      }).attr("class", "rect").style("opacity", function (d) {
+        return d.contribution == _this2.bucket ? 1 : 0.9;
+      });
       this.g.append("g").attr("class", "x axis").attr("transform", "translate(0," + this.height + ")").call(d3.axisBottom(this.x).ticks(6));
       this.g.append("g").attr("class", "y axis").attr("transform", "translate(0,0)").call(d3.axisLeft(this.y));
       this.g.select('.y.axis').selectAll('text').attr('x', 10);
@@ -17797,9 +17797,9 @@ function () {
       self.model.castShadow = true;
       var scene = self.getScene();
       self.scene = scene;
-      self.scene.add(self.model);
-      self.animateCamera(); // self.multiplyGift(self.number)
+      self.scene.add(self.model); // here is where the multiplying magic happen 
 
+      self.animateCamera();
       self.update(scene);
     });
   }
@@ -17808,7 +17808,7 @@ function () {
     key: "animateCamera",
     value: function animateCamera() {
       var self = this;
-      self.cameraDelay = new TWEEN.Tween(self.cameraPos).to(self.cameraPos, 3000).onUpdate(function () {});
+      self.cameraDelay = new TWEEN.Tween(self.cameraPos).to(self.cameraPos, 5000).onUpdate(function () {});
       self.cameraTween = new TWEEN.Tween(self.cameraPos).to({
         x: 50,
         y: 70,
