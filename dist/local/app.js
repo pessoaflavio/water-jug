@@ -17452,9 +17452,11 @@ function App() {
   });
 
   if (cityPanelEl && giftPanelEl) {
-    var sampleUpdate = function sampleUpdate() {
-      // City panel
-      console.log('the real bucket is ' + currentBucket);
+    var cityPanel = new _js_CityPanel__WEBPACK_IMPORTED_MODULE_2__["default"](cityPanelEl);
+    var giftPanel = new _js_GiftPanel__WEBPACK_IMPORTED_MODULE_3__["default"](giftPanelEl);
+    setTimeout(function () {
+      console.log('the real bucket is ' + currentBucket); // City panel
+
       cityPanel.update(newCity, donations, bucket); // Gift panel
 
       giftPanel.update(giftValue, giftItem, giftValueTotal, giftNumberTotal, giftItemPlural);
@@ -17462,15 +17464,8 @@ function App() {
         cityPanel.toggleFrame(1);
         giftPanel.toggleFrame(1);
         barChart.highlight(bucket);
-      }, 10000);
-    };
-
-    var cityPanel = new _js_CityPanel__WEBPACK_IMPORTED_MODULE_2__["default"](cityPanelEl);
-    var giftPanel = new _js_GiftPanel__WEBPACK_IMPORTED_MODULE_3__["default"](giftPanelEl);
-    sampleUpdate(); // setTimeout(() => {
-    //   console.log('let me hear this')
-    //   sampleUpdate();
-    // }, 2000);
+      }, 5000);
+    }, 2000);
   }
 }
 
@@ -17991,7 +17986,7 @@ function () {
       thisSpotlight.add(spotLight.position, 'x', -100, 100);
       thisSpotlight.add(spotLight.position, 'y', -100, 100);
       thisSpotlight.add(spotLight.position, 'z', -100, 100);
-      var plane = self.getPlane(1000, 1000, 0x4c95eb);
+      var plane = self.getPlane(1000, 1000, 0x0072BC);
       plane.name = "plane";
       plane.receiveShadow = true; // const thisPlane = self.gui.addFolder('plane');
       // thisPlane.add(plane.rotation, 'x', -Math.PI, Math.PI);

@@ -162,14 +162,12 @@ function App() {
     const cityPanel = new CityPanel(cityPanelEl);
     const giftPanel = new GiftPanel(giftPanelEl);
 
-    function sampleUpdate() {
 
-      // City panel
-
+    setTimeout(() => {
       console.log('the real bucket is ' + currentBucket);
 
+      // City panel
       cityPanel.update(newCity, donations, bucket);
-
       // Gift panel
       giftPanel.update(giftValue, giftItem, giftValueTotal, giftNumberTotal, giftItemPlural);
 
@@ -177,14 +175,11 @@ function App() {
         cityPanel.toggleFrame(1);
         giftPanel.toggleFrame(1);
         barChart.highlight(bucket);
-      }, 10000);
-    }
+      }, 5000);
 
-    sampleUpdate();
-    // setTimeout(() => {
-    //   console.log('let me hear this')
-    //   sampleUpdate();
-    // }, 2000);
+
+
+    }, 2000);
   }
 }
 
