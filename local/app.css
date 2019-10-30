@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=IBM+Plex+Mono:300,400,700);
 @font-face {
   font-family: 'TIMMONS_NY_FINAL';
-  src: url("/fonts/TIMMONS_NY_FINAL.woff2"); }
+  src: url("fonts/TIMMONS_NY_FINAL.woff2"); }
 
 .donations-chart {
   width: 100%;
